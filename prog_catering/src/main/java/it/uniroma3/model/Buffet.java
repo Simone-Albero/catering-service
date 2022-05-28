@@ -1,5 +1,8 @@
 package it.uniroma3.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,5 +30,52 @@ public class Buffet {
 	@ManyToOne
 	private Chef chef;
 	
+	private List<String> imgs;
+
 	
+	
+	public Buffet() {
+		this.imgs = new ArrayList<String>();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public Chef getChef() {
+		return chef;
+	}
+
+	public void setChef(Chef chef) {
+		this.chef = chef;
+	}
+
+	public List<String> getImgs() {
+		return imgs;
+	}
+
+	public void setImgs(List<String> imgs) {
+		this.imgs = imgs;
+	}
+
 }

@@ -1,5 +1,6 @@
 package it.uniroma3.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -16,9 +17,38 @@ public class Company {
 	private Long id;
 	
 	@OneToMany
-	private List<Buffet> buffets;
+	private List<Buffet> buffet;
 	
 	@OneToMany
 	private List<User> users;
+
+	public Company() {
+		this.buffet = new ArrayList<Buffet>();
+		this.users = new ArrayList<User>();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Buffet> getBuffet() {
+		return buffet;
+	}
+
+	public void setBuffet(List<Buffet> buffet) {
+		this.buffet = buffet;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 	
 }

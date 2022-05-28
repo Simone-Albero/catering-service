@@ -1,5 +1,6 @@
 package it.uniroma3.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -32,4 +33,49 @@ public class Chef {
 	
 	@OneToMany(mappedBy = "chef")
 	private List<Buffet> buffet;
+
+	public Chef() {
+		this.buffet = new ArrayList<Buffet>();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public Nation getNation() {
+		return nation;
+	}
+
+	public void setNation(Nation nation) {
+		this.nation = nation;
+	}
+
+	public List<Buffet> getBuffet() {
+		return buffet;
+	}
+
+	public void setBuffet(List<Buffet> buffet) {
+		this.buffet = buffet;
+	}
+	
 }
