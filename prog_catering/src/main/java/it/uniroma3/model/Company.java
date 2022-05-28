@@ -17,13 +17,13 @@ public class Company {
 	private Long id;
 	
 	@OneToMany
-	private List<Buffet> buffet;
+	private List<Buffet> buffets;
 	
 	@OneToMany
 	private List<User> users;
 
 	public Company() {
-		this.buffet = new ArrayList<Buffet>();
+		this.buffets = new ArrayList<Buffet>();
 		this.users = new ArrayList<User>();
 	}
 
@@ -36,11 +36,11 @@ public class Company {
 	}
 
 	public List<Buffet> getBuffet() {
-		return buffet;
+		return buffets;
 	}
 
 	public void setBuffet(List<Buffet> buffet) {
-		this.buffet = buffet;
+		this.buffets = buffet;
 	}
 
 	public List<User> getUsers() {
