@@ -30,7 +30,7 @@ public class BuffetController {
 			}
 			
 			this.buffetService.save(buffet);
-			model.addAttribute("persona", this.buffetService.findById(buffet.getId()));
+			model.addAttribute("buffet", this.buffetService.findById(buffet.getId()));
 			return "buffet.html";
 		}
 		else return "buffetForm.html";
@@ -59,9 +59,9 @@ public class BuffetController {
 	 * si ipotizza di avere uno chef come attributo del modello
 	 */
 	@GetMapping("/buffetForm")
-	public String getForm(Model model) {
+	public String getForm(@ModelAttribute("chef")Chef chef, Model model) {
 		Buffet buffet = new Buffet();
-		buffet.setChef((Chef)model.getAttribute("chef"));
+		buffet.setChef(chef);
 		
 		model.addAttribute("buffet", buffet);
 		return "buffetForm.html";

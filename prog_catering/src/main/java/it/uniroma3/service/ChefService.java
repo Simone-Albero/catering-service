@@ -13,6 +13,7 @@ import it.uniroma3.repository.ChefRepository;
 
 @Service
 public class ChefService {
+	
 	@Autowired
 	private ChefRepository chefRepo;
 	
@@ -27,8 +28,8 @@ public class ChefService {
 	public List<Chef> findAll(){
 		List<Chef> chefs = new ArrayList<Chef>();
 		
-		for (Chef b : this.chefRepo.findAll()) {
-			chefs.add(b);
+		for (Chef c : this.chefRepo.findAll()) {
+			chefs.add(c);
 		}
 		return chefs;
 	}

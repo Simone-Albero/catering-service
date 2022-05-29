@@ -2,6 +2,7 @@ package it.uniroma3.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ import it.uniroma3.service.ChefService;
 @Controller
 public class ChefController {
 
+	@Autowired
 	private ChefService chefService;
 	
 	@PostMapping("/chef")
@@ -28,7 +30,7 @@ public class ChefController {
 			FileStorer.store(file, chef.getName());
 			
 			this.chefService.save(chef);
-			model.addAttribute("persona", this.chefService.findById(chef.getId()));
+			model.addAttribute("chef", this.chefService.findById(chef.getId()));
 			return "chef.html";
 		}
 		else return "chefForm.html";
@@ -55,7 +57,7 @@ public class ChefController {
 	@GetMapping("/chefForm")
 	public String getForm(Model model) {
 		Chef chef = new Chef();
-		Nation nation = new Nation(); 
+		Nation nation = new Nation(); /**non lo so a priori, ma lanazione potrebbe già esistere**/
 		chef.setNation(nation);
 		
 		model.addAttribute("chef", chef);
