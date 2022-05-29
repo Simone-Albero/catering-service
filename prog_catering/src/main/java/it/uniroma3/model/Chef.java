@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.lang.NonNull;
 
 @Entity
@@ -29,10 +31,13 @@ public class Chef {
 	private String surname;
 	
 	@ManyToOne
+	@Cascade({CascadeType.PERSIST, CascadeType.MERGE})
 	private Nation nation;
 	
 	@OneToMany(mappedBy = "chef")
 	private List<Buffet> buffet;
+	
+	private String img;
 
 	public Chef() {
 		this.buffet = new ArrayList<Buffet>();
@@ -76,6 +81,14 @@ public class Chef {
 
 	public void setBuffet(List<Buffet> buffet) {
 		this.buffet = buffet;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 }

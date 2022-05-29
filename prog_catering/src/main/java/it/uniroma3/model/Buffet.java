@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.lang.NonNull;
@@ -30,10 +31,14 @@ public class Buffet {
 	@ManyToOne
 	private Chef chef;
 	
+	@OneToMany
+	private List<Course> courses;
+	
 	private List<String> imgs;
 
 	public Buffet() {
 		this.imgs = new ArrayList<String>();
+		this.courses = new ArrayList<Course>();
 	}
 
 	public Long getId() {
@@ -66,6 +71,14 @@ public class Buffet {
 
 	public void setChef(Chef chef) {
 		this.chef = chef;
+	}
+	
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 
 	public List<String> getImgs() {

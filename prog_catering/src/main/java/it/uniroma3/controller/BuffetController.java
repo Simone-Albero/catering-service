@@ -24,34 +24,40 @@ public class BuffetController {
 	
 	@PostMapping("/buffet")
 	public String addBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("file")MultipartFile[] files, BindingResult bindingResult, Model model) {
-		
 		if(!bindingResult.hasErrors()) {
-			
 			for(MultipartFile file : files) {
-				FileStorer.store(file, buffet.getChef().getName());
+				FileStorer.store(file, buffet.getName());
 			}
 			
 			this.buffetService.save(buffet);
 			model.addAttribute("persona", this.buffetService.findById(buffet.getId()));
 			return "buffet.html";
 		}
-		
 		else return "buffetForm.html";
-		
-	}
-	
-	@GetMapping("/buffets")
-	public String getBuffet(Model model) {
-		model.addAttribute("buffet", this.buffetService.findAll());
-		return "buffets.html";
 	}
 	
 	@GetMapping("/buffet/{id}")
 	public String getBuffet(@PathVariable("id") Long id, Model model) {
-		this.buffetService.deleteById(id);
+		model.addAttribute("buffet", this.buffetService.findById(id));
 		return "buffet.html";
 	}
 	
+	
+	@GetMapping("/buffets")
+	public String getBuffets(Model model) {
+		model.addAttribute("buffets", this.buffetService.findAll());
+		return "buffets.html";
+	}
+	
+	@GetMapping("/deleteBuffet/{id}")
+	public String deleteBuffet(@PathVariable("id") Long id, Model model) {
+		this.buffetService.deleteById(id);
+		return "index.html";
+	}
+	
+	/*
+	 * si ipotizza di avere uno chef come attributo del modello
+	 */
 	@GetMapping("/buffetForm")
 	public String getForm(Model model) {
 		Buffet buffet = new Buffet();
@@ -60,12 +66,5 @@ public class BuffetController {
 		model.addAttribute("buffet", buffet);
 		return "buffetForm.html";
 	}
-	
-	@GetMapping("/deleteBuffet/{id}")
-	public String deletePersona(@PathVariable("id") Long id, Model model) {
-		this.buffetService.deleteById(id);
-		return "index.html";
-	}
-	
 	
 }
