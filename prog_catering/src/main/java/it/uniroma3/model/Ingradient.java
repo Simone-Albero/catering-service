@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.lang.NonNull;
 
@@ -26,6 +28,7 @@ public class Ingradient {
 	private String desc;
 	
 	@ManyToOne
+	@Cascade({CascadeType.PERSIST, CascadeType.MERGE})
 	private Provenance provenance;
 
 	public Long getId() {
