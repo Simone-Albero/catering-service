@@ -1,4 +1,4 @@
-package it.uniroma3.model;
+package it.uniroma3.catering.model;
 
 import java.time.LocalDate;
 

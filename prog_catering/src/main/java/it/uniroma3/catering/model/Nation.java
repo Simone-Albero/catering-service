@@ -1,4 +1,4 @@
-package it.uniroma3.model;
+package it.uniroma3.catering.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.lang.NonNull;
 
 @Entity
-public class Provenance {
+public class Nation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,16 +18,8 @@ public class Provenance {
 	
 	@NotBlank
 	@NonNull
-	private Nation county;
-	
-	@NotBlank
-	@NonNull
 	@UniqueElements
-	private String city;
-	
-	@NotBlank
-	@NonNull
-	private String desc;
+	private String name;
 
 	public Long getId() {
 		return id;
@@ -37,28 +29,12 @@ public class Provenance {
 		this.id = id;
 	}
 
-	public Nation getCounty() {
-		return county;
+	public String getName() {
+		return name;
 	}
 
-	public void setCounty(Nation county) {
-		this.county = county;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	} 
 	
 }

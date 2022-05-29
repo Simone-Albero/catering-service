@@ -1,4 +1,4 @@
-package it.uniroma3.service;
+package it.uniroma3.catering.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.model.Course;
-import it.uniroma3.repository.CourseRepository;
+import it.uniroma3.catering.model.Course;
+import it.uniroma3.catering.repository.CourseRepository;
 
 @Service
 public class CourseService {

@@ -1,16 +1,19 @@
-package it.uniroma3.model;
+package it.uniroma3.catering.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.lang.NonNull;
 
 @Entity
-public class Nation {
+public class Ingradient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +23,13 @@ public class Nation {
 	@NonNull
 	@UniqueElements
 	private String name;
+	
+	@NotBlank
+	private String desc;
+	
+	@ManyToOne
+	@Cascade({CascadeType.PERSIST, CascadeType.MERGE})
+	private Provenance provenance;
 
 	public Long getId() {
 		return id;
@@ -35,6 +45,22 @@ public class Nation {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public Provenance getProvenance() {
+		return provenance;
+	}
+
+	public void setProvenance(Provenance provenance) {
+		this.provenance = provenance;
 	}
 	
 }

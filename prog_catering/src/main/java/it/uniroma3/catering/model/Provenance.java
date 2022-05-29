@@ -1,4 +1,4 @@
-package it.uniroma3.model;
+package it.uniroma3.catering.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,13 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.lang.NonNull;
 
 @Entity
-public class Ingradient {
+public class Provenance {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,15 +19,17 @@ public class Ingradient {
 	
 	@NotBlank
 	@NonNull
-	@UniqueElements
-	private String name;
+	@ManyToOne
+	private Nation county;
 	
 	@NotBlank
-	private String desc;
+	@NonNull
+	@UniqueElements
+	private String city;
 	
-	@ManyToOne
-	@Cascade({CascadeType.PERSIST, CascadeType.MERGE})
-	private Provenance provenance;
+	@NotBlank
+	@NonNull
+	private String desc;
 
 	public Long getId() {
 		return id;
@@ -39,12 +39,20 @@ public class Ingradient {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Nation getCounty() {
+		return county;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCounty(Nation county) {
+		this.county = county;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getDesc() {
@@ -53,14 +61,6 @@ public class Ingradient {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
-	}
-
-	public Provenance getProvenance() {
-		return provenance;
-	}
-
-	public void setProvenance(Provenance provenance) {
-		this.provenance = provenance;
-	}
+	} 
 	
 }

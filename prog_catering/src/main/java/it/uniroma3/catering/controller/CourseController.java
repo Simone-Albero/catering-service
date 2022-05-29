@@ -1,4 +1,4 @@
-package it.uniroma3.controller;
+package it.uniroma3.catering.controller;
 
 import javax.validation.Valid;
 
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import it.uniroma3.model.Course;
-import it.uniroma3.presentation.FileStorer;
-import it.uniroma3.service.CourseService;
+import it.uniroma3.catering.model.Course;
+import it.uniroma3.catering.presentation.FileStorer;
+import it.uniroma3.catering.service.CourseService;
 
 @Controller
 public class CourseController {
@@ -48,7 +48,7 @@ public class CourseController {
 		return "courses.html";
 	}
 	
-	@GetMapping("/course/{id}")
+	@GetMapping("/deleteCourse/{id}")
 	public String deleteCourse(@PathVariable("id") Long id, Model model) {
 		this.courseService.deleteById(id);
 		return "index.html";

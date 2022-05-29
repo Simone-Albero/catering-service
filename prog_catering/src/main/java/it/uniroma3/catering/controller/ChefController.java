@@ -1,4 +1,4 @@
-package it.uniroma3.controller;
+package it.uniroma3.catering.controller;
 
 import javax.validation.Valid;
 
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import it.uniroma3.model.Chef;
-import it.uniroma3.model.Nation;
-import it.uniroma3.presentation.FileStorer;
-import it.uniroma3.service.ChefService;
+import it.uniroma3.catering.model.Chef;
+import it.uniroma3.catering.model.Nation;
+import it.uniroma3.catering.presentation.FileStorer;
+import it.uniroma3.catering.service.ChefService;
 
 @Controller
 public class ChefController {
@@ -48,7 +48,7 @@ public class ChefController {
 		return "chefs.html";
 	}
 	
-	@GetMapping("/chef/{id}")
+	@GetMapping("/deleteChef/{id}")
 	public String deleteChef(@PathVariable("id") Long id, Model model) {
 		this.chefService.deleteById(id);
 		return "index.html";

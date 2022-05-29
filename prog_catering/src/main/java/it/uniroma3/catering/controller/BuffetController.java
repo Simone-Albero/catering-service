@@ -1,4 +1,7 @@
-package it.uniroma3.controller;
+package it.uniroma3.catering.controller;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -12,10 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import it.uniroma3.model.Buffet;
-import it.uniroma3.model.Chef;
-import it.uniroma3.presentation.FileStorer;
-import it.uniroma3.service.BuffetService;
+import it.uniroma3.catering.model.Buffet;
+import it.uniroma3.catering.model.Chef;
+import it.uniroma3.catering.presentation.FileStorer;
+import it.uniroma3.catering.service.BuffetService;
 
 @Controller
 public class BuffetController {
@@ -25,10 +28,11 @@ public class BuffetController {
 	@PostMapping("/buffet")
 	public String addBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("file")MultipartFile[] files, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
-			for(MultipartFile file : files) {
-				FileStorer.store(file, buffet.getName());
+			List<String> imgs= new ArrayList<String>(); 
+ 			for(MultipartFile file : files) {
+				imgs.add(FileStorer.store(file, buffet.getName()));
 			}
-			
+			buffet.setImgs((String[])imgs.toArray());
 			this.buffetService.save(buffet);
 			model.addAttribute("buffet", this.buffetService.findById(buffet.getId()));
 			return "buffet.html";

@@ -1,4 +1,4 @@
-package it.uniroma3.controller;
+package it.uniroma3.catering.controller;
 
 import javax.validation.Valid;
 
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import it.uniroma3.model.Ingradient;
-import it.uniroma3.presentation.FileStorer;
-import it.uniroma3.service.IngradientService;
+import it.uniroma3.catering.model.Ingradient;
+import it.uniroma3.catering.presentation.FileStorer;
+import it.uniroma3.catering.service.IngradientService;
 
 @Controller
 public class IngradientController {
@@ -48,7 +48,7 @@ public class IngradientController {
 		return "ingradients.html";
 	}
 	
-	@GetMapping("/ingradient/{id}")
+	@GetMapping("/deleteIngradient/{id}")
 	public String deleteIngradient(@PathVariable("id") Long id, Model model) {
 		this.ingradientService.deleteById(id);
 		return "index.html";

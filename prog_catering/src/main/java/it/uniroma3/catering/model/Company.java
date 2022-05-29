@@ -1,4 +1,4 @@
-package it.uniroma3.model;
+package it.uniroma3.catering.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+
+/**
+ * Inutile?? Sembrerebbe essere semplicemente Una Molti a Molti!
+ */
 @Entity
 public class Company { 
 	

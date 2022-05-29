@@ -1,4 +1,4 @@
-package it.uniroma3.model;
+package it.uniroma3.catering.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +34,9 @@ public class Buffet {
 	@OneToMany
 	private List<Course> courses;
 	
-	private List<String> imgs;
+	private String[] imgs;
 
 	public Buffet() {
-		this.imgs = new ArrayList<String>();
 		this.courses = new ArrayList<Course>();
 	}
 
@@ -81,16 +80,12 @@ public class Buffet {
 		this.courses = courses;
 	}
 
-	public List<String> getImgs() {
+	public String[] getImgs() {
 		return imgs;
 	}
 
-	public void setImgs(List<String> imgs) {
+	public void setImgs(String[] imgs) {
 		this.imgs = imgs;
-	}
-
-	public void addImage(String img) {
-		imgs.add(img);
 	}
 	
 }
