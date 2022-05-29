@@ -32,8 +32,6 @@ public class Buffet {
 	
 	private List<String> imgs;
 
-	
-	
 	public Buffet() {
 		this.imgs = new ArrayList<String>();
 	}
@@ -78,4 +76,8 @@ public class Buffet {
 		this.imgs = imgs;
 	}
 
+	public void addImage(String img) {
+		imgs.add(img);
+	}
+	
 }
