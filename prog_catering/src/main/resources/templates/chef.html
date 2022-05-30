@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Chef</title>
+</head>
+<body>
+	<div>
+		<h4>Dettagli chef:</h4>
+		<div>
+			<img th:src="@{'/' + ${chef.surname} + '/' + ${chef.img}}"></img>
+			<div>Nome: <span th:text="${chef.name}">Paolo</span></div>
+			<div>Cognome: <span th:text="${chef.surname}">Rossi</span></div>
+			
+		</div>
+	</div>
+	<footer>
+		<a href="/">Home</a>
+	</footer>
+</body>
+</html>

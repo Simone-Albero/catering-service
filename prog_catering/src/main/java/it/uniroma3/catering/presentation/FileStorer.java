@@ -19,11 +19,11 @@ public class FileStorer {
 		Path fileNameAndPath  = Paths.get(uploadDirectory+owner, file.getOriginalFilename());
 		try {
 			Files.write(fileNameAndPath, file.getBytes());
-			return fileNameAndPath.getFileName().toString();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return fileNameAndPath.getFileName().toString();
 	}
 	
 	
