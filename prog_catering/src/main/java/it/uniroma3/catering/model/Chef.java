@@ -9,8 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-
-import org.springframework.lang.NonNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Chef {
@@ -20,15 +19,15 @@ public class Chef {
 	private Long id;
 	
 	@NotBlank
-	@NonNull
+	@NotNull
 	private String name;
 	
 	@NotBlank
-	@NonNull
+	@NotNull
 	private String surname;
 
 	@NotBlank
-	@NonNull
+	@NotNull
 	private String nation;
 	
 	@OneToMany(mappedBy = "chef")

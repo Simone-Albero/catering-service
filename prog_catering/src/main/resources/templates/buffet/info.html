@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Buffet</title>
+</head>
+<body>
+	<div>
+		<h4>Dettagli Buffet:</h4>
+		<div>
+			<li th:each="img : ${buffet.imgs}">
+				<div th:if="${img}"><img th:src="@{'/images/' + ${buffet.name} + '/' + ${img}}"></img></div>
+			</li>
+
+			<div>Nome: <span th:text="${buffet.name}">Ricco Marittimo</span></div>
+			<div>Descrizione: <span th:text="${buffet.description}">Piatti di mare in abbondanza</span></div>
+		</div>
+	</div>
+	<footer>
+		<a href="/">Home</a>
+	</footer>
+</body>
+</html>

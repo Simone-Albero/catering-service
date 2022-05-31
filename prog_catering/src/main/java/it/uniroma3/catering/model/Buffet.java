@@ -10,34 +10,36 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-
-import org.springframework.lang.NonNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Buffet {
+
+	private static final int MAX_IMGS = 5;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@NotBlank
-	@NonNull
+	@NotNull
 	private String name;
 	
 	@NotBlank
-	@NonNull
-	private String desc;
+	@NotNull
+	private String description;
 	
 	@ManyToOne
 	private Chef chef;
 	
 	@OneToMany
-	private List<Dish> courses;
+	private List<Dish> dishes;
 	
 	private String[] imgs;
 
 	public Buffet() {
-		this.courses = new ArrayList<Dish>();
+		this.dishes = new ArrayList<Dish>();
+		this.imgs = new String[MAX_IMGS];
 	}
 
 	public Long getId() {
@@ -56,12 +58,12 @@ public class Buffet {
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Chef getChef() {
@@ -71,13 +73,13 @@ public class Buffet {
 	public void setChef(Chef chef) {
 		this.chef = chef;
 	}
-	
-	public List<Dish> getCourses() {
-		return courses;
+
+	public List<Dish> getDishes() {
+		return dishes;
 	}
 
-	public void setCourses(List<Dish> courses) {
-		this.courses = courses;
+	public void setDishes(List<Dish> dishes) {
+		this.dishes = dishes;
 	}
 
 	public String[] getImgs() {

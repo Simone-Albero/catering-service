@@ -1,10 +1,8 @@
 package it.uniroma3.catering.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,48 +10,55 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.catering.model.Buffet;
-import it.uniroma3.catering.model.Chef;
 import it.uniroma3.catering.presentation.FileStorer;
 import it.uniroma3.catering.service.BuffetService;
+import it.uniroma3.catering.service.ChefService;
 
 @Controller
+@RequestMapping("/buffet")
 public class BuffetController {
-
+	
+	@Autowired
 	private BuffetService buffetService;
 	
-	@PostMapping("/buffet")
-	public String addBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("file")MultipartFile[] files, BindingResult bindingResult, Model model) {
+	@Autowired
+	private ChefService chefService;
+	
+	@PostMapping("/add")
+	public String addBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
-			List<String> imgs= new ArrayList<String>(); 
+			int i=0;
  			for(MultipartFile file : files) {
-				imgs.add(FileStorer.store(file, buffet.getName()));
+ 				buffet.getImgs()[i] = FileStorer.store(file, buffet.getChef().getSurname()+ "/" + buffet.getName());
+ 				i++;
 			}
-			buffet.setImgs((String[])imgs.toArray());
+ 			
 			this.buffetService.save(buffet);
 			model.addAttribute("buffet", this.buffetService.findById(buffet.getId()));
-			return "buffet.html";
+			return "/buffet/info";
 		}
-		else return "buffetForm.html";
+		else return "/buffet/form";
 	}
 	
-	@GetMapping("/buffet/{id}")
+	@GetMapping("/{id}")
 	public String getBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(id));
-		return "buffet.html";
+		return "/buffet/info";
 	}
 	
 	
-	@GetMapping("/buffets")
+	@GetMapping("/all")
 	public String getBuffets(Model model) {
 		model.addAttribute("buffets", this.buffetService.findAll());
 		return "buffets.html";
 	}
 	
-	@GetMapping("/deleteBuffet/{id}")
+	@GetMapping("/delete/{id}")
 	public String deleteBuffet(@PathVariable("id") Long id, Model model) {
 		this.buffetService.deleteById(id);
 		return "index.html";
@@ -62,13 +67,12 @@ public class BuffetController {
 	/*
 	 * si ipotizza di avere uno chef come attributo del modello
 	 */
-	@GetMapping("/buffetForm")
-	public String getForm(@ModelAttribute("chef")Chef chef, Model model) {
+	@GetMapping("/form/{id}")
+	public String getForm(@PathVariable("id") Long id, Model model) {
 		Buffet buffet = new Buffet();
-		buffet.setChef(chef);
-		
+		buffet.setChef(this.chefService.findById(id));		
 		model.addAttribute("buffet", buffet);
-		return "buffetForm.html";
+		return "/buffet/form";
 	}
 	
 }
