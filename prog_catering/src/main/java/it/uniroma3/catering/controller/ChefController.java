@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.catering.model.Chef;
-import it.uniroma3.catering.model.Nation;
 import it.uniroma3.catering.presentation.FileStorer;
 import it.uniroma3.catering.service.ChefService;
 
@@ -33,25 +32,27 @@ public class ChefController {
 			
 			this.chefService.save(chef);
 			model.addAttribute("chef", this.chefService.findById(chef.getId()));
-			return "chef.html";
+			return "/chef/info";
 		}
-		else return "chefForm.html";
+		else return "/chef/form";
 	}
 	
 	@GetMapping("/{id}")
 	public String getChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("chef", this.chefService.findById(id));
-		return "chef.html";
+		return "/chef/info";
 	}
 	
 	@GetMapping("/all")
 	public String getChefs(Model model) {
 		model.addAttribute("chefs", this.chefService.findAll());
-		return "chefs.html";
+		return "/chef/all";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String deleteChef(@PathVariable("id") Long id, Model model) {
+		Chef chef = chefService.findById(id);
+		FileStorer.removeImg(chef.getSurname(),chef.getImg());
 		this.chefService.deleteById(id);
 		return "index.html";
 	}
@@ -59,11 +60,32 @@ public class ChefController {
 	@GetMapping("/form")
 	public String getForm(Model model) {
 		Chef chef = new Chef();
-		chef.setNation(new Nation());
-		
 		/**Gestire il controllo della nazione**/
 		model.addAttribute("chef", chef);
-		return "chefForm.html";
+		return "/chef/form";
+	}
+	
+	@GetMapping("/modify/{id}")
+	public String addChef(@PathVariable("id") Long id, Model model) {
+		Chef oldChef =  this.chefService.findById(id);
+		model.addAttribute("chef", oldChef);
+		return "chef/modify";
+	}
+	
+	@PostMapping("/modify")
+	public String updateChef(@Valid @ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+		if(!bindingResult.hasErrors()) {
+			
+			if(!file.isEmpty() && !(file.getOriginalFilename().equals(chef.getImg()))) {
+				FileStorer.removeImg(chef.getSurname(), chef.getImg());
+				chef.setImg(FileStorer.store(file, chef.getSurname()));
+			}
+			
+			this.chefService.save(chef);
+			model.addAttribute("chef", this.chefService.findById(chef.getId()));
+			return "/chef/info";
+		}
+		else return "/chef/modify";
 	}
 	
 	

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import it.uniroma3.catering.model.Course;
+import it.uniroma3.catering.model.Dish;
 import it.uniroma3.catering.presentation.FileStorer;
 import it.uniroma3.catering.service.CourseService;
 
@@ -25,7 +25,7 @@ public class CourseController {
 	
 	
 	@PostMapping("/course")
-	public String addCourse(@Valid @ModelAttribute("course")Course course, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+	public String addCourse(@Valid @ModelAttribute("course")Dish course, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			FileStorer.store(file, course.getName()); /**TO-DO: da sistemare**/
 			
@@ -56,7 +56,7 @@ public class CourseController {
 	
 	@GetMapping("/courseForm")
 	public String getForm(Model model) {
-		model.addAttribute("course", new Course());
+		model.addAttribute("course", new Dish());
 		return "courseForm.html";
 	}
 	

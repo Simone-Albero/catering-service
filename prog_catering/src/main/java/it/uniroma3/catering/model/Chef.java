@@ -7,12 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.springframework.lang.NonNull;
 
 @Entity
@@ -29,10 +26,10 @@ public class Chef {
 	@NotBlank
 	@NonNull
 	private String surname;
-	
-	@ManyToOne
-	@Cascade({CascadeType.PERSIST, CascadeType.MERGE})
-	private Nation nation;
+
+	@NotBlank
+	@NonNull
+	private String nation;
 	
 	@OneToMany(mappedBy = "chef")
 	private List<Buffet> buffet;
@@ -67,11 +64,11 @@ public class Chef {
 		this.surname = surname;
 	}
 
-	public Nation getNation() {
+	public String getNation() {
 		return nation;
 	}
 
-	public void setNation(Nation nation) {
+	public void setNation(String nation) {
 		this.nation = nation;
 	}
 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" />
+<title>Chefs</title>
+</head>
+<body>
+	<h4>Elenco chef</h4>
+	<ul>
+		<li th:each="chef : ${chefs}">
+		<div>
+			<a href="chef.html" th:href="@{'/chef' + '/' + ${chef.id}}" th:text="${chef.name} + ' ' + ${chef.surname}">Paolo Rossi</a>
+			<a href="chef.html" th:href="@{'/chef/delete' + '/' + ${chef.id}}" >Rimuovi</a>
+			<a href="chef.html" th:href="@{'/chef/modify' + '/' + ${chef.id}}" >Modifica</a>
+		</div>
+		</li>
+	</ul>
+	<div><a href="/">Home</a></div>
+</body>
+</html>

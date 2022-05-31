@@ -4,11 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.lang.NonNull;
 
@@ -27,10 +24,10 @@ public class Ingradient {
 	@NotBlank
 	private String desc;
 	
-	@ManyToOne
-	@Cascade({CascadeType.PERSIST, CascadeType.MERGE})
-	private Provenance provenance;
-
+	@NotBlank
+	@NonNull
+	private String provenance;
+	
 	public Long getId() {
 		return id;
 	}
@@ -55,11 +52,11 @@ public class Ingradient {
 		this.desc = desc;
 	}
 
-	public Provenance getProvenance() {
+	public String getProvenance() {
 		return provenance;
 	}
 
-	public void setProvenance(Provenance provenance) {
+	public void setProvenance(String provenance) {
 		this.provenance = provenance;
 	}
 	

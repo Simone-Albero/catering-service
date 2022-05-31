@@ -32,12 +32,12 @@ public class Buffet {
 	private Chef chef;
 	
 	@OneToMany
-	private List<Course> courses;
+	private List<Dish> courses;
 	
 	private String[] imgs;
 
 	public Buffet() {
-		this.courses = new ArrayList<Course>();
+		this.courses = new ArrayList<Dish>();
 	}
 
 	public Long getId() {
@@ -72,11 +72,11 @@ public class Buffet {
 		this.chef = chef;
 	}
 	
-	public List<Course> getCourses() {
+	public List<Dish> getCourses() {
 		return courses;
 	}
 
-	public void setCourses(List<Course> courses) {
+	public void setCourses(List<Dish> courses) {
 		this.courses = courses;
 	}
 

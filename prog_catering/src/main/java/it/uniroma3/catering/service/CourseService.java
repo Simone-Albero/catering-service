@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.catering.model.Course;
+import it.uniroma3.catering.model.Dish;
 import it.uniroma3.catering.repository.CourseRepository;
 
 @Service
@@ -17,18 +17,18 @@ public class CourseService {
 	@Autowired
 	private CourseRepository courseRepo;
 	
-	public void save(Course course) {
+	public void save(Dish course) {
 		this.courseRepo.save(course);
 	}
 	
-	public Course findById(Long id) {
+	public Dish findById(Long id) {
 		return this.courseRepo.findById(id).get();
 	}
 	
-	public List<Course> findAll(){
-		List<Course> courses = new ArrayList<Course>();
+	public List<Dish> findAll(){
+		List<Dish> courses = new ArrayList<Dish>();
 		
-		for (Course c : this.courseRepo.findAll()) {
+		for (Dish c : this.courseRepo.findAll()) {
 			courses.add(c);
 		}
 		return courses;
