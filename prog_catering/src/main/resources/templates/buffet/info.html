@@ -9,9 +9,8 @@
 		<h4>Dettagli Buffet:</h4>
 		<div>
 			<div th:each="img : ${buffet.imgs}">
-				<div th:if="${img != 'null'}"><img th:src="@{'/images/' + ${buffet.chef.name}+'_'+${buffet.chef.surname} + '/' + ${buffet.name} + '/' + ${img}}"></img></div>
+				<img th:if="${img != null}" th:src="@{'/images/' + ${buffet.chef.name}+'_'+${buffet.chef.surname} + '/' + ${buffet.name} + '/' + ${img}}"></img>
 			</div>
-
 			<div>Nome: <span th:text="${buffet.name}">Ricco Marittimo</span></div>
 			<div>Descrizione: <span th:text="${buffet.description}">Piatti di mare in abbondanza</span></div>
 		</div>

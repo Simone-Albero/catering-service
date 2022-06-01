@@ -28,13 +28,18 @@ public class BuffetController {
 	
 	@Autowired
 	private ChefService chefService;
+
+	private String getDirectoryName(Buffet buffet) {
+		return buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName();
+	}
+	
 	
 	@PostMapping("/add")
 	public String addBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			int i=0;
  			for(MultipartFile file : files) {
- 				buffet.getImgs()[i] = FileStorer.store(file, buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName());
+ 				buffet.getImgs()[i] = FileStorer.store(file, getDirectoryName(buffet));
  				i++;
 			}
  			
@@ -67,9 +72,25 @@ public class BuffetController {
 	@GetMapping("/delete/{id}")
 	public String deleteBuffet(@PathVariable("id") Long id, Model model) {
 		Buffet buffet = this.buffetService.findById(id);
-		FileStorer.removeImgsAndDir(buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName(), buffet.getImgs());
+		FileStorer.removeImgsAndDir(getDirectoryName(buffet), buffet.getImgs());
 		this.buffetService.deleteById(id);
 		return "index.html";
+	}
+	
+	@GetMapping("/delete/{id}/{img}")
+	public String deleteImage(@PathVariable("id") Long id, @PathVariable("img") String img, Model model) {
+		Buffet buffet = this.buffetService.findById(id);
+		for(String currImg : buffet.getImgs()) {
+			if(currImg != null && currImg.equals(img)) {
+				buffet.removeImg(img);
+				FileStorer.removeImg(getDirectoryName(buffet), img);
+			}
+			
+		}
+			
+		this.buffetService.save(buffet);
+		model.addAttribute("buffet", this.buffetService.findById(id));
+		return "buffet/modify";
 	}
 	
 	/*
@@ -94,11 +115,12 @@ public class BuffetController {
 	public String updateBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			if (files != null) {
-				FileStorer.dirEmpty(buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName());
+				FileStorer.dirEmpty(getDirectoryName(buffet));
+				buffet.emptyImgst();
 				int i=0;
 				for(MultipartFile file : files) {
 					if(!file.isEmpty()) {
-						buffet.getImgs()[i]= FileStorer.store(file, buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName());
+						buffet.getImgs()[i]= FileStorer.store(file, getDirectoryName(buffet));
 						i++;
 					}
 				}

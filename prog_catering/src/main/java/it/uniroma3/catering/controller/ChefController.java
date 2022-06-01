@@ -25,10 +25,14 @@ public class ChefController {
 	@Autowired
 	private ChefService chefService;
 	
+	private String getDirectoryName(Chef chef) {
+		return chef.getName()+"_"+chef.getSurname();
+	}
+	
 	@PostMapping("/add")
 	public String addChef(@Valid @ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
-			chef.setImg(FileStorer.store(file, chef.getName()+"_"+chef.getSurname()));
+			chef.setImg(FileStorer.store(file, getDirectoryName(chef)));
 			
 			this.chefService.save(chef);
 			model.addAttribute("chef", this.chefService.findById(chef.getId()));
@@ -52,8 +56,8 @@ public class ChefController {
 	@GetMapping("/delete/{id}")
 	public String deleteChef(@PathVariable("id") Long id, Model model) {
 		Chef chef = chefService.findById(id);
-		/**TODO chiamata a buffet controller per la rimozione di tutti i buffet**/
-		FileStorer.removeImgAndDir(chef.getName()+"_"+chef.getSurname(),chef.getImg());
+		/**TODO processo a cascata per svuotare ed eliminare tutte le immagini**/
+		FileStorer.removeImgAndDir(getDirectoryName(chef),chef.getImg());
 		this.chefService.deleteById(id);
 		return "index.html";
 	}
@@ -77,8 +81,8 @@ public class ChefController {
 		if(!bindingResult.hasErrors()) {
 			
 			if(!file.isEmpty()) {
-				FileStorer.removeImgAndDir(chef.getName()+"_"+chef.getSurname(), chef.getImg());
-				chef.setImg(FileStorer.store(file, chef.getName()+"_"+chef.getSurname()));
+				FileStorer.removeImgAndDir(getDirectoryName(chef), chef.getImg());
+				chef.setImg(FileStorer.store(file, getDirectoryName(chef)));
 			}
 			
 			this.chefService.save(chef);

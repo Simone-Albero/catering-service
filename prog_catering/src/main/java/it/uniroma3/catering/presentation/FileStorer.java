@@ -59,7 +59,11 @@ public class FileStorer {
 	
 	public static void dirEmpty(String owner) {
 		for(File file : new File(setupDirName(owner)).listFiles()) {
-			file.delete();
+			try {
+				Files.delete(file.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 		
