@@ -4,7 +4,7 @@
 <title>Chefs</title>
 </head>
 <body>
-	<h4>Elenco chef</h4>
+	<h4>Elenco Chef</h4>
 	<ul>
 		<li th:each="chef : ${chefs}">
 		<div>
@@ -12,6 +12,7 @@
 			<a href="chef.html" th:href="@{'/chef/delete' + '/' + ${chef.id}}" >Rimuovi</a>
 			<a href="chef.html" th:href="@{'/chef/modify' + '/' + ${chef.id}}" >Modifica</a>
 			<a href="chef.html" th:href="@{'/buffet/form' + '/' + ${chef.id}}" >Aggiungi Buffet</a>
+			<a href="chef.html" th:href="@{'/buffet/' + ${chef.id} + '/all'}" >Visualizza Proposte</a>
 		</div>
 		</li>
 	</ul>

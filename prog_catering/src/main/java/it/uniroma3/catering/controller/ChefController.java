@@ -21,14 +21,14 @@ import it.uniroma3.catering.service.ChefService;
 @Controller
 @RequestMapping("/chef")
 public class ChefController {
-
+	
 	@Autowired
 	private ChefService chefService;
 	
 	@PostMapping("/add")
 	public String addChef(@Valid @ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
-			chef.setImg(FileStorer.store(file, chef.getSurname()));
+			chef.setImg(FileStorer.store(file, chef.getName()+"_"+chef.getSurname()));
 			
 			this.chefService.save(chef);
 			model.addAttribute("chef", this.chefService.findById(chef.getId()));
@@ -52,7 +52,8 @@ public class ChefController {
 	@GetMapping("/delete/{id}")
 	public String deleteChef(@PathVariable("id") Long id, Model model) {
 		Chef chef = chefService.findById(id);
-		FileStorer.removeImg(chef.getSurname(),chef.getImg());
+		/**TODO chiamata a buffet controller per la rimozione di tutti i buffet**/
+		FileStorer.removeImgAndDir(chef.getName()+"_"+chef.getSurname(),chef.getImg());
 		this.chefService.deleteById(id);
 		return "index.html";
 	}
@@ -60,13 +61,12 @@ public class ChefController {
 	@GetMapping("/form")
 	public String getForm(Model model) {
 		Chef chef = new Chef();
-		/**Gestire il controllo della nazione**/
 		model.addAttribute("chef", chef);
 		return "/chef/form";
 	}
 	
 	@GetMapping("/modify/{id}")
-	public String addChef(@PathVariable("id") Long id, Model model) {
+	public String modifyChef(@PathVariable("id") Long id, Model model) {
 		Chef oldChef =  this.chefService.findById(id);
 		model.addAttribute("chef", oldChef);
 		return "chef/modify";
@@ -76,9 +76,9 @@ public class ChefController {
 	public String updateChef(@Valid @ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			
-			if(!file.isEmpty() && !(file.getOriginalFilename().equals(chef.getImg()))) {
-				FileStorer.removeImg(chef.getSurname(), chef.getImg());
-				chef.setImg(FileStorer.store(file, chef.getSurname()));
+			if(!file.isEmpty()) {
+				FileStorer.removeImgAndDir(chef.getName()+"_"+chef.getSurname(), chef.getImg());
+				chef.setImg(FileStorer.store(file, chef.getName()+"_"+chef.getSurname()));
 			}
 			
 			this.chefService.save(chef);

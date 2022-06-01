@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" />
+<title>Modifica Buffet</title>
+</head>
+<body>
+	<form th:action="@{/buffet/modify}" method="post" th:object="${buffet}" enctype="multipart/form-data">
+		<input type="hidden" th:field="*{id}">
+		<input type="hidden" th:field="*{chef}">
+		<input type="hidden" th:field="*{imgs}">
+		<input type="hidden" th:field="*{dishes}">
+		<div>Nome: <input type="text" th:field="*{name}"></div>
+		<div><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
+		<div>Descrizione: <input type="text" th:field="*{description}"></div>
+		<div><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></div>
+		<div>Immagini: <input type="file" name="files" multiple></div>
+		<div><button type="submit">Conferma</button></div>
+	</form>
+</body>
+</html>

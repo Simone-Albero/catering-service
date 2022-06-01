@@ -11,23 +11,20 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 @Entity
-public class Dish { //piatto
-
+public class Dish { 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@NotBlank
 	@NotNull
-	@UniqueElements
 	private String name;
 	
 	@NotBlank
 	@NotNull
-	private String desc;
+	private String description;
 	
 	@OneToMany
 	private List<Ingradient> ingradients;
@@ -52,12 +49,12 @@ public class Dish { //piatto
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public List<Ingradient> getIngradients() {

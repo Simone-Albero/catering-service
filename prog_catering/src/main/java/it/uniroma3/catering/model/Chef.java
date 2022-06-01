@@ -31,12 +31,12 @@ public class Chef {
 	private String nation;
 	
 	@OneToMany(mappedBy = "chef")
-	private List<Buffet> buffet;
+	private List<Buffet> buffets;
 	
 	private String img;
 
 	public Chef() {
-		this.buffet = new ArrayList<Buffet>();
+		this.buffets = new ArrayList<Buffet>();
 	}
 
 	public Long getId() {
@@ -71,12 +71,12 @@ public class Chef {
 		this.nation = nation;
 	}
 
-	public List<Buffet> getBuffet() {
-		return buffet;
+	public List<Buffet> getBuffets() {
+		return buffets;
 	}
 
-	public void setBuffet(List<Buffet> buffet) {
-		this.buffet = buffet;
+	public void setBuffets(List<Buffet> buffets) {
+		this.buffets = buffets;
 	}
 
 	public String getImg() {

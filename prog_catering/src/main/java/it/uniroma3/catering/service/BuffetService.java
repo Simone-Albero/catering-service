@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.catering.model.Buffet;
+import it.uniroma3.catering.model.Chef;
 import it.uniroma3.catering.repository.BuffetRepository;
 
 @Service
@@ -29,6 +30,15 @@ public class BuffetService {
 		List<Buffet> buffets = new ArrayList<Buffet>();
 		
 		for (Buffet b : this.buffetRepo.findAll()) {
+			buffets.add(b);
+		}
+		return buffets;
+	}
+	
+	public List<Buffet> findAllByChef(Chef chef){
+		List<Buffet> buffets = new ArrayList<Buffet>();
+		
+		for (Buffet b : this.buffetRepo.findAllByChef(chef)) {
 			buffets.add(b);
 		}
 		return buffets;

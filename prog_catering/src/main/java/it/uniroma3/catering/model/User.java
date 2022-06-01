@@ -6,12 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.lang.NonNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "users")
 public class User {
 
 	@Id
@@ -24,17 +24,15 @@ public class User {
 	
 	private LocalDate birthDate;
 	
-	@NonNull
+	@NotNull
 	@NotBlank
-	@UniqueElements
 	private String username;
 	
-	@NonNull
+	@NotNull
 	@NotBlank
-	@UniqueElements
 	private String email;
 
-	@NonNull
+	@NotNull
 	@NotBlank
 	private String pwd;
 

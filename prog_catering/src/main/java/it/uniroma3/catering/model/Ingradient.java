@@ -5,9 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.lang.NonNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Ingradient {
@@ -17,15 +15,14 @@ public class Ingradient {
 	private Long id;
 	
 	@NotBlank
-	@NonNull
-	@UniqueElements
+	@NotNull
 	private String name;
 	
 	@NotBlank
-	private String desc;
+	private String description;
 	
 	@NotBlank
-	@NonNull
+	@NotNull
 	private String provenance;
 	
 	public Long getId() {
@@ -44,12 +41,12 @@ public class Ingradient {
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getProvenance() {

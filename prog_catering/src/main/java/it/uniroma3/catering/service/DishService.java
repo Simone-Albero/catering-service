@@ -9,26 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.catering.model.Dish;
-import it.uniroma3.catering.repository.CourseRepository;
+import it.uniroma3.catering.repository.DishRepository;
 
 @Service
-public class CourseService {
+public class DishService {
 	
 	@Autowired
-	private CourseRepository courseRepo;
+	private DishRepository dishRepo;
 	
 	public void save(Dish course) {
-		this.courseRepo.save(course);
+		this.dishRepo.save(course);
 	}
 	
 	public Dish findById(Long id) {
-		return this.courseRepo.findById(id).get();
+		return this.dishRepo.findById(id).get();
 	}
 	
 	public List<Dish> findAll(){
 		List<Dish> courses = new ArrayList<Dish>();
 		
-		for (Dish c : this.courseRepo.findAll()) {
+		for (Dish c : this.dishRepo.findAll()) {
 			courses.add(c);
 		}
 		return courses;
@@ -36,6 +36,6 @@ public class CourseService {
 	
 	@Transactional
 	public void deleteById(Long id) {
-		this.courseRepo.deleteById(id);
+		this.dishRepo.deleteById(id);
 	}
 }

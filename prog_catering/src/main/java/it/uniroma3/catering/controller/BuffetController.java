@@ -34,7 +34,7 @@ public class BuffetController {
 		if(!bindingResult.hasErrors()) {
 			int i=0;
  			for(MultipartFile file : files) {
- 				buffet.getImgs()[i] = FileStorer.store(file, buffet.getChef().getSurname()+ "/" + buffet.getName());
+ 				buffet.getImgs()[i] = FileStorer.store(file, buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName());
  				i++;
 			}
  			
@@ -55,11 +55,19 @@ public class BuffetController {
 	@GetMapping("/all")
 	public String getBuffets(Model model) {
 		model.addAttribute("buffets", this.buffetService.findAll());
-		return "buffets.html";
+		return "/buffet/all";
+	}
+	
+	@GetMapping("/{id}/all")
+	public String getBuffetsByChef(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("buffets", this.buffetService.findAllByChef(this.chefService.findById(id)));
+		return "/buffet/all";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String deleteBuffet(@PathVariable("id") Long id, Model model) {
+		Buffet buffet = this.buffetService.findById(id);
+		FileStorer.removeImgsAndDir(buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName(), buffet.getImgs());
 		this.buffetService.deleteById(id);
 		return "index.html";
 	}
@@ -73,6 +81,34 @@ public class BuffetController {
 		buffet.setChef(this.chefService.findById(id));		
 		model.addAttribute("buffet", buffet);
 		return "/buffet/form";
+	}
+	
+	@GetMapping("/modify/{id}")
+	public String modifyBuffet(@PathVariable("id") Long id, Model model) {
+		Buffet oldBuffet =  this.buffetService.findById(id);
+		model.addAttribute("buffet", oldBuffet);
+		return "buffet/modify";
+	}
+	
+	@PostMapping("/modify")
+	public String updateBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
+		if(!bindingResult.hasErrors()) {
+			if (files != null) {
+				FileStorer.dirEmpty(buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName());
+				int i=0;
+				for(MultipartFile file : files) {
+					if(!file.isEmpty()) {
+						buffet.getImgs()[i]= FileStorer.store(file, buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName());
+						i++;
+					}
+				}
+			}
+			
+			this.buffetService.save(buffet);
+			model.addAttribute("buffet", this.buffetService.findById(buffet.getId()));
+			return "/buffet/info";
+		}
+		else return "/buffet/modify";
 	}
 	
 }
