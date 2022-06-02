@@ -57,9 +57,20 @@ public class ChefController {
 	public String deleteChef(@PathVariable("id") Long id, Model model) {
 		Chef chef = chefService.findById(id);
 		/**TODO processo a cascata per svuotare ed eliminare tutte le immagini**/
-		FileStorer.removeImgAndDir(getDirectoryName(chef),chef.getImg());
+		FileStorer.dirEmptyEndDelete(getDirectoryName(chef));
 		this.chefService.deleteById(id);
 		return "index.html";
+	}
+	
+	@GetMapping("/delete/image/{id}")
+	public String deleteImage(@PathVariable("id") Long id, Model model) {
+		Chef chef = this.chefService.findById(id);
+		FileStorer.removeImg(getDirectoryName(chef), chef.getImg());
+		chef.setImg(null);
+			
+		this.chefService.save(chef);
+		model.addAttribute("chef", this.chefService.findById(id));
+		return "/chef/modify";
 	}
 	
 	@GetMapping("/form")

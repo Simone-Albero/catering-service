@@ -59,12 +59,18 @@ public class FileStorer {
 	
 	public static void dirEmpty(String owner) {
 		for(File file : new File(setupDirName(owner)).listFiles()) {
+			if(file.isDirectory()) dirEmptyEndDelete(owner + "/" + file.getName()); 
 			try {
 				Files.delete(file.toPath());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static void dirEmptyEndDelete(String owner) {
+		dirEmpty(owner);
+		removeDirectory(owner);
 	}
 		
 	

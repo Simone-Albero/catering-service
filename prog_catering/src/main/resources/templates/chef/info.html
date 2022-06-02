@@ -8,7 +8,7 @@
 	<div>
 		<h4>Dettagli chef:</h4>
 		<div>
-			<img th:src="@{'/images/'+ ${chef.name}+'_'+${chef.surname} + '/' + ${chef.img}}"></img>
+			<img th:if="${chef.img != null}" th:src="@{'/images/'+ ${chef.name}+'_'+${chef.surname} + '/' + ${chef.img}}"></img>
 			<div>Nome: <span th:text="${chef.name}">Paolo</span></div>
 			<div>Cognome: <span th:text="${chef.surname}">Rossi</span></div>
 			<div>Cognome: <span th:text="${chef.nation}">Rossi</span></div>
