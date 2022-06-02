@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Sign Up</title>
+</head>
+<body>
+    <h4>Registrazione</h4>
+	<form th:action="@{/registration/validate}" method="POST">
+    <table>
+        <tr>
+            <td>Username</td>
+            <td><input type="text" th:field="${credentials.username}"/></td>
+            <td th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}" ></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" th:field="${credentials.password}"/></td>
+            <td th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}" ></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" th:field="${user.email}"/></td>
+            <td th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}" ></td>
+        </tr>
+        <tr>
+            <td>Nome</td>
+            <td><input type="text" th:field="${user.name}"/></td>
+            <td th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}" ></td>
+        </tr>
+        <tr>
+            <td>Cognome</td>
+            <td><input type="text" th:field="${user.surname}"/></td>
+            <td th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}" ></td>
+        </tr>
+        <tr>
+            <td>Data Di Nascita</td>
+            <td><input type="date" th:field="${user.birthDate}"/></td>
+            <td th:if="${#fields.hasErrors('user.birthDate')}" th:errors="${user.birthDate}" ></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Registra</button>
+            </td>
+        </tr>
+    </table>
+	</form>
+</body>
+</html>

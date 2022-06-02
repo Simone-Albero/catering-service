@@ -74,7 +74,7 @@ public class BuffetController {
 		Buffet buffet = this.buffetService.findById(id);
 		FileStorer.removeImgsAndDir(getDirectoryName(buffet), buffet.getImgs());
 		this.buffetService.deleteById(id);
-		return "index.html";
+		return "index";
 	}
 	
 	@GetMapping("/delete/{id}/{img}")

@@ -59,7 +59,7 @@ public class ChefController {
 		/**TODO processo a cascata per svuotare ed eliminare tutte le immagini**/
 		FileStorer.dirEmptyEndDelete(getDirectoryName(chef));
 		this.chefService.deleteById(id);
-		return "index.html";
+		return "index";
 	}
 	
 	@GetMapping("/delete/image/{id}")

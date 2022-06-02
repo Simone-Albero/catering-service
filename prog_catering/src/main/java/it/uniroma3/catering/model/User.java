@@ -2,6 +2,7 @@ package it.uniroma3.catering.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "users")
@@ -18,23 +21,20 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotNull
+	@NotBlank	
 	private String name;
 	
+	@NotNull
+	@NotBlank
 	private String surname;
 	
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
 	
-	@NotNull
-	@NotBlank
-	private String username;
-	
-	@NotNull
-	@NotBlank
+	@Column(nullable = false, unique = true)
 	private String email;
-
-	@NotNull
-	@NotBlank
-	private String pwd;
 
 	public Long getId() {
 		return id;
@@ -68,28 +68,12 @@ public class User {
 		this.birthDate = birthDate;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
 	}
 	
 }
