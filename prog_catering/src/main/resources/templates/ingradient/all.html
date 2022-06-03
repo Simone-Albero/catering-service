@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" />
+<title>Ingredienti</title>
+</head>
+<body>
+	<h4>Elenco Ingredienti</h4>
+	<ul>
+		<li th:each="ingradient : ${ingradients}">
+		<div>
+			<a th:href="@{'/ingradient' + '/' + ${ingradient.id}}" th:text="${ingradient.name}">Prezzemolo</a>
+			<a th:href="@{'/ingradient/delete' + '/' + ${ingradient.id}}" >Rimuovi</a>
+			<a th:href="@{'/ingradient/modify' + '/' + ${ingradient.id}}" >Modifica</a>
+		</div>
+		</li>
+	</ul>
+	<div><a href="/default">Home</a></div>
+</body>
+</html>

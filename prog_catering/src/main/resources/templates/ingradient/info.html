@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Ingrediente</title>
+</head>
+<body>
+	<div>
+		<h4>Dettagli Ingrediente:</h4>
+		<div>
+			<img th:if="${ingradient.img != null}" th:src="@{'/images/' + ${ingradient.getDirectoryName()} + '/' + ${ingradient.img}}"></img>
+			<div>Nome: <span th:text="${ingradient.name}">Prezzemolo</span></div>
+			<div>Descrizione: <span th:text="${ingradient.description}">In Barattolo</span></div>
+			<div>Provenienza: <span th:text="${ingradient.provenance}">Italia</span></div>
+		</div>
+	</div>
+	<footer>
+		<a href="/default">Home</a>
+	</footer>
+</body>
+</html>
+

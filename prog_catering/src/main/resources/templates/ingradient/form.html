@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" />
+<title>Inserimento Ingrediente</title>
+</head>
+<body>
+	<form th:action="@{/ingradient/add}" method="post" th:object="${ingradient}" enctype="multipart/form-data">
+		<input type="hidden" th:field="*{dish}">
+		<div>Nome: <input type="text" th:field="*{name}"></div>
+		<div><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
+		<div>Descrizione: <input type="text" th:field="*{description}"></div>
+		<div><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></div>
+		<div>Provenienza: <input type="text" th:field="*{provenance}"></div>
+		<div><span th:if="${#fields.hasErrors('provenance')}" th:errors="*{provenance}"></span></div>
+		<div>Immagine: <input type="file" name="file"></div>
+		<div><button type="submit">Conferma</button></div>
+	</form>
+</body>
+</html>

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -24,6 +25,11 @@ public class Ingradient {
 	@NotBlank
 	@NotNull
 	private String provenance;
+	
+	private String img;
+	
+	@ManyToOne
+	private Dish dish;
 	
 	public Long getId() {
 		return id;
@@ -55,6 +61,26 @@ public class Ingradient {
 
 	public void setProvenance(String provenance) {
 		this.provenance = provenance;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public Dish getDish() {
+		return dish;
+	}
+
+	public void setDish(Dish dish) {
+		this.dish = dish;
+	}
+	
+	public String getDirectoryName() {
+		return this.dish.getDirectoryName()+"/"+ this.name.replaceAll("\\s+","_");
 	}
 	
 }

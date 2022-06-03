@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 public class Dish { 
 	
@@ -32,7 +35,8 @@ public class Dish {
 	@ManyToOne
 	private Buffet buffet;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "dish")
+	@Cascade(CascadeType.DELETE)
 	private List<Ingradient> ingradients;
 
 	public Dish() {
@@ -85,6 +89,10 @@ public class Dish {
 
 	public void setIngradients(List<Ingradient> ingradients) {
 		this.ingradients = ingradients;
+	}
+	
+	public void addIngradient(Ingradient ingradient) {
+		this.ingradients.add(ingradient);
 	}
 	
 	public String getDirectoryName() {

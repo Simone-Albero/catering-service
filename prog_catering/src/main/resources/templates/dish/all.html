@@ -11,8 +11,8 @@
 			<a th:href="@{'/dish' + '/' + ${dish.id}}" th:text="${dish.name}">Delizie Di Mare</a>
 			<a th:href="@{'/dish/delete' + '/' + ${dish.id}}" >Rimuovi</a>
 			<a th:href="@{'/dish/modify' + '/' + ${dish.id}}" >Modifica</a>
-			<a th:href="@{'/dish/form' + '/' + ${dish.id}}" >Aggiungi Ingrediente</a>
-			<a th:href="@{'/dish/' + ${dish.id} + '/all'}" >Visualizza Ingredienti</a>
+			<a th:href="@{'/ingradient/form' + '/' + ${dish.id}}" >Aggiungi Ingrediente</a>
+			<a th:href="@{'/ingradient/' + ${dish.id} + '/all'}" >Visualizza Ingredienti</a>
 		</div>
 		</li>
 	</ul>
