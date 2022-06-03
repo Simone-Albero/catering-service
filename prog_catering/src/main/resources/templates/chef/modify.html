@@ -8,7 +8,7 @@
 		<input type="hidden" th:field="*{id}">
 		<input type="hidden" th:field="*{img}">
 		<div th:if="${chef.img != null}">
-			<img th:src="@{'/images/' + ${chef.name}+'_'+${chef.surname} + '/' + ${chef.img}}"></img>
+			<img th:src="@{'/images/' + ${chef.getDirectoryName()} + '/' + ${chef.img}}"></img>
 			<a th:href="@{'/chef/delete/image/' + *{id}}">Rimuovi</a>
 		</div>
 		<div>Nome: <input type="text" th:field="*{name}"></div>

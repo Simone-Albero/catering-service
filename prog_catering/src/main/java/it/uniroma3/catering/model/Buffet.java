@@ -9,8 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Buffet {
@@ -32,7 +36,8 @@ public class Buffet {
 	@ManyToOne
 	private Chef chef;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "buffet")
+	@Cascade(CascadeType.DELETE)
 	private List<Dish> dishes;
 	
 	private String[] imgs;
@@ -99,7 +104,14 @@ public class Buffet {
 			if(this.imgs[i] != null && this.imgs[i].equals(img)) this.imgs[i]=null;
 		}
 	}
+
+	public void addDish(@Valid Dish dish) {
+		this.dishes.add(dish);
+	}
 	
+	public String getDirectoryName() {
+		return this.chef.getDirectoryName()+"/"+ this.name.replaceAll("\\s+","_");
+	}
 	
 	
 }

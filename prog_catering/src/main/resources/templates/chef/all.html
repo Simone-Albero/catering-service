@@ -8,14 +8,14 @@
 	<ul>
 		<li th:each="chef : ${chefs}">
 		<div>
-			<a href="chef.html" th:href="@{'/chef' + '/' + ${chef.id}}" th:text="${chef.name} + ' ' + ${chef.surname}">Paolo Rossi</a>
-			<a href="chef.html" th:href="@{'/chef/delete' + '/' + ${chef.id}}" >Rimuovi</a>
-			<a href="chef.html" th:href="@{'/chef/modify' + '/' + ${chef.id}}" >Modifica</a>
-			<a href="chef.html" th:href="@{'/buffet/form' + '/' + ${chef.id}}" >Aggiungi Buffet</a>
-			<a href="chef.html" th:href="@{'/buffet/' + ${chef.id} + '/all'}" >Visualizza Proposte</a>
+			<a th:href="@{'/chef' + '/' + ${chef.id}}" th:text="${chef.name} + ' ' + ${chef.surname}">Paolo Rossi</a>
+			<a th:href="@{'/chef/delete' + '/' + ${chef.id}}" >Rimuovi</a>
+			<a th:href="@{'/chef/modify' + '/' + ${chef.id}}" >Modifica</a>
+			<a th:href="@{'/buffet/form' + '/' + ${chef.id}}" >Aggiungi Buffet</a>
+			<a th:href="@{'/buffet/' + ${chef.id} + '/all'}" >Visualizza Proposte</a>
 		</div>
 		</li>
 	</ul>
-	<div><a href="/">Home</a></div>
+	<div><a href="/default">Home</a></div>
 </body>
 </html>

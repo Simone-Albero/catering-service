@@ -8,13 +8,14 @@
 	<ul>
 		<li th:each="buffet : ${buffets}">
 		<div>
-			<a href="buffet.html" th:href="@{'/buffet' + '/' + ${buffet.id}}" th:text="${buffet.name}">Delizie Di Mare</a>
-			<a href="buffet.html" th:href="@{'/buffet/delete' + '/' + ${buffet.id}}" >Rimuovi</a>
-			<a href="buffet.html" th:href="@{'/buffet/modify' + '/' + ${buffet.id}}" >Modifica</a>
-			<a href="buffet.html" th:href="@{'/buffet/form' + '/' + ${buffet.id}}" >Aggiungi Portata</a>
+			<a th:href="@{'/buffet' + '/' + ${buffet.id}}" th:text="${buffet.name}">Delizie Di Mare</a>
+			<a th:href="@{'/buffet/delete' + '/' + ${buffet.id}}" >Rimuovi</a>
+			<a th:href="@{'/buffet/modify' + '/' + ${buffet.id}}" >Modifica</a>
+			<a th:href="@{'/dish/form' + '/' + ${buffet.id}}" >Aggiungi Portata</a>
+			<a th:href="@{'/dish/' + ${buffet.id} + '/all'}" >Visualizza Portate</a>
 		</div>
 		</li>
 	</ul>
-	<div><a href="/">Home</a></div>
+	<div><a href="/default">Home</a></div>
 </body>
 </html>

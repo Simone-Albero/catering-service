@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -25,6 +26,11 @@ public class Dish {
 	@NotBlank
 	@NotNull
 	private String description;
+	
+	private String img;
+	
+	@ManyToOne
+	private Buffet buffet;
 	
 	@OneToMany
 	private List<Ingradient> ingradients;
@@ -56,6 +62,22 @@ public class Dish {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Buffet getBuffet() {
+		return buffet;
+	}
+
+	public void setBuffet(Buffet buffet) {
+		this.buffet = buffet;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
 
 	public List<Ingradient> getIngradients() {
 		return ingradients;
@@ -65,5 +87,7 @@ public class Dish {
 		this.ingradients = ingradients;
 	}
 	
-	
+	public String getDirectoryName() {
+		return this.buffet.getDirectoryName()+"/"+ this.name.replaceAll("\\s+","_");
+	}
 }

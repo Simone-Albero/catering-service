@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.catering.model.Buffet;
 import it.uniroma3.catering.model.Dish;
 import it.uniroma3.catering.repository.DishRepository;
 
@@ -37,5 +38,9 @@ public class DishService {
 	@Transactional
 	public void deleteById(Long id) {
 		this.dishRepo.deleteById(id);
+	}
+
+	public List<Dish> findAllByBuffet(Buffet buffet) {
+		return this.dishRepo.findAllByBuffet(buffet);
 	}
 }

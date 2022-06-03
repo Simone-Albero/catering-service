@@ -69,4 +69,6 @@ public class AuthController {
         }
         return "/user/registerForm";
     }
+    
+    /**TODO logica admin-user**/
 }

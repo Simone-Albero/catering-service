@@ -90,5 +90,14 @@ public class Chef {
 	public void setImg(String img) {
 		this.img = img;
 	}
+
+	public void addBuffet(Buffet buffet) {
+		this.buffets.add(buffet);
+	}
+	
+	public String getDirectoryName() {
+		
+		return this.name.replaceAll("\\s+","_")+"_"+this.surname.replaceAll("\\s+","_");
+	}
 	
 }

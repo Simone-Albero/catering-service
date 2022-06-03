@@ -25,14 +25,10 @@ public class ChefController {
 	@Autowired
 	private ChefService chefService;
 	
-	private String getDirectoryName(Chef chef) {
-		return chef.getName()+"_"+chef.getSurname();
-	}
-	
 	@PostMapping("/add")
 	public String addChef(@Valid @ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
-			chef.setImg(FileStorer.store(file, getDirectoryName(chef)));
+			chef.setImg(FileStorer.store(file, chef.getDirectoryName()));
 			
 			this.chefService.save(chef);
 			model.addAttribute("chef", this.chefService.findById(chef.getId()));
@@ -57,15 +53,15 @@ public class ChefController {
 	public String deleteChef(@PathVariable("id") Long id, Model model) {
 		Chef chef = chefService.findById(id);
 		/**TODO processo a cascata per svuotare ed eliminare tutte le immagini**/
-		FileStorer.dirEmptyEndDelete(getDirectoryName(chef));
+		FileStorer.dirEmptyEndDelete(chef.getDirectoryName());
 		this.chefService.deleteById(id);
-		return "index";
+		return "/user/home";
 	}
 	
 	@GetMapping("/delete/image/{id}")
 	public String deleteImage(@PathVariable("id") Long id, Model model) {
 		Chef chef = this.chefService.findById(id);
-		FileStorer.removeImg(getDirectoryName(chef), chef.getImg());
+		FileStorer.removeImg(chef.getDirectoryName(), chef.getImg());
 		chef.setImg(null);
 			
 		this.chefService.save(chef);
@@ -75,8 +71,7 @@ public class ChefController {
 	
 	@GetMapping("/form")
 	public String getForm(Model model) {
-		Chef chef = new Chef();
-		model.addAttribute("chef", chef);
+		model.addAttribute("chef", new Chef());
 		return "/chef/form";
 	}
 	
@@ -92,8 +87,8 @@ public class ChefController {
 		if(!bindingResult.hasErrors()) {
 			
 			if(!file.isEmpty()) {
-				FileStorer.removeImgAndDir(getDirectoryName(chef), chef.getImg());
-				chef.setImg(FileStorer.store(file, getDirectoryName(chef)));
+				FileStorer.removeImgAndDir(chef.getDirectoryName(), chef.getImg());
+				chef.setImg(FileStorer.store(file, chef.getDirectoryName()));
 			}
 			
 			this.chefService.save(chef);

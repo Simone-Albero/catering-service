@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Piatto</title>
+</head>
+<body>
+	<div>
+		<h4>Dettagli Piatto:</h4>
+		<div>
+			<img th:if="${dish.img != null}" th:src="@{'/images/' + ${dish.getDirectoryName()} + '/' + ${dish.img}}"></img>
+			<div>Nome: <span th:text="${dish.name}">Risotto Alla Crema Di Scampi</span></div>
+			<div>Descrizione: <span th:text="${dish.description}">Scampi freschi</span></div>
+		</div>
+	</div>
+	<footer>
+		<a href="/default">Home</a>
+	</footer>
+</body>
+</html>

@@ -28,10 +28,6 @@ public class BuffetController {
 	
 	@Autowired
 	private ChefService chefService;
-
-	private String getDirectoryName(Buffet buffet) {
-		return buffet.getChef().getName()+"_"+buffet.getChef().getSurname()+ "/" + buffet.getName();
-	}
 	
 	
 	@PostMapping("/add")
@@ -39,12 +35,16 @@ public class BuffetController {
 		if(!bindingResult.hasErrors()) {
 			int i=0;
  			for(MultipartFile file : files) {
- 				buffet.getImgs()[i] = FileStorer.store(file, getDirectoryName(buffet));
+ 				buffet.getImgs()[i] = FileStorer.store(file, buffet.getDirectoryName());
  				i++;
 			}
  			
+ 			buffet.getChef().addBuffet(buffet);
+ 			this.chefService.save(buffet.getChef());
+ 			
 			this.buffetService.save(buffet);
 			model.addAttribute("buffet", this.buffetService.findById(buffet.getId()));
+			
 			return "/buffet/info";
 		}
 		else return "/buffet/form";
@@ -72,9 +72,9 @@ public class BuffetController {
 	@GetMapping("/delete/{id}")
 	public String deleteBuffet(@PathVariable("id") Long id, Model model) {
 		Buffet buffet = this.buffetService.findById(id);
-		FileStorer.removeImgsAndDir(getDirectoryName(buffet), buffet.getImgs());
+		FileStorer.removeImgsAndDir(buffet.getDirectoryName(), buffet.getImgs());
 		this.buffetService.deleteById(id);
-		return "index";
+		return "/user/home";
 	}
 	
 	@GetMapping("/delete/{id}/{img}")
@@ -83,7 +83,7 @@ public class BuffetController {
 		for(String currImg : buffet.getImgs()) {
 			if(currImg != null && currImg.equals(img)) {
 				buffet.removeImg(img);
-				FileStorer.removeImg(getDirectoryName(buffet), img);
+				FileStorer.removeImg(buffet.getDirectoryName(), img);
 			}
 			
 		}
@@ -93,9 +93,7 @@ public class BuffetController {
 		return "buffet/modify";
 	}
 	
-	/*
-	 * si ipotizza di avere uno chef come attributo del modello
-	 */
+	/**l'id e' dello chef per il quale si sta inserendo il buffet**/
 	@GetMapping("/form/{id}")
 	public String getForm(@PathVariable("id") Long id, Model model) {
 		Buffet buffet = new Buffet();
@@ -115,12 +113,12 @@ public class BuffetController {
 	public String updateBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			if (files != null) {
-				FileStorer.dirEmpty(getDirectoryName(buffet));
+				FileStorer.dirEmpty(buffet.getDirectoryName());
 				buffet.emptyImgst();
 				int i=0;
 				for(MultipartFile file : files) {
 					if(!file.isEmpty()) {
-						buffet.getImgs()[i]= FileStorer.store(file, getDirectoryName(buffet));
+						buffet.getImgs()[i]= FileStorer.store(file, buffet.getDirectoryName());
 						i++;
 					}
 				}
