@@ -4,6 +4,10 @@
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
+.carousel{
+	z-index: 1;
+	margin-top: -62px;
+}
 
 .carousel-item{
 	height: 32rem;
@@ -27,11 +31,6 @@
 
 /* OVERVIEW CONTENT
 -------------------------------------------------- */
-
-.carousel{
-	z-index: 1;
-	margin-top: -62px;
-}
 
 
 /* Center align the text within the three columns below the carousel */

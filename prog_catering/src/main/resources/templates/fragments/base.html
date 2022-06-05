@@ -16,7 +16,7 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
 		  
 		  <a class="navbar-brand" href="#">
-		  	<img src="/images/static/basket3-fill.svg" width="30" class="img-fluid"/>
+		  	<img src="/images/static/mainPage/basket3-fill.svg" width="30" class="img-fluid"/>
 		  </a>
 		  
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,16 +26,16 @@
 		  <div class="collapse navbar-collapse" id="navbarNav">
 		    <ul class="navbar-nav justify-content-center">
 		      
-		      <li class="nav-item active">
-		        <a class="nav-link" href="#"><b>Home</b><span class="sr-only">(current)</span></a>
+		      <li class="nav-item">
+		        <a class="nav-link" th:href="@{${link1}}"><b>Home</b><span class="sr-only">(current)</span></a>
 		      </li>
 		      
 		      <li class="nav-item">
-		        <a class="nav-link" href="#"><b>Log In</b></a>
+		        <a class="nav-link" th:href="@{${link2}}"><b th:text="${title1}"></b></a>
 		      </li>
 		      
 		      <li class="nav-item">
-		        <a class="nav-link" href="#"><b>Sign Up</b></a>
+		        <a class="nav-link" th:href="@{${link3}}"><b th:text="${title2}"></b></a>
 		      </li>
 		    </ul>
 		  </div>

@@ -1,0 +1,33 @@
+/* CUSTOMIZE THE BACKGROUND
+-------------------------------------------------- */
+body{
+	background-image: url("/images/static/loginPage/loginPage1.jpg");
+	background-size: cover;
+}
+
+
+/* CUSTOMIZE THE FORM
+-------------------------------------------------- */
+.login-page {
+  width: 500px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 500px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+}
+
+.card-footer {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 3rem;
+}
