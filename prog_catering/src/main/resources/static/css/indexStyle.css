@@ -28,6 +28,12 @@
 /* OVERVIEW CONTENT
 -------------------------------------------------- */
 
+.carousel{
+	z-index: 1;
+	margin-top: -62px;
+}
+
+
 /* Center align the text within the three columns below the carousel */
 .overview{
 	margin-top: 3rem;
@@ -45,3 +51,19 @@
   margin-right: .75rem;
   margin-left: .75rem;
 }
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 1.5rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.05rem;
+}
+
+
