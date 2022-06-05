@@ -70,5 +70,17 @@ public class AuthController {
         return "/user/registerForm";
     }
     
-    /**TODO logica admin-user**/
+    /**TODO logica admin**/
+    
+    @GetMapping("/admin/promote")
+    public String promoteUser() {
+    	return "/admin/promote";
+    }
+    
+    @PostMapping("/admin/promote/finalize")
+    public String promotion(@ModelAttribute("username") String username, BindingResult userBindingResult, Model model) {
+    	this.credentialsService.promote(username);
+    	return "admin/home";
+    }
+    
 }

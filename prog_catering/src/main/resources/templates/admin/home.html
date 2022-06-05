@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Catering(Admin)</title>
+</head>
+<body>
+	<div>
+		<h4>Operazioni:</h4>
+		<div>
+			<div><a th:href= "@{/chef/form}">Inserisci Chef</a></div>
+			<div><a th:href= "@{/chef/all}">Visualizza Chefs</a></div>
+			<div><a th:href= "@{/admin/promote}">Promuovi Ad Admin</a></div>
+		</div>
+		<div>
+			<a th:href="@{/logout}">Logout</a>
+   		</div>
+	</div>
+</body>
+</html>

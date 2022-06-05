@@ -1,0 +1,47 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+.carousel-item{
+	height: 32rem;
+	background:#777;
+	position: relative;
+	color: white;
+}
+
+.carousel-box {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;	
+	padding: 50px;
+}
+
+.carousel-image{
+	opacity: 0.6;
+	width: fit-content;
+}
+
+/* OVERVIEW CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.overview{
+	margin-top: 3rem;
+}
+
+
+.overview .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.overview h2 {
+  font-weight: 400;
+}
+.overview .col-lg-4 p {
+  margin-right: .75rem;
+  margin-left: .75rem;
+}

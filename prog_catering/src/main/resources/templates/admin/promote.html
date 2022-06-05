@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Promote</title>
+</head>
+<body>
+	<h4>Promote User</h4>
+	<form th:action="@{/admin/promote/finalize}" method="POST">
+		<div>
+			<div>
+				<span>Username:</span>
+				<span><input name="username" type="text" required /></span>
+			</div>		
+			<div>
+				<span><button type="submit">Submit</button></span>
+			</div>
+		</div>
+	</form>
+</body>
+</html>
