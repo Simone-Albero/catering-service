@@ -1,12 +1,13 @@
 /* GLOBAL STYLES
 -------------------------------------------------- */
-
+body{
+	background-color: WhiteSmoke;
+}
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 .carousel{
 	z-index: 1;
-	margin-top: -62px;
 }
 
 .carousel-item{
@@ -27,6 +28,26 @@
 .carousel-image{
 	opacity: 0.6;
 	width: fit-content;
+}
+
+.img-container {
+  height: 90vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#img1{
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/static/mainPage/mainPage1.jpg");
+}
+
+#img2{
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/static/mainPage/mainPage2.jpg");
+}
+
+#img3{
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/static/mainPage/mainPage3.jpg");
 }
 
 /* OVERVIEW CONTENT
@@ -64,5 +85,3 @@
   line-height: 1;
   letter-spacing: -.05rem;
 }
-
-

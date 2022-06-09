@@ -1,0 +1,39 @@
+/* CUSTOMIZE THE MAIN FRAME
+-------------------------------------------------- */
+.main-row{
+	
+	height: 60vh;
+ 	background-size: cover;
+  	background-position: center;
+  	background-repeat: no-repeat;
+  	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/static/buffetPage/buffetPage1.jpg");
+  	display: flex;
+}
+
+.title-frame{
+	display: flex;
+}
+
+.title{
+	font-size: 300%;
+	font-weight: bold;
+	color: white;
+	background-color: rgba(17,17,17,0.7);
+	padding: 1% 4%;
+	border-radius: 40px;
+	border-bottom: 4px solid #fff;
+	border-left: 4px solid #fff;
+	
+}
+
+/* CUSTOMIZE THE CONTENT FRAME
+-------------------------------------------------- */
+.content-frame{
+	display: flex;
+}
+
+.card-frame{
+	margin: 30px;
+}
+
+

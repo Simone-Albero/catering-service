@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static it.uniroma3.catering.model.Credentials.ADMIN_ROLE;
 
@@ -43,10 +44,14 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 
                 /** logout **/
                 .and().logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/index")        
-                .invalidateHttpSession(true)
-                .clearAuthentication(true).permitAll();
+    			//il logout è attivato con una richiesta GET a "/logout"
+    			.logoutUrl("/logout")
+    			//in caso di successo, si viene reindirizzati all'index
+    			.logoutSuccessUrl("/")
+    			.invalidateHttpSession(true)
+    			.deleteCookies("JSESSIONID")
+    			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+    			.clearAuthentication(true).permitAll();
     }
 
     /**

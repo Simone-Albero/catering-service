@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+	    <!-- Required meta tags -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>Catering</title>
+	
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+		<link rel="stylesheet" href="/css/baseStyle.css">
+		<link rel="stylesheet" href="/css/buffetStyle.css">
+		
+	</head>
+	
+	<body>
+	
+		<!-- Navbar Fragment -->
+		<header th:replace="fragments/base.html :: navbar('Profile', 'Log Out', '/', '/', '/logout')"></header>
+		
+		<div class="container-fluid">
+		
+			<!-- Main Frame -->
+			<div class="row main-row">
+				<div class="col title-frame align-self-center justify-content-center">
+					<div class="row title">Le Nostre Proposte</div>
+				</div>
+			</div>
+			
+			<!-- Card Frame --> 
+			<div class="row content-frame bg-light justify-content-center">
+				
+				<!-- Card -->
+				<div class="card mb-4 shadow-sm col-md-3 card-frame">
+		            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+		
+		            <div class="card-body">
+		              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+		              <div class="d-flex justify-content-between align-items-center">
+		                <div class="btn-group">
+		                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+		                </div>
+		                <small class="text-muted">9 mins</small>
+		              </div>
+		            </div>
+		            
+	        	</div>
+	        	
+			</div>
+			
+		</div>
+		
+		<!-- Footer -->
+		<div class="card-footer text-muted">
+			<p class="float-right"><a href="#" class="text-dark">Back to top</a></p>
+	    	Catering SPA
+	  	</div>
+	    
+	    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+	    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	  
+	  
+    </body>
+</html>

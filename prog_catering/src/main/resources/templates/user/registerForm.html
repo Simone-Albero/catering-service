@@ -17,7 +17,7 @@
 		<header th:replace="fragments/base.html :: navbar('Login', 'Sign Up', '/', '/login', '/register')"></header>
 		
 		<div class="login-page">
-  			<div class="form shadow-lg p-3 mb-5 bg-light rounded">
+  			<div class="form shadow-lg p-3 mb-5 bg-light">
   			
 				<form th:action="@{/login}" method="POST">
 				  <h1 class="form-text text-muted"><b>Registrati</b></h1>
@@ -54,7 +54,7 @@
 			   	    </div>
   				  </div>
 					
-				   <small class="form-text text-muted">Not registered? <a href="#">Create an account</a></small><br>
+				   <small class="form-text text-muted">Already registered? <a href="/login">Sign In</a></small><br>
 				  <button type="submit" class="btn btn-primary">Submit</button>
 				</form>				
 			

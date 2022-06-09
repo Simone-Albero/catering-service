@@ -62,6 +62,13 @@ public class BuffetController {
 		model.addAttribute("buffets", this.buffetService.findAll());
 		return "/buffet/all";
 	}
+
+	@GetMapping("/home")
+	public String buffetHome(Model model) {
+		model.addAttribute("buffets", this.buffetService.findAll());
+		return "/buffet/buffetHome";
+	}
+	
 	
 	@GetMapping("/{id}/all")
 	public String getBuffetsByChef(@PathVariable("id") Long id, Model model) {
