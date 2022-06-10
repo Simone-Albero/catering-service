@@ -1,0 +1,117 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+
+body{
+	font-family: 'Roboto', sans-serif;
+}
+
+h1{
+	font-family: 'DM Serif Display', serif;		
+	font-size: 4rem;
+	text-align: center;
+}
+
+h3{
+	font-family: 'DM Serif Display', serif;	
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+h2{
+	font-family: 'DM Serif Display', serif;	
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+h5{
+	font-weight: bold;
+}
+
+/* CUSTOMIZE THE TITLE
+-------------------------------------------------- */
+
+.title-frame{
+	display: flex;
+}
+
+.title{
+	font-family: 'DM Serif Display', serif;		
+	font-size: 4.5rem;
+	font-weight: bold;
+	color: white;
+
+	padding: 0.7% 2%;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom: 3px solid #fff;
+	
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+carousel{
+	z-index: 1;
+	width: 100%;
+}
+
+.carousel-item{
+	height: 32rem;
+	background:#777;
+	position: relative;
+	color: white;
+}
+
+.carousel-img{
+	opacity: 0.6;
+	width: 100%;
+}
+
+.img-container {
+  height: 90vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.carousel-box {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;	
+	padding: 15rem 18rem;
+	text-align: center;
+}
+
+/* CUSTOMIZE THE CARD
+-------------------------------------------------- */
+
+.card{
+	border-radius: 20px;
+}
+
+.dish-img{
+	border-top-left-radius: 10px; 
+	border-top-right-radius: 10px;
+}
+
+/* CUSTOMIZE THE INFO
+-------------------------------------------------- */
+.img-thumbnail{
+	border-radius: 20px;
+	border: 0px;
+}
+
+/* RESPONSIVE
+------------------------- */
+@media (max-width: 991px) {
+	
+	.carousel-img{
+		height: 100%;
+	}
+}
+
+
+
+

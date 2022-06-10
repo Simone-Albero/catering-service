@@ -11,6 +11,15 @@
 		<link rel="stylesheet" href="/css/indexStyle.css">
 		<link rel="stylesheet" href="/css/baseStyle.css">
 		
+		<!-- Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+		
 	</head>
   
     <body>
@@ -32,8 +41,8 @@
 			    <div class="carousel-item active img-container " id="img1" >
 			    	
 			    	<div class="container carousel-box">
-			    		<h1>Esempio 1</h1>
-			    		<p>Testo di prova</p>
+			    		<h1>Professionalità</h1>
+			    		<p>Ci impegnamo a garantire il miglior servizio per voi</p>
 			    		<a href="#" class="btn btn-lg btn-primary">Bottone</a>
 			    	</div>
 			    </div>
@@ -103,7 +112,7 @@
 	    	
 	    	<!-- General Info -->
 		    <div class="row featurette">
-		      <div class="col-md-8.3">
+		      <div class="col-md-8">
 		        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
 		        <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
 		      </div>
@@ -115,7 +124,7 @@
 		    <hr class="featurette-divider">
 		
 			<!-- General Info -->
-		    <div class="row featurette">
+		    <div class="row featurette mb-4">
 		      <div class="col-md-8 order-md-2">
 		        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
 		        <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
@@ -128,10 +137,7 @@
 		</div>
 		
 		<!-- Footer -->
-		<div class="card-footer text-muted mt-4">
-			<p class="float-right"><a href="#" class="text-dark">Back to top</a></p>
-	    	Catering SPA
-	  	</div>
+		<footer th:replace="fragments/base.html :: footer"></footer>
 		
 	    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
 	    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

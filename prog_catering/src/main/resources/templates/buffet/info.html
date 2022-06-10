@@ -1,22 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<meta charset="UTF-8" />
-<title>Buffet</title>
-</head>
-<body>
-	<div>
-		<h4>Dettagli Buffet:</h4>
-		<div>
-			<div th:each="img : ${buffet.imgs}">
-				<img th:if="${img != null}" th:src="@{'/images/' + ${buffet.getDirectoryName()} + '/' + ${img}}"></img>
+    <head>
+	    <!-- Required meta tags -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>Catering</title>
+	
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+		<link rel="stylesheet" href="/css/baseStyle.css">
+		<link rel="stylesheet" href="/css/buffetInfoStyle.css">
+		
+		<!-- Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+	
+		<!-- Navbar Fragment -->
+		<header th:replace="fragments/base.html :: navbar('Profile', 'Log Out', '/', '/', '/logout')"></header>
+		
+		<!-- Content Frame -->
+		<div class="container-fluid">
+			<!-- Buffet Imgs -->
+			<div class="row">
+				<div class="col p-0">
+					<!-- Carousel -->
+					<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+						            	
+						<div class="carousel-inner">
+						            		
+						   <!-- Carousel First Item-->
+					       <div class="carousel-item img-container active">
+								<img class="img-fluid carousel-img" th:if="${buffet.imgs[0] != null}" th:src="@{'/images/' + ${buffet.getDirectoryName()} + '/' + ${buffet.imgs[0]}}"></img>
+						   		
+						   		<div class="container carousel-box">
+									<div class="title" th:text="${buffet.name}">Nome Buffet</div>
+			    				</div>
+						   </div>
+						            		
+						   <!-- Carousel Items -->
+						   <div class="carousel-item img-container" th:each="img : ${buffet.imgs}" th:if="${img != null && img != buffet.imgs[0]}">
+								<img class="img-fluid carousel-img"  th:src="@{'/images/' + ${buffet.getDirectoryName()} + '/' + ${img}}"></img>
+						   		<div class="container carousel-box">
+									<div class="title" th:text="${buffet.name}">Nome Buffet</div>
+			    				</div>
+						   </div>
+							            
+						   <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+						   </button>
+										
+						   <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+							    <span class="sr-only">Next</span>
+						  </button>	
+											            
+						</div>	
+					</div>
+				</div>
 			</div>
-			<div>Nome: <span th:text="${buffet.name}">Ricco Marittimo</span></div>
-			<div>Descrizione: <span th:text="${buffet.description}">Piatti di mare in abbondanza</span></div>
+			
+			<!-- Buffet Info -->
+			<div class="row d-flex justify-content-start">
+				
+				<div class="col-sm-auto p-4 ml-4">
+					<img class="img-thumbnail"  th:src="@{'/images/' + ${buffet.chef.getDirectoryName()} +'/'+ ${buffet.chef.img}}"></img>
+				</div>
+					        
+				<div class="col-sm-auto p-4">
+					<strong class="mb-2 text-success">Chef</strong>
+					<h3 class="m-0" th:text="${buffet.chef.name} +' ' + ${buffet.chef.surname}">Chef Name</h3><br>
+					<hr class="featurette-divider m-0">
+					<h4 class="mb-1 mt-1" th:text="${buffet.name} + ':'">Nome Buffet</h4>
+					<p class="mb-auto text-muted" th:text="${buffet.description}"></p>
+					<a th:href="@{'/chef/' + ${buffet.chef.id}}" class="stretched-link">Chef Info</a>
+				</div>  
+			
+			</div>
+			
+			<hr class="featurette-divider">
+			
+			<!-- Dishes Info -->
+			
+			<div class="row">
+				<div class="col"><h1>Le Portate</h1></div>
+			</div>
+			
+			<!-- Dishes Cards -->
+			<div clas="row">
+				<div class="col" th:each="dish : ${buffet.dishes}">
+					
+					<!-- Dish Card -->
+					<div class="card m-4 shadow" style="width: 18rem;">
+	  					<img th:src="@{@{'/images/' + ${dish.getDirectoryName()} +'/'+ ${dish.img}}}" class="card-img-top dish-img" alt="...">
+	  					<div class="card-body">
+	    					<h5 class="card-title" th:text="${dish.name}">Dish Name</h5>
+	    					<p class="card-text" th:text="${dish.description}">Dish Description</p>
+	    					<div class="btn-group">
+			                  <a th:href="@{'/dish' + '/' + ${dish.id}}" class="btn btn-sm btn-outline-secondary">View</a>
+			                </div>
+	  					</div>
+					</div>	
+				</div>
+			</div>
 		</div>
-	</div>
-	<footer>
-		<a href="/default">Home</a>
-	</footer>
-</body>
+		
+		<!-- Footer -->
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	    
+	    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+	    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	  
+	  
+    </body>
 </html>
+
+							
+
+

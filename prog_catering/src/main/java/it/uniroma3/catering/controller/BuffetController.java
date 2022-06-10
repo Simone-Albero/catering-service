@@ -1,5 +1,7 @@
 package it.uniroma3.catering.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +67,8 @@ public class BuffetController {
 
 	@GetMapping("/home")
 	public String buffetHome(Model model) {
-		model.addAttribute("buffets", this.buffetService.findAll());
+		List<Buffet> buffets = this.buffetService.findAll();
+		model.addAttribute("buffets", buffets.subList(0, 9));
 		return "/buffet/buffetHome";
 	}
 	

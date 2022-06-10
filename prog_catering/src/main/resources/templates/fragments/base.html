@@ -12,46 +12,74 @@
 	</head>
 	<body>
 	
-	<!-- Navbar Fragment -->
-	<header th:fragment="navbar(title1, title2, link1, link2, link3)">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-		  
+		<!-- Navbar Fragment -->
+		<header th:fragment="navbar(title1, title2, link1, link2, link3)">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+			  
+			
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon" ></span>
+			  </button>
+			  
+			    
+			  
+			
+			  <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+			    <ul class="navbar-nav">
+			     
+			      <li>
+				    <a class="navbar-brand" href="#">
+				  		<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
+		  					<path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
+						</svg>
+				  	</a>	
+			      </li>
+			      
+			      <li class="nav-item">
+			        <a class="nav-link mr-5" th:href="@{${link1}}">Home</a>
+			      </li>
+			      
+			      <li class="nav-item">
+			        <a class="nav-link mr-5" th:href="@{${link2}}" th:text="${title1}"></a>
+			      </li>
+			      
+			      <li class="nav-item">
+			        <a class="nav-link" th:href="@{${link3}}" th:text="${title2}"></a>
+			      </li>
+			    </ul>
+			  </div>
+			</nav>		  
+		</header>
 		
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon" ></span>
-		  </button>
-		  
-		    
-		  
+		<footer th:fragment="footer">
+				<div class="container-fluid card-footer text-muted">
+				
+					<div class="row">
+						<div class="col">
+							<div class="col company-name text-center">Catering SPA</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col">
+							<p class="text-center">&copy;Created By Simone Albero: Esame Sistemi Informativi su Web</p>
+						</div>
+	      			</div>
+	      			
+	      			<hr class="featurette-divider">
+	      			
+	      			<div class="row">
+						<div class="col">
+							<p class="float-right"><a href="#" class="text-dark">Back to top</a></p>
+						</div>
+	      			</div>
+	      			
+				</div>
+				
+		</footer>
 		
-		  <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-		    <ul class="navbar-nav">
-		     
-		      <li class="nav-item">
-			    <a class="navbar-brand" href="#">
-			  		<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
-	  					<path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
-					</svg>
-			  	</a>	
-		      </li>
-		      
-		      <li class="nav-item">
-		        <a class="nav-link mr-5" th:href="@{${link1}}">Home</a>
-		      </li>
-		      
-		      <li class="nav-item">
-		        <a class="nav-link mr-5" th:href="@{${link2}}" th:text="${title1}"></a>
-		      </li>
-		      
-		      <li class="nav-item">
-		        <a class="nav-link" th:href="@{${link3}}" th:text="${title2}"></a>
-		      </li>
-		    </ul>
-		  </div>
-		</nav>		  
-	</header>
-	
 	</body>
 </html>
+
 
 
