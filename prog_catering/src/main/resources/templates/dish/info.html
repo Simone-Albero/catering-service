@@ -1,20 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<meta charset="UTF-8" />
-<title>Piatto</title>
-</head>
-<body>
-	<div>
-		<h4>Dettagli Piatto:</h4>
-		<div>
-			<img th:if="${dish.img != null}" th:src="@{'/images/' + ${dish.getDirectoryName()} + '/' + ${dish.img}}"></img>
-			<div>Nome: <span th:text="${dish.name}">Risotto Alla Crema Di Scampi</span></div>
-			<div>Descrizione: <span th:text="${dish.description}">Scampi freschi</span></div>
+    <head>
+	    <!-- Required meta tags -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>Piatto</title>
+	
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+		<link rel="stylesheet" href="/css/baseStyle.css">
+		<link rel="stylesheet" href="/css/dishInfoStyle.css">
+		
+		<!-- Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+	
+		<!-- Navbar Fragment -->
+		<header th:replace="fragments/base.html :: navbar('Profile', 'Log Out', '/', '/', '/logout')"></header>
+		
+		<!-- Content Frame -->
+		<div class="container-fluid">
+		
+			<!-- Dish Img -->
+			<div class="row ">
+				<div class="col main-row align-self-center p-0">
+					<img class="img-fluid dish-img"  th:src="@{'/images/' + ${dish.getDirectoryName()} +'/'+ ${dish.img}}"></img>
+					<div class="title" th:text="${dish.name}"><h1>Nome Piatto</h1></div>
+				</div>
+			</div>
+			
+			
+			
+			<!-- Dish Info -->
+			<div class="row d-flex justify-content-start">
+				
+				<div class="col-sm-3 p-4 ml-4">
+					<img class="img-thumbnail"  th:src="@{'/images/' + ${dish.buffet.getDirectoryName()} +'/'+ ${dish.buffet.imgs[0]}}"></img>
+				</div>
+					        
+				<div class="col-sm-auto p-4">
+					<strong class="mb-2 text-success">Buffet</strong>
+					<h3 class="m-0" th:text="${dish.buffet.name}">Buffet Name</h3><br>
+					<hr class="featurette-divider m-0">
+					<h4 class="mb-1 mt-1" th:text="${dish.name} + ':'">Nome Piatto</h4>
+					<p class="mb-auto text-muted" th:text="${dish.description}"></p>
+					<a th:href="@{'/buffet/' + ${dish.buffet.id}}" class="btn btn-sm btn-outline-secondary">Buffet Info</a>
+				</div>  
+			
+			</div>
+			
+			<hr class="featurette-divider">
+			
+			<!-- Ingradients Info -->
+			
+			<div class="row">
+				<div class="col"><h1>Gli Ingredienti</h1></div>
+			</div>
+			
+			<!-- Dishes Cards -->
+			<div class="row d-flex justify-content-center">
+				<div class="col-sm-auto" th:each="ingradient : ${dish.ingradients}">
+					
+					<!-- Dish Card -->
+					<div class="card mb-4 shadow">
+	  					<img th:src="@{@{'/images/' + ${ingradient.getDirectoryName()} +'/'+ ${ingradient.img}}}" class="card-img-top ingradient-img" alt="...">
+	  					<div class="card-body">
+	    					<h5 class="card-title" th:text="${ingradient.name} + ':'">Dish Name</h5>
+	    					<p class="card-text" th:text="${ingradient.description}">Dish Description</p>
+	    					<p class="card-text text-muted" th:text="'Provenienza: ' + ${ingradient.provenance}">Dish provenance</p>
+	    					<div class="btn-group">
+			                  <!-- nessun bottone per ora -->
+			                </div>
+	  					</div>
+					</div>	
+					
+				</div>
+				
+			</div>
 		</div>
-	</div>
-	<footer>
-		<a href="/default">Home</a>
-	</footer>
-</body>
+		
+		<!-- Footer -->
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	    
+	    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+	    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	  
+	  
+    </body>
 </html>
+
+							
+
+

@@ -30,17 +30,16 @@ h5{
 /* CUSTOMIZE THE TITLE
 -------------------------------------------------- */
 
-.title-frame{
-	display: flex;
-}
-
 .title{
+	position: absolute;
+	
 	font-family: 'DM Serif Display', serif;		
 	font-size: 4.5rem;
 	font-weight: bold;
 	color: white;
 	text-align: center;
 	align-self: center;
+	margin: 0.5rem 20rem ;
 	border-bottom-right-radius: 20px;
 	border-bottom-left-radius: 20px;
 	border-bottom: 3px solid #fff;
@@ -48,62 +47,40 @@ h5{
 }
 
 
-/* CUSTOMIZE THE CAROUSEL
+/* CUSTOMIZE THE MAINFRAME
 -------------------------------------------------- */
-carousel{
-	z-index: 1;
+.main-row{
+	height: 90vh;
+  	display: flex;
+  	
+}
+
+.dish-img{
 	width: 100%;
-}
-
-.carousel-item{
-	height: 32rem;
-	background:#777;
-	position: relative;
-	color: white;
-}
-
-.carousel-img{
-	opacity: 0.6;
-	width: 100%;
-}
-
-.img-container {
-  height: 90vh;
-  min-height: 500px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.carousel-box {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;	
-	padding: 15rem 18rem;
-	text-align: center;
+	opacity: 0.7;
 }
 
 /* CUSTOMIZE THE CARD
 -------------------------------------------------- */
-
 .card{
 	border-radius: 20px;
 	width: 20rem;
 	height: 23rem;
 }
 
-.dish-img{
+.ingradient-img{
 	border-top-left-radius: 10px; 
 	border-top-right-radius: 10px;
 }
 
-/* CUSTOMIZE THE INFO
--------------------------------------------------- */
 .img-thumbnail{
 	border-radius: 20px;
 	border: 0px;
 }
+
+/* CUSTOMIZE THE INFO
+-------------------------------------------------- */
+
 
 /* RESPONSIVE
 ------------------------- */

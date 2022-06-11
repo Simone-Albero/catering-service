@@ -68,7 +68,7 @@ public class BuffetController {
 	@GetMapping("/home")
 	public String buffetHome(Model model) {
 		List<Buffet> buffets = this.buffetService.findAll();
-		model.addAttribute("buffets", buffets.subList(0, 9));
+		model.addAttribute("buffets", buffets);
 		return "/buffet/buffetHome";
 	}
 	

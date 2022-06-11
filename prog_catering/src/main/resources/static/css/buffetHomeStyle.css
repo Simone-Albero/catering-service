@@ -26,7 +26,7 @@ h1{
  	background-size: cover;
   	background-position: center;
   	background-repeat: no-repeat;
-  	background-image: linear-gradient(rgba(100, 100, 100, 0.2), rgba(100, 100, 100, 0.2)), url("/images/static/buffetPage/buffetPage1.jpg");
+  	background-image: linear-gradient(rgba(100, 100, 100, 0.4), rgba(100, 100, 100, 0.4)), url("/images/static/buffetPage/buffetPage1.jpg");
   	display: flex;
 }
 
@@ -40,7 +40,8 @@ h1{
 	font-weight: bold;
 	color: white;
 
-	padding: 0.7% 2%;
+	text-align: center;
+	align-self: center;
 	border-bottom-right-radius: 20px;
 	border-bottom-left-radius: 20px;
 	border-bottom: 3px solid #fff;
