@@ -33,7 +33,7 @@
 			<div class="row">
 				<div class="col p-0">
 					<!-- Carousel -->
-					<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+					<div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
 						            	
 						<div class="carousel-inner">
 						            		
@@ -82,7 +82,6 @@
 					<hr class="featurette-divider m-0">
 					<h4 class="mb-1 mt-1" th:text="${buffet.name} + ':'">Nome Buffet</h4>
 					<p class="mb-auto text-muted" th:text="${buffet.description}"></p>
-					<a th:href="@{'/chef/' + ${buffet.chef.id}}" class="btn btn-sm btn-outline-secondary">Chef Info</a>
 				</div>  
 			
 			</div>

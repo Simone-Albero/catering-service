@@ -49,6 +49,12 @@ public class ChefController {
 		return "/chef/all";
 	}
 	
+	@GetMapping("/home")
+	public String getChefsHome(Model model) {
+		model.addAttribute("chefs", this.chefService.findAll());
+		return "/chef/home";
+	}
+	
 	@GetMapping("/delete/{id}")
 	public String deleteChef(@PathVariable("id") Long id, Model model) {
 		Chef chef = chefService.findById(id);

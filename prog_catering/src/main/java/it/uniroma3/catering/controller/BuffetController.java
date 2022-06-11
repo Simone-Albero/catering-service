@@ -66,10 +66,10 @@ public class BuffetController {
 	}
 
 	@GetMapping("/home")
-	public String buffetHome(Model model) {
+	public String getBuffetsHome(Model model) {
 		List<Buffet> buffets = this.buffetService.findAll();
 		model.addAttribute("buffets", buffets);
-		return "/buffet/buffetHome";
+		return "/buffet/home";
 	}
 	
 	
@@ -77,6 +77,12 @@ public class BuffetController {
 	public String getBuffetsByChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffets", this.buffetService.findAllByChef(this.chefService.findById(id)));
 		return "/buffet/all";
+	}
+	
+	@GetMapping("/{id}/home")
+	public String getBuffetsHomeByChef(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("buffets", this.buffetService.findAllByChef(this.chefService.findById(id)));
+		return "/buffet/home";
 	}
 	
 	@GetMapping("/delete/{id}")

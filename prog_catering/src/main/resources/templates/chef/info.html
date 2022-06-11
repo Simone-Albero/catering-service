@@ -11,7 +11,7 @@
 			<img th:if="${chef.img != null}" th:src="@{'/images/'+ ${chef.getDirectoryName()} + '/' + ${chef.img}}"></img>
 			<div>Nome: <span th:text="${chef.name}">Paolo</span></div>
 			<div>Cognome: <span th:text="${chef.surname}">Rossi</span></div>
-			<div>Cognome: <span th:text="${chef.nation}">Rossi</span></div>
+			<div>Nazione: <span th:text="${chef.nation}">Italia</span></div>
 		</div>
 	</div>
 	<footer>
