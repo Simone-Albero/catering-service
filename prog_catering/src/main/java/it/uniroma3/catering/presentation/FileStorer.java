@@ -72,6 +72,10 @@ public class FileStorer {
 		dirEmpty(owner);
 		removeDirectory(owner);
 	}
+	
+	public static void dirRename(String oldName, String newName) {
+		new File(setupDirName(oldName)).renameTo(new File(setupDirName(newName)));
+	}
 		
 	
 

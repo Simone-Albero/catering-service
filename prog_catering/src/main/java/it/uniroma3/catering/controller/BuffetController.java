@@ -32,7 +32,7 @@ public class BuffetController {
 	private ChefService chefService;
 	
 	
-	@PostMapping("/add")
+	@PostMapping("/admin/add")
 	public String addBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			int i=0;
@@ -45,9 +45,7 @@ public class BuffetController {
  			this.chefService.save(buffet.getChef());
  			
 			this.buffetService.save(buffet);
-			model.addAttribute("buffet", this.buffetService.findById(buffet.getId()));
-			
-			return "/buffet/info";
+			return this.getBuffetsHome(model);
 		}
 		else return "/buffet/form";
 	}
@@ -82,18 +80,19 @@ public class BuffetController {
 	@GetMapping("/{id}/home")
 	public String getBuffetsHomeByChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffets", this.buffetService.findAllByChef(this.chefService.findById(id)));
+		model.addAttribute("chef", this.chefService.findById(id));
 		return "/buffet/home";
 	}
 	
-	@GetMapping("/delete/{id}")
+	@GetMapping("/admin/delete/{id}")
 	public String deleteBuffet(@PathVariable("id") Long id, Model model) {
 		Buffet buffet = this.buffetService.findById(id);
 		FileStorer.removeImgsAndDir(buffet.getDirectoryName(), buffet.getImgs());
 		this.buffetService.deleteById(id);
-		return "/user/home";
+		return this.getBuffetsHome(model);
 	}
 	
-	@GetMapping("/delete/{id}/{img}")
+	@GetMapping("/admin/delete/{id}/{img}")
 	public String deleteImage(@PathVariable("id") Long id, @PathVariable("img") String img, Model model) {
 		Buffet buffet = this.buffetService.findById(id);
 		for(String currImg : buffet.getImgs()) {
@@ -110,7 +109,7 @@ public class BuffetController {
 	}
 	
 	/**l'id e' dello chef per il quale si sta inserendo il buffet**/
-	@GetMapping("/form/{id}")
+	@GetMapping("/admin/form/{id}")
 	public String getForm(@PathVariable("id") Long id, Model model) {
 		Buffet buffet = new Buffet();
 		buffet.setChef(this.chefService.findById(id));		
@@ -118,16 +117,17 @@ public class BuffetController {
 		return "/buffet/form";
 	}
 	
-	@GetMapping("/modify/{id}")
+	@GetMapping("/admin/modify/{id}")
 	public String modifyBuffet(@PathVariable("id") Long id, Model model) {
 		Buffet oldBuffet =  this.buffetService.findById(id);
 		model.addAttribute("buffet", oldBuffet);
 		return "buffet/modify";
 	}
 	
-	@PostMapping("/modify")
+	@PostMapping("/admin/modify")
 	public String updateBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
+			FileStorer.dirRename(this.buffetService.findById(buffet.getId()).getDirectoryName() , buffet.getDirectoryName());
 			if (files != null) {
 				FileStorer.dirEmpty(buffet.getDirectoryName());
 				buffet.emptyImgst();
@@ -141,8 +141,7 @@ public class BuffetController {
 			}
 			
 			this.buffetService.save(buffet);
-			model.addAttribute("buffet", this.buffetService.findById(buffet.getId()));
-			return "/buffet/info";
+			return this.getBuffetsHome(model);
 		}
 		else return "/buffet/modify";
 	}

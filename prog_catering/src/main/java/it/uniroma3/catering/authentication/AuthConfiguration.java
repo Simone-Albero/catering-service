@@ -32,8 +32,8 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/logout", "/css/**", "/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/login", "/registration/validate").permitAll()
-                .antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
-                .antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET, "/admin/**", "/chef/admin/**", "/buffet/admin/**", "/dish/admin/**", "/ingradient/admin/**").hasAnyAuthority(ADMIN_ROLE)
+                .antMatchers(HttpMethod.POST, "/admin/**", "/chef/admin/**", "/buffet/admin/**", "/dish/admin/**", "/ingradient/admin/**").hasAnyAuthority(ADMIN_ROLE)
                 .anyRequest().authenticated()
 
                 /** login **/

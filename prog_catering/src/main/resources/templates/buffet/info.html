@@ -73,15 +73,17 @@
 			<div class="row d-flex justify-content-start">
 				
 				<div class="col-sm-3 p-4 ml-4">
-					<img class="img-thumbnail"  th:src="@{'/images/' + ${buffet.chef.getDirectoryName()} +'/'+ ${buffet.chef.img}}"></img>
+					<img class="img-thumbnail"  th:src="@{'/images/' + ${buffet.getDirectoryName()} +'/'+ ${buffet.imgs[0]}}"></img>
 				</div>
 					        
-				<div class="col-sm-auto p-4">
-					<strong class="mb-2 text-success">Chef</strong>
-					<h3 class="m-0" th:text="${buffet.chef.name} +' ' + ${buffet.chef.surname}">Chef Name</h3><br>
-					<hr class="featurette-divider m-0">
-					<h4 class="mb-1 mt-1" th:text="${buffet.name} + ':'">Nome Buffet</h4>
-					<p class="mb-auto text-muted" th:text="${buffet.description}"></p>
+				<div class="col-sm-7 p-4">
+					<strong class="mb-2 text-info">Buffet</strong>
+					<h3 class="m-0" th:text="${buffet.name}">Buffet Name</h3><br>
+					<hr class="featurette-divider">
+					<h4 class="mb-1 mt-1" th:text="${buffet.description}">Buffet Description</h4>
+					<div sec:access="hasAuthority('ADMIN')" class="btn-group">
+						<a th:href="@{'/dish/admin/form/' + ${buffet.id}}" class="btn btn btn-outline-success">Add Dish</a>
+					</div>
 				</div>  
 			
 			</div>
@@ -108,8 +110,8 @@
 				                  <a th:href="@{'/dish' + '/' + ${dish.id}}" class="btn btn-sm btn-outline-success">View</a>
 				                  
 				                  <div sec:access="hasAuthority('ADMIN')" class="btn-group float-right">
-    									<a th:href="@{'/dish/delete/' + ${dish.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
-				                  		<a th:href="@{'/dish/modify/' + ${dish.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
+    									<a th:href="@{'/dish/admin/delete/' + ${dish.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
+				                  		<a th:href="@{'/dish/admin/modify/' + ${dish.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
 								  </div>
 				                  
 				           </div>

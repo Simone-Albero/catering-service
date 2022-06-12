@@ -50,15 +50,15 @@ h2{
 }
 
 #img1{
-	background-image: linear-gradient(rgba(100, 100, 100, 0.4), rgba(100, 100, 100, 0.4)), url("/images/static/mainPage/mainPage1.jpg");
+	background-image: linear-gradient(rgba(100, 100, 100, 0.5), rgba(100, 100, 100, 0.5)), url("/images/static/mainPage/mainPage1.jpg");
 }
 
 #img2{
-	background-image: linear-gradient(rgba(100, 100, 100, 0.4), rgba(100, 100, 100, 0.4)), url("/images/static/mainPage/mainPage2.jpg");
+	background-image: linear-gradient(rgba(100, 100, 100, 0.5), rgba(100, 100, 100, 0.5)), url("/images/static/mainPage/mainPage2.jpg");
 }
 
 #img3{
-	background-image: linear-gradient(rgba(100, 100, 100, 0.2), rgba(100, 100, 100, 0.2)), url("/images/static/mainPage/mainPage3.jpg");
+	background-image: linear-gradient(rgba(100, 100, 100, 0.5), rgba(100, 100, 100, 0.5)), url("/images/static/mainPage/mainPage3.jpg");
 }
 
 /* OVERVIEW CONTENT

@@ -51,9 +51,9 @@ public class AuthController {
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.findByUsername(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/home";
+            return "index";
         }
-        return "/user/home";
+        return "index";
     }
     
     @PostMapping("/registration/validate")

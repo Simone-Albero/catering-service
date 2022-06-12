@@ -27,7 +27,7 @@
 		<!-- Navbar Fragment -->
 		<header th:replace="fragments/base.html :: navbar"></header>
 		
-		<div class="container-fluid">
+		<div class="container-fluid bg-light">
 		
 			<!-- Main Frame -->
 			<div class="row main-row">
@@ -36,12 +36,34 @@
 				</div>
 			</div>
 			
+			<!-- Chef Info -->
+			<div class="row d-flex justify-content-start" th:if="${chef != null}">
+				
+				<div class="col-sm-3 p-4 ml-4">
+					<img class="img-thumbnail"  th:src="@{'/images/' + ${chef.getDirectoryName()} +'/'+ ${chef.img}}"></img>
+				</div>
+					        
+				<div class="col-sm-7 p-4">
+					<strong class="mb-2 text-success">Chef</strong>
+					<h3 class="m-0" th:text="${chef.name} +' ' + ${chef.surname}">Chef Name</h3><br>
+					<hr class="featurette-divider m-1">
+					<h4 class="m-0" th:text="'Nazione: ' + ${chef.nation}">Chef Nation</h4><br>
+					<div sec:access="hasAuthority('ADMIN')" class="btn-group">
+						<a th:href="@{'/buffet/admin/form/' + ${chef.id}}" class="btn btn-outline-success">Add Buffet</a>
+					</div>
+				</div>  
+				
+				
+			</div>
+			
+			<hr class="featurette-divider" th:if="${chef != null}">
+			
 			<div class="row bg-light">
 				<div class="col p-4"><h1>I Buffets</h1></div>
 			</div>
 			
 			<!-- Card Frame --> 
-			<div class="row content-frame bg-light justify-content-center">
+			<div class="row content-frame justify-content-center">
 				
 				<!-- Chefs Cards -->
 				<div class="row d-flex justify-content-center bg-light">
@@ -57,8 +79,8 @@
 				                  <a th:href="@{'/buffet/' + ${buffet.id}}" class="btn btn-sm btn-outline-success">View</a>
 				                  
 				                  <div sec:access="hasAuthority('ADMIN')" class="btn-group float-right">
-    									<a th:href="@{'/buffet/delete/' + ${buffet.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
-				                  		<a th:href="@{'/buffet/modify/' + ${buffet.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
+    									<a th:href="@{'/buffet/admin/delete/' + ${buffet.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
+				                  		<a th:href="@{'/buffet/admin/modify/' + ${buffet.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
 								  </div>
 				                  
 				                </div>

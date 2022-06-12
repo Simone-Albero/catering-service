@@ -29,7 +29,7 @@ public class DishController {
 	@Autowired
 	private BuffetService buffetService;
 	
-	@PostMapping("/add")
+	@PostMapping("/admin/add")
 	public String addDish(@Valid @ModelAttribute("dish")Dish dish, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			dish.setImg(FileStorer.store(file, dish.getDirectoryName()));
@@ -38,9 +38,9 @@ public class DishController {
 			this.buffetService.save(dish.getBuffet());
 			
 			this.dishService.save(dish);
-			model.addAttribute("dish", this.dishService.findById(dish.getId()));
+			model.addAttribute("buffet", dish.getBuffet());
 			
-			return "/dish/info";
+			return "/buffet/info";
 		}
 		else return "/dish/form";
 	}
@@ -64,15 +64,17 @@ public class DishController {
 	}
 	
 	
-	@GetMapping("/delete/{id}")
+	@GetMapping("/admin/delete/{id}")
 	public String deleteDish(@PathVariable("id") Long id, Model model) {
 		Dish dish = dishService.findById(id);
+		model.addAttribute("buffet", dish.getBuffet());
 		FileStorer.dirEmptyEndDelete(dish.getDirectoryName());
 		this.dishService.deleteById(id);
-		return "/user/home";
+		
+		return "/buffet/info";
 	}
 	
-	@GetMapping("/delete/image/{id}")
+	@GetMapping("/admin/delete/image/{id}")
 	public String deleteImage(@PathVariable("id") Long id, Model model) {
 		Dish dish = this.dishService.findById(id);
 		FileStorer.removeImg(dish.getDirectoryName(), dish.getImg());
@@ -84,7 +86,7 @@ public class DishController {
 	}
 	
 	/**l'id e' del buffet per il quale si sta inserendo il piatto**/
-	@GetMapping("/form/{id}")
+	@GetMapping("/admin/form/{id}")
 	public String getForm(@PathVariable("id") Long id, Model model) {
 		Dish dish = new Dish();
 		dish.setBuffet(this.buffetService.findById(id));	
@@ -92,16 +94,17 @@ public class DishController {
 		return "/dish/form";
 	}
 	
-	@GetMapping("/modify/{id}")
+	@GetMapping("/admin/modify/{id}")
 	public String modifyDish(@PathVariable("id") Long id, Model model) {
 		Dish oldDish =  this.dishService.findById(id);
 		model.addAttribute("dish", oldDish);
 		return "dish/modify";
 	}
 	
-	@PostMapping("/modify")
+	@PostMapping("/admin/modify")
 	public String updateDish(@Valid @ModelAttribute("dish")Dish dish, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
+			FileStorer.dirRename(this.dishService.findById(dish.getId()).getDirectoryName() , dish.getDirectoryName());
 			
 			if(!file.isEmpty()) {
 				FileStorer.removeImgAndDir(dish.getDirectoryName(), dish.getImg());
@@ -109,8 +112,8 @@ public class DishController {
 			}
 			
 			this.dishService.save(dish);
-			model.addAttribute("dish", this.dishService.findById(dish.getId()));
-			return "/dish/info";
+			model.addAttribute("buffet", dish.getBuffet());
+			return "/buffet/info";
 		}
 		else return "/dish/modify";
 	}

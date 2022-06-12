@@ -1,19 +1,76 @@
 <!DOCTYPE html>
-<head>
-<meta charset="UTF-8" />
-<title>Inserimento Ingrediente</title>
-</head>
-<body>
-	<form th:action="@{/ingradient/add}" method="post" th:object="${ingradient}" enctype="multipart/form-data">
-		<input type="hidden" th:field="*{dish}">
-		<div>Nome: <input type="text" th:field="*{name}"></div>
-		<div><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
-		<div>Descrizione: <input type="text" th:field="*{description}"></div>
-		<div><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></div>
-		<div>Provenienza: <input type="text" th:field="*{provenance}"></div>
-		<div><span th:if="${#fields.hasErrors('provenance')}" th:errors="*{provenance}"></span></div>
-		<div>Immagine: <input type="file" name="file"></div>
-		<div><button type="submit">Conferma</button></div>
-	</form>
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <!-- Required meta tags -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>Inserisci Ingrediente</title>
+	
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+		<link rel="stylesheet" href="/css/modifyStyle.css">
+		<link rel="stylesheet" href="/css/baseStyle.css">
+		
+		<!-- Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+	
+	</head>
+	
+	<body>
+		 <!-- Navbar Fragment -->
+		
+		<header th:replace="fragments/base.html :: navbar"></header>
+		
+		<div class="login-page container-fluid">
+  			<div class="form shadow-lg p-3 mb-5 bg-light">
+  			
+				<form th:action="@{/ingradient/admin/add}" method="post" th:object="${ingradient}" enctype="multipart/form-data">
+				
+				   <input type="hidden" th:field="*{dish}">
+				  
+				   <h1 class="form-text text-muted"><b>Inserisci Ingrediente</b></h1>
+				  
+    				<div class="form-row d-flex justify-content-center m-2">
+      					<label for="inputName">Nome</label>
+      					<input class="form-control" type="text" id="inputName" th:field="*{name}">
+   				 	</div>
+   				 	
+			    	<div class="form-row d-flex justify-content-center m-2">
+			      		<label for="inputDesc">Descrizione</label>
+			     		<input class="form-control" type="text" id="inputDesc" th:field="*{description}">
+			   	    </div>
+			   	    
+			   	    <div class="form-row d-flex justify-content-center m-2">
+			      		<label for="inputProv">Provenienza</label>
+			     		<input class="form-control" type="text" id="inputProv" th:field="*{provenance}">
+			   	    </div>
+  				  	
+  				  	<div class="form-row d-flex justify-content-start m-4">
+			      		<label for="inputImg">Immagini</label>
+			     		<input class="form-control-file" type="file" id="inputImg" name="file" multiple>
+			   	    </div>
+  				  
+  				  	<button type="submit" class="btn btn-primary">Submit</button>
+
+				</form>				
+			
+			</div>
+		</div>
+		
+		<!-- Footer -->
+		<footer th:replace="fragments/base.html :: footer"></footer>
+		
+		 <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+	    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+		
+	</body>
+
 </html>

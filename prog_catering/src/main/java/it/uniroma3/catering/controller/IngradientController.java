@@ -30,7 +30,7 @@ public class IngradientController {
 	private DishService dishService;
 	
 
-	@PostMapping("/add")
+	@PostMapping("/admin/add")
 	public String addIngradient(@Valid @ModelAttribute("ingradient")Ingradient ingradient, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			ingradient.setImg(FileStorer.store(file, ingradient.getDirectoryName()));
@@ -39,9 +39,9 @@ public class IngradientController {
 			this.dishService.save(ingradient.getDish());
 			
 			this.ingradientService.save(ingradient);
-			model.addAttribute("ingradient", this.ingradientService.findById(ingradient.getId()));
+			model.addAttribute("dish", ingradient.getDish());
 			
-			return "/ingradient/info";
+			return "/dish/info";
 		}
 		else return "/ingradient/form";
 	}
@@ -64,15 +64,17 @@ public class IngradientController {
 		return "/ingradient/all";
 	}
 	
-	@GetMapping("/delete/{id}")
+	@GetMapping("/admin/delete/{id}")
 	public String deleteIngradient(@PathVariable("id") Long id, Model model) {
 		Ingradient ingradient = ingradientService.findById(id);
 		FileStorer.dirEmptyEndDelete(ingradient.getDirectoryName());
 		this.ingradientService.deleteById(id);
-		return "/user/home";
+
+		model.addAttribute("dish", ingradient.getDish());
+		return "/dish/info";
 	}
 	
-	@GetMapping("/delete/image/{id}")
+	@GetMapping("/admin/delete/image/{id}")
 	public String deleteImage(@PathVariable("id") Long id, Model model) {
 		Ingradient ingradient = this.ingradientService.findById(id);
 		FileStorer.removeImg(ingradient.getDirectoryName(), ingradient.getImg());
@@ -84,7 +86,7 @@ public class IngradientController {
 	}
 	
 	/**l'id e' del piatto per il quale si sta inserendo l'ingrediente**/
-	@GetMapping("/form/{id}")
+	@GetMapping("/admin/form/{id}")
 	public String getForm(@PathVariable("id") Long id, Model model) {
 		Ingradient ingradient = new Ingradient();
 		ingradient.setDish(this.dishService.findById(id));	
@@ -92,16 +94,17 @@ public class IngradientController {
 		return "/ingradient/form";
 	}
 	
-	@GetMapping("/modify/{id}")
+	@GetMapping("/admin/modify/{id}")
 	public String modifyIngradient(@PathVariable("id") Long id, Model model) {
 		Ingradient oldIngradient =  this.ingradientService.findById(id);
 		model.addAttribute("ingradient", oldIngradient);
 		return "ingradient/modify";
 	}
 	
-	@PostMapping("/modify")
+	@PostMapping("/admin/modify")
 	public String updateIngradient(@Valid @ModelAttribute("ingradient")Ingradient ingradient, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
+			FileStorer.dirRename(this.ingradientService.findById(ingradient.getId()).getDirectoryName() , ingradient.getDirectoryName());
 			
 			if(!file.isEmpty()) {
 				FileStorer.removeImgAndDir(ingradient.getDirectoryName(), ingradient.getImg());
@@ -109,8 +112,9 @@ public class IngradientController {
 			}
 			
 			this.ingradientService.save(ingradient);
-			model.addAttribute("ingradient", this.ingradientService.findById(ingradient.getId()));
-			return "/ingradient/info";
+			model.addAttribute("dish", ingradient.getDish());
+			
+			return "/dish/info";
 		}
 		else return "/ingradient/modify";
 	}

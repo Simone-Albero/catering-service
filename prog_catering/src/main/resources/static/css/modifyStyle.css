@@ -1,0 +1,27 @@
+
+/* CUSTOMIZE THE FORM
+-------------------------------------------------- */
+.login-page {
+	height: 120vh;
+  	background-size: cover;
+  	background-position: center;
+  	background-repeat: no-repeat;
+  	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/static/loginPage/loginPage1.jpg");
+	padding: 10%
+}
+
+.form {
+  	position: relative;
+  	background: #FFFFFF;
+  	max-width: 700px;
+  	margin: 0 auto 100px;
+  	max-height: 650px;
+  	text-align: center;
+  	border-radius: 12px;
+}
+
+.img-thumbnail{
+	max-width: 150px;
+	border-radius: 10px;
+	border: 0px;
+}

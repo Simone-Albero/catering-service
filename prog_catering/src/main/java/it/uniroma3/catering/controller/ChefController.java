@@ -25,14 +25,13 @@ public class ChefController {
 	@Autowired
 	private ChefService chefService;
 	
-	@PostMapping("/add")
+	@PostMapping("/admin/add")
 	public String addChef(@Valid @ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			chef.setImg(FileStorer.store(file, chef.getDirectoryName()));
 			
 			this.chefService.save(chef);
-			model.addAttribute("chef", this.chefService.findById(chef.getId()));
-			return "/chef/info";
+			return this.getChefsHome(model);
 		}
 		else return "/chef/form";
 	}
@@ -55,16 +54,16 @@ public class ChefController {
 		return "/chef/home";
 	}
 	
-	@GetMapping("/delete/{id}")
+	@GetMapping("/admin/delete/{id}")
 	public String deleteChef(@PathVariable("id") Long id, Model model) {
 		Chef chef = chefService.findById(id);
 		/**TODO processo a cascata per svuotare ed eliminare tutte le immagini**/
 		FileStorer.dirEmptyEndDelete(chef.getDirectoryName());
 		this.chefService.deleteById(id);
-		return "/user/home";
+		return this.getChefsHome(model);
 	}
 	
-	@GetMapping("/delete/image/{id}")
+	@GetMapping("/admin/delete/image/{id}")
 	public String deleteImage(@PathVariable("id") Long id, Model model) {
 		Chef chef = this.chefService.findById(id);
 		FileStorer.removeImg(chef.getDirectoryName(), chef.getImg());
@@ -75,22 +74,23 @@ public class ChefController {
 		return "/chef/modify";
 	}
 	
-	@GetMapping("/form")
+	@GetMapping("/admin/form")
 	public String getForm(Model model) {
 		model.addAttribute("chef", new Chef());
 		return "/chef/form";
 	}
 	
-	@GetMapping("/modify/{id}")
+	@GetMapping("/admin/modify/{id}")
 	public String modifyChef(@PathVariable("id") Long id, Model model) {
 		Chef oldChef =  this.chefService.findById(id);
 		model.addAttribute("chef", oldChef);
 		return "chef/modify";
 	}
 	
-	@PostMapping("/modify")
+	@PostMapping("/admin/modify")
 	public String updateChef(@Valid @ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
+			FileStorer.dirRename(this.chefService.findById(chef.getId()).getDirectoryName() , chef.getDirectoryName());
 			
 			if(!file.isEmpty()) {
 				FileStorer.removeImgAndDir(chef.getDirectoryName(), chef.getImg());
@@ -98,8 +98,8 @@ public class ChefController {
 			}
 			
 			this.chefService.save(chef);
-			model.addAttribute("chef", this.chefService.findById(chef.getId()));
-			return "/chef/info";
+			
+			return this.getChefsHome(model);
 		}
 		else return "/chef/modify";
 	}
