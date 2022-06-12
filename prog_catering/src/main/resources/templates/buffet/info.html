@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
 	    <!-- Required meta tags -->
 	    <meta charset="utf-8">
@@ -25,7 +25,7 @@
 	<body>
 	
 		<!-- Navbar Fragment -->
-		<header th:replace="fragments/base.html :: navbar('Profile', 'Log Out', '/', '/', '/logout')"></header>
+		<header th:replace="fragments/base.html :: navbar"></header>
 		
 		<!-- Content Frame -->
 		<div class="container-fluid">
@@ -104,9 +104,15 @@
 	  					<div class="card-body">
 	    					<h5 class="card-title" th:text="${dish.name}">Dish Name</h5>
 	    					<p class="card-text" th:text="${dish.description}">Dish Description</p>
-	    					<div class="btn-group">
-			                  <a th:href="@{'/dish' + '/' + ${dish.id}}" class="btn btn-sm btn-outline-secondary">View</a>
-			                </div>
+			                <div>
+				                  <a th:href="@{'/dish' + '/' + ${dish.id}}" class="btn btn-sm btn-outline-success">View</a>
+				                  
+				                  <div sec:access="hasAuthority('ADMIN')" class="btn-group float-right">
+    									<a th:href="@{'/dish/delete/' + ${dish.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
+				                  		<a th:href="@{'/dish/modify/' + ${dish.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
+								  </div>
+				                  
+				           </div>
 	  					</div>
 					</div>	
 					

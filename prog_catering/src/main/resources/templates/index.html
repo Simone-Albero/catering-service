@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
 	    <!-- Required meta tags -->
 	    <meta charset="utf-8">
@@ -24,7 +24,7 @@
   
     <body>
 	    <!-- Navbar Fragment -->
-		<header th:replace="fragments/base.html :: navbar('Login', 'Sign Up', '/', '/login', '/register')"></header>
+		<header th:replace="fragments/base.html :: navbar"></header>
 		
 		<!-- Carousel -->
 		<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
@@ -42,8 +42,7 @@
 			    	
 			    	<div class="container carousel-box">
 			    		<h1>Professionalità</h1>
-			    		<p>Ci impegnamo a garantire il miglior servizio per i nostri clienti</p>
-			    		<a href="#" class="btn btn-lg btn-primary">Bottone</a>
+			    		<h3>Ci impegnamo a garantire il miglior servizio per i nostri clienti</h3>
 			    	</div>
 			    </div>
 			    
@@ -52,8 +51,7 @@
 			    	
 			    	<div class="container carousel-box">
 			    		<h1>Affidibilità</h1>
-			    		<p>I nostri clienti non rimangono mai delusi!</p>
-			    		<a href="#" class="btn btn-lg btn-primary">Bottone</a>
+			    		<h3>I nostri clienti non rimangono mai delusi!</h3>
 			    	</div>
 			    </div>
 			    
@@ -62,8 +60,8 @@
 			    	
 			    	<div class="container carousel-box">
 			    		<h1>Immediatezza</h1>
-			    		<p>Sei pronto? richiedici ora un preventivo gratuito! </p>
-			    		<a href="#" class="btn btn-lg btn-primary">Bottone</a>
+			    		<h3>Sei pronto? richiedici ora un preventivo gratuito! </h3>
+			    		<a href="#" class="btn btn-lg btn-primary">Prenota</a>
 			    	</div>
 			    </div>
 			    
@@ -88,22 +86,21 @@
 	      		<div class="col-lg-4">
 	        		<img src="/images/static/mainPage/chef.jpg" width="140" class="img-fluid rounded-circle"/>
 	        		<h2>Chef</h2>
-	        		<p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+	        		<h5 class="text-muted">Selezioniamo i nostri chef con processi rigorosi, prediligendo grandi nomi.</h4>
 	        		<p><a class="btn btn-secondary" href="/chef/home">View details &raquo;</a></p>
 	      		</div>
 	      		<!-- Buffet Content -->
 	      		<div class="col-lg-4">
 	        		<img src="/images/static/mainPage/buffet.jpg" width="140" class="img-fluid rounded-circle"/>
 	        		<h2>Buffet</h2>
-	        		<p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+	        		<h5 class="text-muted">Realizziamo buffet originali e personalizzabili per ogni occasione ed esigenza</h4>
 	        		<p><a class="btn btn-secondary" href="/buffet/home">View details &raquo;</a></p>
 	      		</div>
 	      		<!-- About Us Content -->
 	      		<div class="col-lg-4">
 	        		<img src="/images/static/mainPage/aboutUs.jpg" width="140" class="img-fluid rounded-circle"/>
-	        		<h2>About Us</h2>
-	        		<p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-	        		<p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+	        		<h2>Chi Siamo</h2>
+	        		<h5 class="text-muted">La nostra attività vanta più di trenta anni di espreienza nel settore, durante i quali abbiamo sviluppato una reputazione solida e ci siamo affermati come i miglioti nel settore</h5>
 	      		</div>
 	  
 	    	</div>
@@ -113,8 +110,8 @@
 	    	<!-- General Info -->
 		    <div class="row featurette">
 		      <div class="col-md-8">
-		        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-		        <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+		        <h2 class="featurette-heading">I nostri fornitori. <span class="text-muted">I migliori sul mercato.</span></h2>
+		        <p class="lead">Selezioniamo i nostri fornitori con rigore, prestando massima attenzione ai più alti standard alimentari, qualitativi e igenici.</p>
 		      </div>
 		      <div class="col-md">
 		        <img src="/images/static/mainPage/mainPage4.jpg" width="300" class="img-fluid"/>
@@ -126,8 +123,8 @@
 			<!-- General Info -->
 		    <div class="row featurette mb-4">
 		      <div class="col-md-8 order-md-2">
-		        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-		        <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+		        <h2 class="featurette-heading">Il cibo è prezioso per noi. <span class="text-muted">Non lo sprechiamo!</span></h2>
+		        <p class="lead">Alla fine di ogni evento, quando possibile, diamo il cibo avanzato alle associazioni locali che si occupano di darlo ai meno fortunati. In questo modo proteggiamo l'ambiente e la comunità.</p>
 		      </div>
 		      <div class="col-md order-md-1">
 				<img src="/images/static/mainPage/mainPage5.jpg" width="300" class="img-fluid"/>

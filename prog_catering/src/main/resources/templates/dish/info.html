@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
 	    <!-- Required meta tags -->
 	    <meta charset="utf-8">
@@ -25,7 +25,7 @@
 	<body>
 	
 		<!-- Navbar Fragment -->
-		<header th:replace="fragments/base.html :: navbar('Profile', 'Log Out', '/', '/', '/logout')"></header>
+		<header th:replace="fragments/base.html :: navbar"></header>
 		
 		<!-- Content Frame -->
 		<div class="container-fluid">
@@ -71,15 +71,16 @@
 				<div class="col-sm-auto" th:each="ingradient : ${dish.ingradients}">
 					
 					<!-- Dish Card -->
-					<div class="card mb-4 shadow">
+					<div class="card m-4 shadow">
 	  					<img th:src="@{@{'/images/' + ${ingradient.getDirectoryName()} +'/'+ ${ingradient.img}}}" class="card-img-top ingradient-img" alt="...">
 	  					<div class="card-body">
 	    					<h5 class="card-title" th:text="${ingradient.name} + ':'">Dish Name</h5>
 	    					<p class="card-text" th:text="${ingradient.description}">Dish Description</p>
 	    					<p class="card-text text-muted" th:text="'Provenienza: ' + ${ingradient.provenance}">Dish provenance</p>
-	    					<div class="btn-group">
-			                  <!-- nessun bottone per ora -->
-			                </div>
+	    					<div sec:access="hasAuthority('ADMIN')" class="btn-group float-right">
+    							<a th:href="@{'/ingradient/delete/' + ${ingradient.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
+				                <a th:href="@{'/ingradient/modify/' + ${ingradient.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
+							</div>
 	  					</div>
 					</div>	
 					

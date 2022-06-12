@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 	    <!-- Required meta tags -->
 	    <meta charset="utf-8">
@@ -25,7 +25,7 @@
 	<body>
 		 <!-- Navbar Fragment -->
 		
-		<header th:replace="fragments/base.html :: navbar('Login', 'Sign Up', '/', '/login', '/register')"></header>
+		<header th:replace="fragments/base.html :: navbar"></header>
 		
 		<div class="login-page">
   			<div class="form shadow-lg p-3 mb-5 bg-light">

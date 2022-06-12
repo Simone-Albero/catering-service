@@ -59,7 +59,8 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
+        auth
+        		.jdbcAuthentication()
                 .dataSource(this.datasource)
                 .authoritiesByUsernameQuery("SELECT username, role FROM credentials WHERE username=?")
                 .usersByUsernameQuery("SELECT username, password, 1 as enabled FROM credentials WHERE username=?");

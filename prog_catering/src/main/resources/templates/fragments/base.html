@@ -13,7 +13,7 @@
 	<body>
 	
 		<!-- Navbar Fragment -->
-		<header th:fragment="navbar(title1, title2, link1, link2, link3)">
+		<header th:fragment="navbar">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
 			  
 			
@@ -25,28 +25,66 @@
 			  
 			
 			  <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-			    <ul class="navbar-nav">
+			  
 			     
-			      <li>
-				    <a class="navbar-brand" href="#">
+			      <a class="navbar-brand" href="#">
 				  		<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
 		  					<path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
 						</svg>
 				  	</a>	
-			      </li>
 			      
-			      <li class="nav-item">
-			        <a class="nav-link mr-5" th:href="@{${link1}}">Home</a>
-			      </li>
-			      
-			      <li class="nav-item">
-			        <a class="nav-link mr-5" th:href="@{${link2}}" th:text="${title1}"></a>
-			      </li>
-			      
-			      <li class="nav-item">
-			        <a class="nav-link" th:href="@{${link3}}" th:text="${title2}"></a>
-			      </li>
-			    </ul>
+			      <!-- User Things -->
+			      <div sec:authorize="hasAuthority('DEFAULT')">
+			      		<ul class="navbar-nav">
+					      <li class="nav-item">
+					        <a class="nav-link mr-5" th:href="@{/}">Home</a>
+					      </li>
+					      
+					      <li class="nav-item">
+					        <a class="nav-link mr-5" th:href="@{/}">Profile</a>
+					      </li>
+					      
+					      <li class="nav-item">
+					        <a class="nav-link" th:href="@{/logout}">Log Out</a>
+					      </li>
+				      	</ul>
+			      </div>
+        		  
+        		  <!-- Admin Things -->
+        		  <div sec:authorize="hasAuthority('ADMIN')">
+        		  		<ul class="navbar-nav">
+					      <li class="nav-item">
+					        <a class="nav-link mr-5" th:href="@{/}">Home</a>
+					      </li>
+					      
+					      <li class="nav-item">
+					        <a class="nav-link mr-5" th:href="@{/admin/promote}">Promote Admin</a>
+					      </li>
+					      
+					      <li class="nav-item">
+					        <a class="nav-link" th:href="@{/logout}">Log Out</a>
+					      </li>
+				      	</ul>
+        		  </div>
+        		  
+        		  <!-- Authenticated User things -->
+			      <div sec:authorize="!isAuthenticated()">  
+				      	<ul class="navbar-nav">
+					      <li class="nav-item">
+					        <a class="nav-link mr-5" th:href="@{/}">Home</a>
+					      </li>
+					      
+					      <li class="nav-item">
+					        <a class="nav-link mr-5" th:href="@{/login}">Log In</a>
+					      </li>
+					      
+					      <li class="nav-item">
+					        <a class="nav-link" th:href="@{/register}">Sign Up</a>
+					      </li>
+				      	</ul>
+			      </div>
+			
+			  
 			  </div>
 			</nav>		  
 		</header>
@@ -56,7 +94,7 @@
 				
 					<div class="row">
 						<div class="col">
-							<div class="col company-name text-center">Catering SPA</div>
+							<div class="col company-name text-center">Catering S.r.l</div>
 						</div>
 					</div>
 					
