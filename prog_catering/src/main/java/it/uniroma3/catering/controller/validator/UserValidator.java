@@ -1,4 +1,4 @@
-package it.uniroma3.catering.validator;
+package it.uniroma3.catering.controller.validator;
 
 import java.util.regex.Pattern;
 
@@ -13,8 +13,8 @@ import it.uniroma3.catering.service.UserService;
 @Component
 public class UserValidator implements Validator {
 	
-	final Integer MAX_NAME_LENGTH = 100;
-    final Integer MIN_NAME_LENGTH = 2;
+	final Integer MAX_NAME_LENGTH = 50;
+    final Integer MIN_NAME_LENGTH = 5;
 	
     @Autowired
     private UserService userService;
@@ -26,24 +26,18 @@ public class UserValidator implements Validator {
         String surname = user.getSurname().trim();
         String email = user.getEmail().trim();
 
-        if (name.isEmpty())
-            errors.rejectValue("nome", "required");
-        else if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH)
-            errors.rejectValue("nome", "size");
 
-        if (surname.isEmpty())
-            errors.rejectValue("cognome", "required");
-        else if (surname.length() < MIN_NAME_LENGTH || surname.length() > MAX_NAME_LENGTH)
-            errors.rejectValue("cognome", "size");
-        
-        if (email.isEmpty()) {
-            errors.rejectValue("email", "required");
+        if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH)
+            errors.rejectValue("name", "size");
+
+        if (surname.length() < MIN_NAME_LENGTH || surname.length() > MAX_NAME_LENGTH)
+            errors.rejectValue("surname", "size");
+
+        if (!isEmailValid(email)) {
+            errors.rejectValue("email", "email.invalid");
         }
-        else if (!isEmailValid(email)) {
-            errors.rejectValue("email", "invalid");
-        }
-        else if (this.userService.findByEmail(email) != null)
-            errors.rejectValue("email", "duplicate");
+        if (this.userService.findByEmail(email) != null)
+            errors.rejectValue("email", "email.duplication");
     }
 
     @Override

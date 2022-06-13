@@ -9,4 +9,6 @@ import it.uniroma3.catering.model.Dish;
 
 public interface DishRepository extends CrudRepository<Dish, Long> {
 	public List<Dish> findAllByBuffet(Buffet buffet);
+
+	public Dish findByName(String name);
 }

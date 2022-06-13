@@ -52,7 +52,7 @@
 					<h3 class="m-0" th:text="${dish.name}">Dish Name</h3><br>
 					<hr class="featurette-divider">
 					<h4 class="mb-auto" th:text="${dish.description}"></h4>
-					<div sec:access="hasAuthority('ADMIN')" class="btn-group">
+					<div sec:authorize="hasAuthority('ADMIN')" class="btn-group">
 						<a th:href="@{'/ingradient/admin/form/' + ${dish.id}}" class="btn btn btn-outline-success">Add Ingradient</a>
 					</div>
 				</div>  
@@ -78,7 +78,7 @@
 	    					<h5 class="card-title" th:text="${ingradient.name} + ':'">Dish Name</h5>
 	    					<p class="card-text" th:text="${ingradient.description}">Dish Description</p>
 	    					<p class="card-text text-muted" th:text="'Provenienza: ' + ${ingradient.provenance}">Dish provenance</p>
-	    					<div sec:access="hasAuthority('ADMIN')" class="btn-group float-right">
+	    					<div sec:authorize="hasAuthority('ADMIN')" class="btn-group float-right">
     							<a th:href="@{'/ingradient/admin/delete/' + ${ingradient.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
 				                <a th:href="@{'/ingradient/admin/modify/' + ${ingradient.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
 							</div>

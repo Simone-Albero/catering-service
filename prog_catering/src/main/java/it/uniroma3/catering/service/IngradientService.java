@@ -43,5 +43,13 @@ public class IngradientService {
 	public List<Ingradient> findAllByDish(Dish dish) {
 		return this.ingradientRepo.findAllByDish(dish);
 	}
+
+	public boolean alreadyExists(Ingradient ingradient) {
+		Ingradient that = this.ingradientRepo.findByName(ingradient.getName());
+		if (that != null)
+			return true;
+		else 
+			return false;
+	}
 	
 }

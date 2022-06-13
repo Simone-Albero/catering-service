@@ -48,7 +48,7 @@
 					<h3 class="m-0" th:text="${chef.name} +' ' + ${chef.surname}">Chef Name</h3><br>
 					<hr class="featurette-divider m-1">
 					<h4 class="m-0" th:text="'Nazione: ' + ${chef.nation}">Chef Nation</h4><br>
-					<div sec:access="hasAuthority('ADMIN')" class="btn-group">
+					<div sec:authorize="hasAuthority('ADMIN')" class="btn-group">
 						<a th:href="@{'/buffet/admin/form/' + ${chef.id}}" class="btn btn-outline-success">Add Buffet</a>
 					</div>
 				</div>  
@@ -78,7 +78,7 @@
 		    					<div>
 				                  <a th:href="@{'/buffet/' + ${buffet.id}}" class="btn btn-sm btn-outline-success">View</a>
 				                  
-				                  <div sec:access="hasAuthority('ADMIN')" class="btn-group float-right">
+				                  <div sec:authorize="hasAuthority('ADMIN')" class="btn-group float-right">
     									<a th:href="@{'/buffet/admin/delete/' + ${buffet.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
 				                  		<a th:href="@{'/buffet/admin/modify/' + ${buffet.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
 								  </div>

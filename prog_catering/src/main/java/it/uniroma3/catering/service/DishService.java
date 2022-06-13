@@ -43,4 +43,12 @@ public class DishService {
 	public List<Dish> findAllByBuffet(Buffet buffet) {
 		return this.dishRepo.findAllByBuffet(buffet);
 	}
+
+	public boolean alreadyExists(Dish dish) {
+		Dish that = this.dishRepo.findByName(dish.getName());
+		if (that != null)
+			return true;
+		else 
+			return false;
+	}
 }

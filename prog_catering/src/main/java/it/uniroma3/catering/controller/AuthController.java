@@ -1,8 +1,6 @@
 package it.uniroma3.catering.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,11 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.catering.controller.validator.CredentialsValidator;
+import it.uniroma3.catering.controller.validator.UserValidator;
 import it.uniroma3.catering.model.Credentials;
 import it.uniroma3.catering.model.User;
 import it.uniroma3.catering.service.CredentialsService;
-import it.uniroma3.catering.validator.CredentialsValidator;
-import it.uniroma3.catering.validator.UserValidator;
 
 @Controller
 public class AuthController {
@@ -47,13 +45,7 @@ public class AuthController {
 	
     @GetMapping("/default")
     public String defaultAfterLogin(Model model) {
-        
-    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credentials credentials = credentialsService.findByUsername(userDetails.getUsername());
-    	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "index";
-        }
-        return "index";
+         return "index";
     }
     
     @PostMapping("/registration/validate")
@@ -69,8 +61,6 @@ public class AuthController {
         }
         return "/user/registerForm";
     }
-    
-    /**TODO logica admin**/
     
     @GetMapping("/admin/promote")
     public String promoteUser() {

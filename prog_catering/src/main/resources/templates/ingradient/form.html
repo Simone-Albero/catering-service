@@ -35,25 +35,32 @@
 				   <input type="hidden" th:field="*{dish}">
 				  
 				   <h1 class="form-text text-muted"><b>Inserisci Ingrediente</b></h1>
+				   
+				   <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+                        <h5 align="center" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</h5>
+                    </div>
 				  
     				<div class="form-row d-flex justify-content-center m-2">
       					<label for="inputName">Nome</label>
-      					<input class="form-control" type="text" id="inputName" th:field="*{name}">
+      					<input class="form-control" type="text" id="inputName" th:field="*{name}" required>
+      					<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
    				 	</div>
    				 	
 			    	<div class="form-row d-flex justify-content-center m-2">
 			      		<label for="inputDesc">Descrizione</label>
-			     		<input class="form-control" type="text" id="inputDesc" th:field="*{description}">
+			     		<input class="form-control" type="text" id="inputDesc" th:field="*{description}" required>
+			     		<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
 			   	    </div>
 			   	    
 			   	    <div class="form-row d-flex justify-content-center m-2">
 			      		<label for="inputProv">Provenienza</label>
-			     		<input class="form-control" type="text" id="inputProv" th:field="*{provenance}">
+			     		<input class="form-control" type="text" id="inputProv" th:field="*{provenance}" required>
+			     		<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('provenance')}" th:errors="*{provenance}"></div>
 			   	    </div>
   				  	
   				  	<div class="form-row d-flex justify-content-start m-4">
-			      		<label for="inputImg">Immagini</label>
-			     		<input class="form-control-file" type="file" id="inputImg" name="file" multiple>
+			      		<label for="inputImg">Immagine</label>
+			     		<input class="form-control-file" type="file" id="inputImg" name="file" required>
 			   	    </div>
   				  
   				  	<button type="submit" class="btn btn-primary">Submit</button>

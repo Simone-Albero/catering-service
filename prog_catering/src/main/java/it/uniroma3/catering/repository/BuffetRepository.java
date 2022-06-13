@@ -9,4 +9,6 @@ import it.uniroma3.catering.model.Chef;
 
 public interface BuffetRepository extends CrudRepository<Buffet, Long>{
 	public List<Buffet> findAllByChef(Chef chef);
+
+	public Buffet findByName(String name);
 }

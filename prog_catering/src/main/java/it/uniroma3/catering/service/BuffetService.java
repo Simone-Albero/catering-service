@@ -48,5 +48,13 @@ public class BuffetService {
 	public void deleteById(Long id) {
 		this.buffetRepo.deleteById(id);
 	}
+
+	public boolean alreadyExists(Buffet buffet) {
+		Buffet that = this.buffetRepo.findByName(buffet.getName());
+		if (that != null)
+			return true;
+		else 
+			return false;
+	}
 	
 }

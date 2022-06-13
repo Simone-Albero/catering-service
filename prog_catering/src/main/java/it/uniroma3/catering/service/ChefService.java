@@ -38,4 +38,12 @@ public class ChefService {
 	public void deleteById(Long id) {
 		this.chefRepo.deleteById(id);
 	}
+
+	public boolean alreadyExists(Chef chef) {
+		Chef that = this.chefRepo.findByNameAndSurname(chef.getName(), chef.getSurname());
+		if (that != null)
+			return true;
+		else 
+			return false;
+	}
 }

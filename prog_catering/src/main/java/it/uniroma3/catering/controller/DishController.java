@@ -1,7 +1,5 @@
 package it.uniroma3.catering.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.catering.controller.validator.DishValidator;
 import it.uniroma3.catering.model.Dish;
 import it.uniroma3.catering.presentation.FileStorer;
 import it.uniroma3.catering.service.BuffetService;
@@ -29,8 +28,12 @@ public class DishController {
 	@Autowired
 	private BuffetService buffetService;
 	
+	@Autowired
+	private DishValidator dishValidator;
+	
 	@PostMapping("/admin/add")
-	public String addDish(@Valid @ModelAttribute("dish")Dish dish, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+	public String addDish(@ModelAttribute("dish")Dish dish, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+		this.dishValidator.validate(dish, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			dish.setImg(FileStorer.store(file, dish.getDirectoryName()));
 			
@@ -102,7 +105,8 @@ public class DishController {
 	}
 	
 	@PostMapping("/admin/modify")
-	public String updateDish(@Valid @ModelAttribute("dish")Dish dish, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+	public String updateDish(@ModelAttribute("dish")Dish dish, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+		this.dishValidator.validate(dish, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			FileStorer.dirRename(this.dishService.findById(dish.getId()).getDirectoryName() , dish.getDirectoryName());
 			

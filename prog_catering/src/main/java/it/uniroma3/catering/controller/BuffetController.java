@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.catering.controller.validator.BuffetValidator;
 import it.uniroma3.catering.model.Buffet;
 import it.uniroma3.catering.presentation.FileStorer;
 import it.uniroma3.catering.service.BuffetService;
@@ -31,9 +32,13 @@ public class BuffetController {
 	@Autowired
 	private ChefService chefService;
 	
+	@Autowired
+	private BuffetValidator buffetValidator;
+	
 	
 	@PostMapping("/admin/add")
-	public String addBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
+	public String addBuffet(@ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
+		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			int i=0;
  			for(MultipartFile file : files) {
@@ -126,6 +131,7 @@ public class BuffetController {
 	
 	@PostMapping("/admin/modify")
 	public String updateBuffet(@Valid @ModelAttribute("buffet")Buffet buffet, @RequestParam("files")MultipartFile[] files, BindingResult bindingResult, Model model) {
+		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			FileStorer.dirRename(this.buffetService.findById(buffet.getId()).getDirectoryName() , buffet.getDirectoryName());
 			if (files != null) {

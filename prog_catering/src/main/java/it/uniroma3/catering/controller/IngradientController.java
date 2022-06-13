@@ -1,7 +1,5 @@
 package it.uniroma3.catering.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.catering.controller.validator.IngradientValidator;
 import it.uniroma3.catering.model.Ingradient;
 import it.uniroma3.catering.presentation.FileStorer;
 import it.uniroma3.catering.service.DishService;
@@ -29,9 +28,12 @@ public class IngradientController {
 	@Autowired
 	private DishService dishService;
 	
+	@Autowired
+	private IngradientValidator ingradientValidator;
 
 	@PostMapping("/admin/add")
-	public String addIngradient(@Valid @ModelAttribute("ingradient")Ingradient ingradient, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+	public String addIngradient(@ModelAttribute("ingradient")Ingradient ingradient, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+		this.ingradientValidator.validate(ingradient, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			ingradient.setImg(FileStorer.store(file, ingradient.getDirectoryName()));
 			
@@ -102,7 +104,8 @@ public class IngradientController {
 	}
 	
 	@PostMapping("/admin/modify")
-	public String updateIngradient(@Valid @ModelAttribute("ingradient")Ingradient ingradient, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+	public String updateIngradient(@ModelAttribute("ingradient")Ingradient ingradient, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+		this.ingradientValidator.validate(ingradient, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			FileStorer.dirRename(this.ingradientService.findById(ingradient.getId()).getDirectoryName() , ingradient.getDirectoryName());
 			

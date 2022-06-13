@@ -40,7 +40,11 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/default")
-                /**TODO inserire oauth login **/
+                
+                /**oauth login **/
+                .and().oauth2Login()
+                .loginPage("/login")
+                .defaultSuccessUrl("/default")
                 
                 /** logout **/
                 .and().logout()

@@ -9,4 +9,6 @@ import it.uniroma3.catering.model.Ingradient;
 
 public interface IngradientRepository extends CrudRepository<Ingradient, Long> {
 	public List<Ingradient> findAllByDish(Dish dish);
+
+	public Ingradient findByName(String name);
 }

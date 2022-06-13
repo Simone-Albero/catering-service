@@ -57,7 +57,7 @@
 			                <div>
 				                  <a th:href="@{'/buffet/' + ${chef.id} + '/home'}" class="btn btn-sm btn-outline-success">Buffets</a>
 				                  
-				                  <div sec:access="hasAuthority('ADMIN')" class="btn-group float-right">
+				                  <div sec:authorize="hasAuthority('ADMIN')" class="btn-group float-right">
     									<a th:href="@{'/chef/admin/delete/' + ${chef.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
 				                  		<a th:href="@{'/chef/admin/modify/' + ${chef.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
 								  </div>

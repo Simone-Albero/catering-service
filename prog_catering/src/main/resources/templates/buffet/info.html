@@ -81,7 +81,7 @@
 					<h3 class="m-0" th:text="${buffet.name}">Buffet Name</h3><br>
 					<hr class="featurette-divider">
 					<h4 class="mb-1 mt-1" th:text="${buffet.description}">Buffet Description</h4>
-					<div sec:access="hasAuthority('ADMIN')" class="btn-group">
+					<div sec:authorize="hasAuthority('ADMIN')" class="btn-group">
 						<a th:href="@{'/dish/admin/form/' + ${buffet.id}}" class="btn btn btn-outline-success">Add Dish</a>
 					</div>
 				</div>  
@@ -109,7 +109,7 @@
 			                <div>
 				                  <a th:href="@{'/dish' + '/' + ${dish.id}}" class="btn btn-sm btn-outline-success">View</a>
 				                  
-				                  <div sec:access="hasAuthority('ADMIN')" class="btn-group float-right">
+				                  <div sec:authorize="hasAuthority('ADMIN')" class="btn-group float-right">
     									<a th:href="@{'/dish/admin/delete/' + ${dish.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
 				                  		<a th:href="@{'/dish/admin/modify/' + ${dish.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
 								  </div>

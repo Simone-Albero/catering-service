@@ -32,6 +32,11 @@
   			
 				<form th:action="@{/login}" method="POST">
 				  <h1 class="form-text text-muted"><b>Accedi</b></h1>
+				  <div th:if="${param.error} and ${session}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION']}">
+                        <div class="alert alert-danger error text-center ">
+                            Errore nel Login!<br>controlla di aver inserito correttamente le tue credenziali!
+                        </div>
+                  </div>
 				  <div class="form-group">
 				    <label for="exampleInputEmail1">Username</label>
 				    <input type="text" name="username" class="form-control" id="exampleInputEmail1" required>
@@ -42,7 +47,12 @@
 				    <small id="passwordHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
 				  </div>
 					
-				   <small class="form-text text-muted">Not registered? <a href="/register">Create an account</a></small><br>
+				  <a class="btn btn-outline-success m-2" href="/oauth2/authorization/google">
+						<img style="width: 25px; margin-right: 10px" src="/images/static/icon/icon-google.png">
+						Login With Google
+				  </a>
+				  
+				  <small class="form-text text-muted">Not registered? <a href="/register">Create an account</a></small><br>
 				  <button type="submit" class="btn btn-primary">Submit</button>
 				</form>				
 			

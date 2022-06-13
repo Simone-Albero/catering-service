@@ -1,7 +1,5 @@
 package it.uniroma3.catering.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.catering.controller.validator.ChefValidator;
 import it.uniroma3.catering.model.Chef;
 import it.uniroma3.catering.presentation.FileStorer;
 import it.uniroma3.catering.service.ChefService;
@@ -25,8 +24,12 @@ public class ChefController {
 	@Autowired
 	private ChefService chefService;
 	
+	@Autowired
+	private ChefValidator chefValidator;
+	
 	@PostMapping("/admin/add")
-	public String addChef(@Valid @ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+	public String addChef(@ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+		this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			chef.setImg(FileStorer.store(file, chef.getDirectoryName()));
 			
@@ -88,7 +91,8 @@ public class ChefController {
 	}
 	
 	@PostMapping("/admin/modify")
-	public String updateChef(@Valid @ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+	public String updateChef(@ModelAttribute("chef")Chef chef, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
+		this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			FileStorer.dirRename(this.chefService.findById(chef.getId()).getDirectoryName() , chef.getDirectoryName());
 			
