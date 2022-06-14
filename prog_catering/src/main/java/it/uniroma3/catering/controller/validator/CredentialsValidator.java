@@ -29,12 +29,15 @@ public class CredentialsValidator implements Validator {
 
         if (username.length() < MIN_USERNAME_LENGTH || username.length() > MAX_USERNAME_LENGTH)
             errors.rejectValue("username", "username.size");
-        
-        else if (this.credentialsService.findByUsername(username) != null)
-            errors.rejectValue("username", "username.duplication");
 
         if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH)
             errors.rejectValue("password", "pass.size");
+        
+        if(credentials.getId() == null || !credentials.getUsername().equals(this.credentialsService.findById(credentials.getId()).getUsername())) {
+        	if (this.credentialsService.findByUsername(username) != null)
+                errors.rejectValue("username", "username.duplication");
+        }
+        
     }
 
     @Override

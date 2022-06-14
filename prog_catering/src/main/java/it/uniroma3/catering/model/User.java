@@ -36,6 +36,8 @@ public class User {
 	@Column(nullable = false, unique = true)
 	private String email;
 
+	private String img;
+	
 	public Long getId() {
 		return id;
 	}
@@ -74,6 +76,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 }

@@ -2,7 +2,7 @@
 /* CUSTOMIZE THE FORM
 -------------------------------------------------- */
 .login-page {
-	height: 120vh;
+	height: 100vh;
   	background-size: cover;
   	background-position: center;
   	background-repeat: no-repeat;
@@ -13,38 +13,32 @@
 .form {
   	position: relative;
   	background: #FFFFFF;
-  	max-width: 700px;
+  	max-width: 500px;
   	margin: 0 auto 100px;
   	text-align: center;
   	border-radius: 12px;
 }
 
-.img-thumbnail{
-	max-width: 150px;
-	border-radius: 10px;
-	border: 0px;
-}
 
 /* RESPONSIVE
 ------------------------- */
 @media (max-width: 900px) {
 	.login-page {
-		height: 150vh;
+		height: 120vh;
 		padding: 35% 10%;
 	}
 }
 
 @media (max-width: 790px) {
 	.login-page {
-		height: 170vh;
+		height: 150vh;
 		padding: 50% 10%;
 	}
 }
 
 @media (max-width: 484px) {
 	.login-page {
-		height: 190vh;
+		height: 170vh;
 		padding: 70% 10%;
 	}
 }
-

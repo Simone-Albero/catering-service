@@ -43,5 +43,9 @@ public class CredentialsService {
 		credentials.setRole(Credentials.ADMIN_ROLE);
 		this.credentialsRepository.save(credentials);
 	}
+
+	public void deleteById(Long id) {
+		this.credentialsRepository.deleteById(id);
+	}
 	
 }

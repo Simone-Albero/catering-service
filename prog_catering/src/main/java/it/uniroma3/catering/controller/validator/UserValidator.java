@@ -36,8 +36,11 @@ public class UserValidator implements Validator {
         if (!isEmailValid(email)) {
             errors.rejectValue("email", "email.invalid");
         }
-        if (this.userService.findByEmail(email) != null)
-            errors.rejectValue("email", "email.duplication");
+        if(user.getId() == null || !user.getEmail().equals(this.userService.findById(user.getId()).getEmail())) {
+            if (this.userService.findByEmail(email) != null)
+                errors.rejectValue("email", "email.duplication");
+        }
+
     }
 
     @Override

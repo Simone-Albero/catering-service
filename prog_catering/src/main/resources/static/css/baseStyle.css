@@ -20,8 +20,7 @@ header{
 	margin-top: 8px;
 }
 
-
-.nav-item a:hover{
+.nav-item a span:hover{
 	color: SandyBrown !important;
 	border-left: 2px solid SandyBrown;
 	border-right: 2px solid SandyBrown;
@@ -56,6 +55,7 @@ header{
 	
 	.nav-item .nav-link{
 		padding-left: 1%;
+		font-size: 1.5rem;
 	}
 }
 

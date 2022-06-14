@@ -69,4 +69,8 @@ public class Credentials {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public String getDirectoryName() {
+		return this.username.replaceAll("\\s+","_");
+	}
 }

@@ -134,9 +134,9 @@ public class BuffetController {
 		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			FileStorer.dirRename(this.buffetService.findById(buffet.getId()).getDirectoryName() , buffet.getDirectoryName());
-			if (files != null) {
+			if (!files[0].isEmpty()) {
 				FileStorer.dirEmpty(buffet.getDirectoryName());
-				buffet.emptyImgst();
+				buffet.emptyImgs();
 				int i=0;
 				for(MultipartFile file : files) {
 					if(!file.isEmpty()) {
@@ -145,7 +145,6 @@ public class BuffetController {
 					}
 				}
 			}
-			
 			this.buffetService.save(buffet);
 			return this.getBuffetsHome(model);
 		}

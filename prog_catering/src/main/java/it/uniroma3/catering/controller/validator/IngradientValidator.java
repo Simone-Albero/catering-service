@@ -40,9 +40,12 @@ public class IngradientValidator implements Validator {
         if (provenance.length() < MIN_LENGTH || provenance.length() > MAX_LENGTH)
             errors.rejectValue("provenance", "size");
         
-        if (this.ingradientService.alreadyExists(ingradient)){
-			errors.reject("ingradient.duplication");
-		}
+        if(ingradient.getId() == null || !ingradient.getName().equals(this.ingradientService.findById(ingradient.getId()).getName())) {
+        	if (this.ingradientService.alreadyExists(ingradient)){
+    			errors.reject("ingradient.duplication");
+    		}
+        }
+        
 	}
 
 }

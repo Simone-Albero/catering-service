@@ -60,7 +60,6 @@ public class ChefController {
 	@GetMapping("/admin/delete/{id}")
 	public String deleteChef(@PathVariable("id") Long id, Model model) {
 		Chef chef = chefService.findById(id);
-		/**TODO processo a cascata per svuotare ed eliminare tutte le immagini**/
 		FileStorer.dirEmptyEndDelete(chef.getDirectoryName());
 		this.chefService.deleteById(id);
 		return this.getChefsHome(model);

@@ -72,7 +72,7 @@
 			<!-- Buffet Info -->
 			<div class="row d-flex justify-content-start">
 				
-				<div class="col-sm-3 p-4 ml-4">
+				<div class="col-sm-3 p-4 ml-1">
 					<img class="img-thumbnail"  th:src="@{'/images/' + ${buffet.getDirectoryName()} +'/'+ ${buffet.imgs[0]}}"></img>
 				</div>
 					        
@@ -98,7 +98,7 @@
 			
 			<!-- Dishes Cards -->
 			<div class="row d-flex justify-content-center">
-				<div class="col-sm-auto" th:each="dish : ${buffet.dishes}">
+				<div class="col-sm-auto d-flex justify-content-center" th:each="dish : ${buffet.dishes}">
 					
 					<!-- Dish Card -->
 					<div class="card m-4 shadow">

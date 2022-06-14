@@ -38,7 +38,7 @@
 			
 			<div class="row bg-light d-flex justify-content-center">
 				<div class="col-auto p-4"><h1>Chefs</h1></div>
-				 <div sec:access="hasAuthority('ADMIN')" class="col-auto align-self-center btn-group">
+				 <div sec:authorize="hasAuthority('ADMIN')" class="col-auto align-self-center btn-group">
     					<a th:href="@{'/chef/admin/form'}" class="btn btn-outline-success">Add Chef</a>  
 				</div>
 			</div>
@@ -46,7 +46,7 @@
 			
 			<!-- Chefs Cards -->
 			<div class="row d-flex justify-content-center bg-light">
-				<div class="col-sm-auto" th:each="chef : ${chefs}">
+				<div class="col-sm-auto d-flex justify-content-center" th:each="chef : ${chefs}">
 					
 					<!-- Chef Card -->
 					<div class="card mb-4 shadow">

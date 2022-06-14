@@ -8,7 +8,7 @@
 	
 	    <!-- Bootstrap CSS -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-		<link rel="stylesheet" href="/css/registerStyle.css">
+		<link rel="stylesheet" href="/css/profileStyle.css">
 		<link rel="stylesheet" href="/css/baseStyle.css">
 		
 		<!-- Font -->
@@ -30,44 +30,47 @@
 		<div class="login-page container-fluid">
   			<div class="form shadow-lg p-3 mb-5 bg-light">
   			
-				<form th:action="@{/registration/validate}" method="POST" enctype="multipart/form-data">
-				  <h1 class="form-text text-muted"><b>Registrati</b></h1>
+				<form th:action="@{/profile/modify}" method="POST" th:object="${credentials}" enctype="multipart/form-data">
+				  <h1 class="form-text text-muted"><b>Aggiorna Profilo</b></h1>
+				  
+				  <input type="hidden" th:field="*{id}">
+				  <input type="hidden" th:field="*{user.id}">
 				  
 				  <div class="form-row">
+				  	<div th:if="*{user.img != null}" class="form-group col-sm-5 m-2">
+						<img class="img-fluid row rounded" th:src="@{'/images/' + ${credentials.getDirectoryName()} + '/' + *{user.img}}"></img>
+						<a class="btn btn-sm btn-outline-danger row m-2 mr-4" th:href="@{'/user/delete/image/' + *{id}}" >Rimuovi</a>
+					</div>
+				  
     				<div class="form-group col-md-6">
       					<label for="inputEmail">Email</label>
-      					<input type="email" class="form-control" id="inputEmail"  th:field="${user.email}" required>
-      					<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}"></div>
+      					<input type="email" class="form-control" id="inputEmail" th:field="*{user.email}" required>
+      					<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('user.email')}" th:errors="*{user.email}"></div>
    				 	</div>
-			    	<div class="form-group col-md-6">
-			      		<label for="inputPassword">Password</label>
-			     		<input type="password" class="form-control" id="inputPassword"  th:field="${credentials.password}" required>
-			     		<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}"></div>
-			   	    </div>
   				  </div>
   				  
   				  <div class="form-row">
     				<div class="form-group col-md-6">
       					<label for="inputName">Name</label>
-      					<input type="text" class="form-control" id="inputName"  th:field="${user.name}" required>
-      					<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}"></div>
+      					<input type="text" class="form-control" id="inputName" th:field="*{user.name}" required>
+      					<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('user.name')}" th:errors="*{user.name}"></div>
    				 	</div>
 			    	<div class="form-group col-md-6">
 			      		<label for="inputSurname">Surname</label>
-			     		<input type="text" class="form-control" id="inputSurname"  th:field="${user.surname}" required>
-			     		<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}"></div>
+			     		<input type="text" class="form-control" id="inputSurname" th:field="*{user.surname}" required>
+			     		<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('user.surname')}" th:errors="*{user.surname}"></div>
 			   	    </div>
   				  </div>
   				  
   				  <div class="form-row">
     				<div class="form-group col-md-8">
       					<label for="inputUsername">Username</label>
-      					<input type="text" class="form-control" id="inputUsername" th:field="${credentials.username}" required>
-      					<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}"></div>
+      					<input type="text" class="form-control" id="inputUsername" th:field="*{username}" required>
+      					<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
    				 	</div>
 			    	<div class="form-group col-md-4">
 			      		<label for="inputBirthDate">Data Di Nascita</label>
-			     		<input type="date" class="form-control" id="inputBirthDate"  th:field="${user.birthDate}" required>
+			     		<input type="date" class="form-control" id="inputBirthDate" th:field="*{user.birthDate}" required>
 			   	    </div>
   				  </div>
   				  
@@ -76,8 +79,8 @@
 			     		<input class="form-control-file" type="file" id="inputImg" name="file">
 			   	  </div>
 					
-				  <small class="form-text text-muted">Already registered? <a href="/login">Sign In</a></small><br>
 				  <button type="submit" class="btn btn-primary">Submit</button>
+				  <a class="btn btn-danger" th:href="'/user/delete/' + *{id}">Elimina Profilo</a>
 				</form>				
 			
 			</div>

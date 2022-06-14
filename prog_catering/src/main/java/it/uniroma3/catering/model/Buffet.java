@@ -95,7 +95,7 @@ public class Buffet {
 		this.imgs = imgs;
 	}
 
-	public void emptyImgst() {
+	public void emptyImgs() {
 		this.imgs = new String[MAX_IMGS];
 	}
 
@@ -112,6 +112,4 @@ public class Buffet {
 	public String getDirectoryName() {
 		return this.chef.getDirectoryName()+"/"+ this.name.replaceAll("\\s+","_");
 	}
-	
-	
 }

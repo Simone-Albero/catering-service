@@ -39,9 +39,12 @@ public class ChefValidator implements Validator {
         if (nation.length() < MIN_LENGTH || nation.length() > MAX_LENGTH)
             errors.rejectValue("nation", "size");
         
-        if (this.chefService.alreadyExists(chef)){
-			errors.reject("chef.duplication");
-		}
+        if(chef.getId() == null || !chef.getName().equals(this.chefService.findById(chef.getId()).getName())|| !chef.getSurname().equals(this.chefService.findById(chef.getId()).getSurname())) {
+            if (this.chefService.alreadyExists(chef)){
+    			errors.reject("chef.duplication");
+    		}
+        }
+
 	}
 
 }

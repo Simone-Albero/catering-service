@@ -32,7 +32,7 @@
 		
 			<!-- Dish Img -->
 			<div class="row ">
-				<div class="col main-row align-self-center p-0">
+				<div class="col main-row align-self-center p-0 d-flex justify-content-center">
 					<img class="img-fluid dish-img"  th:src="@{'/images/' + ${dish.getDirectoryName()} +'/'+ ${dish.img}}"></img>
 					<div class="title" th:text="${dish.name}"><h1>Nome Piatto</h1></div>
 				</div>
@@ -43,7 +43,7 @@
 			<!-- Dish Info -->
 			<div class="row d-flex justify-content-start">
 				
-				<div class="col-sm-3 p-4 ml-4">
+				<div class="col-sm-3 p-4 ml-1">
 					<img class="img-thumbnail"  th:src="@{'/images/' + ${dish.getDirectoryName()} +'/'+ ${dish.img}}"></img>
 				</div>
 					        
@@ -69,7 +69,7 @@
 			
 			<!-- Dishes Cards -->
 			<div class="row d-flex justify-content-center">
-				<div class="col-sm-auto" th:each="ingradient : ${dish.ingradients}">
+				<div class="col-sm-auto d-flex justify-content-center" th:each="ingradient : ${dish.ingradients}">
 					
 					<!-- Dish Card -->
 					<div class="card m-4 shadow">

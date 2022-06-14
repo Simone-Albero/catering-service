@@ -36,10 +36,12 @@ public class DishValidator implements Validator {
         if (description.length() < MIN_LENGTH || description.length() > DESC_MAX_LENGTH)
             errors.rejectValue("description", "desc.size");
 
+        if(dish.getId() == null || !dish.getName().equals(this.dishService.findById(dish.getId()).getName())) {
+        	if (this.dishService.alreadyExists(dish)){
+    			errors.reject("dish.duplication");
+    		}
+        }
         
-        if (this.dishService.alreadyExists(dish)){
-			errors.reject("dish.duplication");
-		}
 	}
 
 }

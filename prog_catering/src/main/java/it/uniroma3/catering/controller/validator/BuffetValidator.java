@@ -36,9 +36,12 @@ public class BuffetValidator implements Validator {
         if (description.length() < MIN_LENGTH || description.length() > DESC_MAX_LENGTH)
             errors.rejectValue("description", "desc.size");
         
-        if (this.buffetService.alreadyExists(buffet)){
-			errors.reject("buffet.duplication");
-		}
+        if(buffet.getId() == null || !buffet.getName().equals(this.buffetService.findById(buffet.getId()).getName())) {
+        	if (this.buffetService.alreadyExists(buffet)){
+    			errors.reject("buffet.duplication");
+    		}
+        }
+        
 	}
 
 }
