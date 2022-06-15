@@ -62,11 +62,11 @@
 			
 			</div>
 			
-			<hr class="featurette-divider">
+			<hr th:if="${!dish.ingradients.isEmpty()}" class="featurette-divider">
 			
 			<!-- Ingradients Info -->
 			
-			<div class="row">
+			<div th:if="${!dish.ingradients.isEmpty()}" class="row">
 				<div class="col"><h1>Gli Ingredienti</h1></div>
 			</div>
 			

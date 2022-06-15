@@ -83,10 +83,10 @@
 					<strong class="mb-2 text-info">Buffet</strong>
 					<h3 class="m-0" th:text="${buffet.name}">Buffet Name</h3>
 					
-					<div class="progress">
+					<div th:if="${!reviews.isEmpty()}" div class="progress">
 						<div th:if="${buffet.avgPerCentRate()} >= 60.0" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5" th:text="'Gradimento: ' + ${buffet.avgPerCentRate()} + '%'"></div>
 						<div th:if="${buffet.avgPerCentRate()} >= 60.0" class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${100.0 - buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5"></div>
-						<div th:if="${buffet.avgPerCentRate()} < 60.0" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5" th:text="${'Gradimento: ' + buffet.avgPerCentRate()} + '%'"></div>
+						<div th:if="${buffet.avgPerCentRate()} < 60.0" class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5" th:text="${'Gradimento: ' + buffet.avgPerCentRate()} + '%'"></div>
 						<div th:if="${buffet.avgPerCentRate()} < 60.0" class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${100.0 - buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5"></div>
 					</div>
 					
@@ -109,11 +109,11 @@
 			
 			</div>
 			
-			<hr class="featurette-divider">
+			<hr th:if="${!buffet.dishes.isEmpty()}" class="featurette-divider">
 			
 			<!-- Dishes Info -->
 			
-			<div class="row">
+			<div th:if="${!buffet.dishes.isEmpty()}" class="row">
 				<div class="col"><h1>Le Portate</h1></div>
 			</div>
 			
@@ -142,10 +142,10 @@
 				</div>
 			</div>
 			
-			<hr class="featurette-divider">
+			<hr th:if="${!reviews.isEmpty()}" class="featurette-divider">
 			
 			<!-- Reviews Info -->
-			<div class="row" th:if="${reviews != null}">
+			<div th:if="${!reviews.isEmpty()}" class="row">
 				<div class="col"><h1>Le Recensioni</h1></div>
 			</div>
 			
