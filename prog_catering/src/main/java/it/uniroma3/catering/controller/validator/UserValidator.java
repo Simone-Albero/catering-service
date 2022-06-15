@@ -14,7 +14,7 @@ import it.uniroma3.catering.service.UserService;
 public class UserValidator implements Validator {
 	
 	final Integer MAX_NAME_LENGTH = 50;
-    final Integer MIN_NAME_LENGTH = 5;
+    final Integer MIN_NAME_LENGTH = 2;
 	
     @Autowired
     private UserService userService;

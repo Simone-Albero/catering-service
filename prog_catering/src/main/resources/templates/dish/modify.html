@@ -6,6 +6,9 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <title>Modifica Piatto</title>
 	
+		<!-- Tab Icon -->
+		<link rel="icon" href="/images/static/icon/tabIcon.png">
+	
 	    <!-- Bootstrap CSS -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/modifyStyle.css">
@@ -51,7 +54,7 @@
 				  	</div>
 				  
     				<div class="form-row d-flex justify-content-center m-2">
-      					<label for="inputName">Nome</label>
+      					<label for="inputName">Piatto</label>
       					<input class="form-control" type="text" id="inputName" th:field="*{name}" required>
       					<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
    				 	</div>

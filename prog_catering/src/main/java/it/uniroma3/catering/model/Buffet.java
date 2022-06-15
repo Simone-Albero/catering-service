@@ -40,10 +40,15 @@ public class Buffet {
 	@Cascade(CascadeType.DELETE)
 	private List<Dish> dishes;
 	
+	@OneToMany(mappedBy = "buffet")
+	@Cascade(CascadeType.ALL)
+	private List<Review> reviews;
+	
 	private String[] imgs;
 
 	public Buffet() {
 		this.dishes = new ArrayList<Dish>();
+		this.reviews = new ArrayList<Review>();
 		this.imgs = new String[MAX_IMGS];
 	}
 
@@ -86,6 +91,18 @@ public class Buffet {
 	public void setDishes(List<Dish> dishes) {
 		this.dishes = dishes;
 	}
+	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	
+	public void addReview(Review review) {
+		this.reviews.add(review);
+	}
 
 	public String[] getImgs() {
 		return imgs;
@@ -111,5 +128,17 @@ public class Buffet {
 	
 	public String getDirectoryName() {
 		return this.chef.getDirectoryName()+"/"+ this.name.replaceAll("\\s+","_");
+	}
+	
+	public Float avgRate(){
+		Float sum = 0f;
+		for(Review r : this.reviews) {
+			sum+= r.getRate();
+		}
+		return sum/this.reviews.size();
+	}
+	
+	public Float avgPerCentRate(){
+		return (this.avgRate()*100)/5;
 	}
 }

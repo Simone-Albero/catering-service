@@ -6,6 +6,9 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <title>Sign Up</title>
 	
+		<!-- Tab Icon -->
+		<link rel="icon" href="/images/static/icon/tabIcon.png">
+	
 	    <!-- Bootstrap CSS -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/profileStyle.css">
@@ -34,12 +37,14 @@
 				  <h1 class="form-text text-muted"><b>Aggiorna Profilo</b></h1>
 				  
 				  <input type="hidden" th:field="*{id}">
+				  <input type="hidden" th:field="*{role}">
+				  <input type="hidden" th:field="*{password}">
 				  <input type="hidden" th:field="*{user.id}">
 				  
-				  <div class="form-row">
-				  	<div th:if="*{user.img != null}" class="form-group col-sm-5 m-2">
-						<img class="img-fluid row rounded" th:src="@{'/images/' + ${credentials.getDirectoryName()} + '/' + *{user.img}}"></img>
-						<a class="btn btn-sm btn-outline-danger row m-2 mr-4" th:href="@{'/user/delete/image/' + *{id}}" >Rimuovi</a>
+				  <div class="form-row d-flex justify-content-around">
+				  	<div th:if="*{user.img != null}" class="form-group col-sm-5">
+						<img class="img-thumbnail bg-light row rounded shadow m-1" th:src="@{'/images/' + ${credentials.getDirectoryName()} + '/' + *{user.img}}"></img>
+						<a class="btn btn-sm btn-outline-danger row m-2 mr-2" th:href="@{'/user/delete/image/' + *{id}}" >Rimuovi</a>
 					</div>
 				  
     				<div class="form-group col-md-6">

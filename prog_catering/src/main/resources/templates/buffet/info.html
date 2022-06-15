@@ -5,7 +5,10 @@
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <title>Buffet</title>
-	
+		
+		<!-- Tab Icon -->
+		<link rel="icon" href="/images/static/icon/tabIcon.png">
+		
 	    <!-- Bootstrap CSS -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/baseStyle.css">
@@ -78,11 +81,29 @@
 					        
 				<div class="col-sm-7 p-4">
 					<strong class="mb-2 text-info">Buffet</strong>
-					<h3 class="m-0" th:text="${buffet.name}">Buffet Name</h3><br>
+					<h3 class="m-0" th:text="${buffet.name}">Buffet Name</h3>
+					
+					<div class="progress">
+						<div th:if="${buffet.avgPerCentRate()} >= 60.0" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5" th:text="'Gradimento: ' + ${buffet.avgPerCentRate()} + '%'"></div>
+						<div th:if="${buffet.avgPerCentRate()} >= 60.0" class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${100.0 - buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5"></div>
+						<div th:if="${buffet.avgPerCentRate()} < 60.0" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5" th:text="${'Gradimento: ' + buffet.avgPerCentRate()} + '%'"></div>
+						<div th:if="${buffet.avgPerCentRate()} < 60.0" class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${100.0 - buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5"></div>
+					</div>
+					
+					<h4 th:if="${buffet.avgRate() >= 3}" class="m-0 text-success" th:text="'Valutazione complessiva: ' + ${buffet.avgRate() + '/5'}">Buffet AvgRate</h4>
+					<h4 th:if="${buffet.avgRate() < 3}" class="m-0 text-danger" th:text="'Valutazione complessiva: ' + ${buffet.avgRate() + '/5'}">Buffet AvgRate</h4>
+					
 					<hr class="featurette-divider">
 					<h4 class="mb-1 mt-1" th:text="${buffet.description}">Buffet Description</h4>
+					
 					<div sec:authorize="hasAuthority('ADMIN')" class="btn-group">
-						<a th:href="@{'/dish/admin/form/' + ${buffet.id}}" class="btn btn btn-outline-success">Add Dish</a>
+						<a th:href="@{'/dish/admin/form/' + ${buffet.id}}" class="btn btn btn-outline-success">Aggiungi Piatto</a>
+					</div>
+					<div sec:authorize="hasAuthority('DEFAULT')" class="btn-group">
+						<a th:href="@{'/review/form/' + ${buffet.id}}" class="btn btn btn-outline-success">Aggiungi Recensione</a>
+					</div>
+					<div sec:authorize="hasRole('USER')" class="btn-group">
+						<a th:href="@{'/review/form/' + ${buffet.id}}" class="btn btn btn-outline-success">Aggiungi Recensione</a>
 					</div>
 				</div>  
 			
@@ -107,11 +128,11 @@
 	    					<h5 class="card-title" th:text="${dish.name}">Dish Name</h5>
 	    					<p class="card-text" th:text="${dish.description}">Dish Description</p>
 			                <div>
-				                  <a th:href="@{'/dish' + '/' + ${dish.id}}" class="btn btn-sm btn-outline-success">View</a>
+				                  <a th:href="@{'/dish' + '/' + ${dish.id}}" class="btn btn-sm btn-outline-success">Info</a>
 				                  
 				                  <div sec:authorize="hasAuthority('ADMIN')" class="btn-group float-right">
-    									<a th:href="@{'/dish/admin/delete/' + ${dish.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
-				                  		<a th:href="@{'/dish/admin/modify/' + ${dish.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
+    									<a th:href="@{'/dish/admin/delete/' + ${dish.id}}" class="btn btn-sm btn-outline-danger">Elimina</a>
+				                  		<a th:href="@{'/dish/admin/modify/' + ${dish.id}}" class="btn btn-sm btn-outline-secondary">Modifica</a>
 								  </div>
 				                  
 				           </div>
@@ -119,6 +140,34 @@
 					</div>	
 					
 				</div>
+			</div>
+			
+			<hr class="featurette-divider">
+			
+			<!-- Reviews Info -->
+			<div class="row" th:if="${reviews != null}">
+				<div class="col"><h1>Le Recensioni</h1></div>
+			</div>
+			
+			<!-- Reviews -->
+			<div class="row">
+				<div class="col-md-6" th:each="review : ${reviews}">
+			      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+			        
+			        <div class="col p-4 d-flex flex-column position-static">
+			          <strong th:if="${review.rate >= 3}" class="d-inline-block mb-2 text-success" th:text="'Valutazione: '+${review.rate}+ '/5'">Valutazione</strong>
+			          <strong th:if="${review.rate < 3}" class="d-inline-block mb-2 text-danger" th:text="'Valutazione: '+${review.rate}+ '/5'">Valutazione</strong>
+			          <h3 class="mb-0" th:text="${review.name}">Nome Recensione</h3>
+			          <p class="card-text mb-auto" th:text="${review.description}">Descrizione</p>
+			          <div>
+				          <div sec:authorize="hasAuthority('ADMIN')" class="btn-group float-left">
+							<a th:href="@{'/review/delete/' + ${review.id}}" class="btn btn-sm btn-outline-danger">Elimina</a>
+						  </div>
+			          </div>
+			        </div>
+			      			        
+			      </div>
+			    </div>
 			</div>
 		</div>
 		
@@ -135,4 +184,4 @@
 
 							
 
-
+  

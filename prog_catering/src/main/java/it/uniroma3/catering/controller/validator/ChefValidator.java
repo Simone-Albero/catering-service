@@ -12,7 +12,7 @@ import it.uniroma3.catering.service.ChefService;
 public class ChefValidator implements Validator {
 	
 	final Integer MAX_LENGTH = 50;
-    final Integer MIN_LENGTH = 5;
+    final Integer MIN_LENGTH = 2;
 	
     @Autowired
     private ChefService chefService;

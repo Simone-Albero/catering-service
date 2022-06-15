@@ -24,14 +24,10 @@ public class CredentialsValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Credentials credentials = (Credentials) o;
         String username = credentials.getUsername().trim();
-        String password = credentials.getPassword().trim();
 
 
         if (username.length() < MIN_USERNAME_LENGTH || username.length() > MAX_USERNAME_LENGTH)
             errors.rejectValue("username", "username.size");
-
-        if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH)
-            errors.rejectValue("password", "pass.size");
         
         if(credentials.getId() == null || !credentials.getUsername().equals(this.credentialsService.findById(credentials.getId()).getUsername())) {
         	if (this.credentialsService.findByUsername(username) != null)

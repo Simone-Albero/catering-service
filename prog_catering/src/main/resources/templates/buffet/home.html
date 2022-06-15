@@ -6,6 +6,9 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <title>Buffets</title>
 	
+		<!-- Tab Icon -->
+		<link rel="icon" href="/images/static/icon/tabIcon.png">
+	
 	    <!-- Bootstrap CSS -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/baseStyle.css">
@@ -49,7 +52,7 @@
 					<hr class="featurette-divider m-1">
 					<h4 class="m-0" th:text="'Nazione: ' + ${chef.nation}">Chef Nation</h4><br>
 					<div sec:authorize="hasAuthority('ADMIN')" class="btn-group">
-						<a th:href="@{'/buffet/admin/form/' + ${chef.id}}" class="btn btn-outline-success">Add Buffet</a>
+						<a th:href="@{'/buffet/admin/form/' + ${chef.id}}" class="btn btn-outline-success">Aggiungi Buffet</a>
 					</div>
 				</div>  
 				
@@ -76,11 +79,11 @@
 		    					<h5 class="card-title" th:text="${buffet.name}">Buffet Name</h5>
 		    					<p class="card-text text-muted" th:text="${buffet.description}">Buffet Description</p>
 		    					<div>
-				                  <a th:href="@{'/buffet/' + ${buffet.id}}" class="btn btn-sm btn-outline-success">View</a>
+				                  <a th:href="@{'/buffet/' + ${buffet.id}}" class="btn btn-sm btn-outline-success">Info</a>
 				                  
 				                  <div sec:authorize="hasAuthority('ADMIN')" class="btn-group float-right">
-    									<a th:href="@{'/buffet/admin/delete/' + ${buffet.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
-				                  		<a th:href="@{'/buffet/admin/modify/' + ${buffet.id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
+    									<a th:href="@{'/buffet/admin/delete/' + ${buffet.id}}" class="btn btn-sm btn-outline-danger">Elimina</a>
+				                  		<a th:href="@{'/buffet/admin/modify/' + ${buffet.id}}" class="btn btn-sm btn-outline-secondary">Modifica</a>
 								  </div>
 				                  
 				                </div>

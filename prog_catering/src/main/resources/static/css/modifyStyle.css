@@ -2,7 +2,7 @@
 /* CUSTOMIZE THE FORM
 -------------------------------------------------- */
 .login-page {
-	height: 120vh;
+	height: 130vh;
   	background-size: cover;
   	background-position: center;
   	background-repeat: no-repeat;
@@ -29,21 +29,21 @@
 ------------------------- */
 @media (max-width: 900px) {
 	.login-page {
-		height: 150vh;
+		height: 190vh;
 		padding: 35% 10%;
 	}
 }
 
 @media (max-width: 790px) {
 	.login-page {
-		height: 170vh;
+		height: 210vh;
 		padding: 50% 10%;
 	}
 }
 
 @media (max-width: 484px) {
 	.login-page {
-		height: 190vh;
+		height: 230vh;
 		padding: 70% 10%;
 	}
 }

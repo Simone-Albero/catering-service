@@ -37,6 +37,11 @@ public class CredentialsService {
         credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
         return this.credentialsRepository.save(credentials);
     }
+    
+    @Transactional
+    public Credentials update(Credentials credentials) {
+        return this.credentialsRepository.save(credentials);
+    }
 
 	public void promote(String username) {
 		Credentials credentials = this.credentialsRepository.findByUsername(username).get();

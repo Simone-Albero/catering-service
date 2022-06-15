@@ -58,6 +58,7 @@ public class BuffetController {
 	@GetMapping("/{id}")
 	public String getBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(id));
+		model.addAttribute("reviews", this.buffetService.findById(id).getReviews());
 		return "/buffet/info";
 	}
 	

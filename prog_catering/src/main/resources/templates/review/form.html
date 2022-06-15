@@ -4,7 +4,7 @@
 	    <!-- Required meta tags -->
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <title>Inserisci Buffet</title>
+	    <title>Inserisci Recensione</title>
 	
 		<!-- Tab Icon -->
 		<link rel="icon" href="/images/static/icon/tabIcon.png">
@@ -33,31 +33,39 @@
 		<div class="login-page container-fluid">
   			<div class="form shadow-lg p-3 mb-5 bg-light">
   			
-				<form th:action="@{/buffet/admin/add}" method="post" th:object="${buffet}" enctype="multipart/form-data">
+				<form th:action="@{/review/add}" method="post" th:object="${review}">
 				
-				    <input type="hidden" th:field="*{chef}">
+				    <input type="hidden" th:field="*{buffet}">
 				  
-				    <h1 class="form-text text-muted"><b>Inserisci Buffet</b></h1>
+				    <h1 class="form-text text-muted"><b>Inserisci Recensione</b></h1>
 				  	
 				  	<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
                         <h5 align="center" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</h5>
                     </div>
                     
     				<div class="form-row d-flex justify-content-center m-2">
-      					<label for="inputName">Buffet</label>
-      					<input class="form-control" type="text" id="inputName" th:field="*{name}" required>
-      					<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    					<div class="form-group col-md-6">
+      						<label for="inputName">Titolo</label>
+      						<input class="form-control" type="text" id="inputName" th:field="*{name}" required>
+      						<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    					</div>
+    						
+    					<div class="form-group col-md-6">
+    						<label for="inputRate">Valutazione</label>
+				     		<select  type="number" class="form-control" id="Inputrate" th:field="*{rate}" required>
+						      <option value=1>1</option>
+						      <option value=2>2</option>
+						      <option value=3>3</option>
+						      <option value=4>4</option>
+						      <option value=5>5</option>
+						    </select>
+    					</div>
    				 	</div>
    				 	
 			    	<div class="form-row d-flex justify-content-center m-2">
 			      		<label for="inputDesc">Descrizione</label>
 			     		<input class="form-control" type="text" id="inputDesc" th:field="*{description}" required>
 			     		<div class="alert alert-danger mt-2" role="alert" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
-			   	    </div>
-  				  	
-  				  	<div class="form-row d-flex justify-content-start m-4">
-			      		<label for="inputImg">Immagini</label>
-			     		<input class="form-control-file" type="file" id="inputImg" name="files" multiple required>
 			   	    </div>
   				  
   				  	<button type="submit" class="btn btn-primary">Submit</button>

@@ -13,7 +13,7 @@ public class BuffetValidator implements Validator {
 
 	final Integer DESC_MAX_LENGTH = 200;
 	final Integer MAX_LENGTH = 50;
-    final Integer MIN_LENGTH = 5;
+    final Integer MIN_LENGTH = 2;
     
     @Autowired
     private BuffetService buffetService;

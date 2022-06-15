@@ -1,5 +1,8 @@
 package it.uniroma3.catering.controller;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -73,10 +76,15 @@ public class AuthController {
    
     
     @GetMapping("/user/delete/{id}")
-	public String deleteUser(@PathVariable("id") Long id, Model model) {
+	public String deleteUser(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
 		Credentials credentials = this.credentialsService.findById(id);
 		FileStorer.dirEmptyEndDelete(credentials.getDirectoryName());
 		this.credentialsService.deleteById(id);
+		try {
+			request.logout();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
 		return "index";
 	}
     
@@ -85,7 +93,7 @@ public class AuthController {
 		Credentials credentials = this.credentialsService.findById(id);
 		FileStorer.removeImgAndDir(credentials.getDirectoryName(), credentials.getUser().getImg());
 		credentials.getUser().setImg(null);			
-		this.credentialsService.save(credentials);
+		this.credentialsService.update(credentials);
 		
 		return this.getProfile(model);
 	}
@@ -120,7 +128,6 @@ public class AuthController {
     	this.credentialsValidator.validate(credentials, bindingResult);
 		
     	if(!bindingResult.hasErrors()) {
-    		credentials.setPassword(this.credentialsService.findById(credentials.getId()).getPassword());
 			FileStorer.dirRename(this.credentialsService.findById(credentials.getId()).getDirectoryName() , credentials.getDirectoryName());
 			
 			if(!file.isEmpty()) {
@@ -128,7 +135,7 @@ public class AuthController {
 				credentials.getUser().setImg(FileStorer.store(file, credentials.getDirectoryName()));
 			}
 			
-			credentialsService.save(credentials);
+			credentialsService.update(credentials);
 			
 			return "index";
 		}
