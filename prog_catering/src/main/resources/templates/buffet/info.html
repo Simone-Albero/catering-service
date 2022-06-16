@@ -90,8 +90,8 @@
 						<div th:if="${buffet.avgPerCentRate()} < 60.0" class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" th:style="'width:' + ${100.0 - buffet.avgPerCentRate()} + '%'" aria-valuemin="0" aria-valuemax="5"></div>
 					</div>
 					
-					<h4 th:if="${buffet.avgRate() >= 3}" class="m-0 text-success" th:text="'Valutazione complessiva: ' + ${buffet.avgRate() + '/5'}">Buffet AvgRate</h4>
-					<h4 th:if="${buffet.avgRate() < 3}" class="m-0 text-danger" th:text="'Valutazione complessiva: ' + ${buffet.avgRate() + '/5'}">Buffet AvgRate</h4>
+					<h4 th:if="${!reviews.isEmpty() && buffet.avgRate() >= 3}" class="m-0 text-success" th:text="'Valutazione complessiva: ' + ${buffet.avgRate() + '/5'}">Buffet AvgRate</h4>
+					<h4 th:if="${!reviews.isEmpty() && buffet.avgRate() < 3}" class="m-0 text-danger" th:text="'Valutazione complessiva: ' + ${buffet.avgRate() + '/5'}">Buffet AvgRate</h4>
 					
 					<hr class="featurette-divider">
 					<h4 class="mb-1 mt-1" th:text="${buffet.description}">Buffet Description</h4>

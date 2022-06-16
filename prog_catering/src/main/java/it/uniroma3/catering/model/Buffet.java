@@ -135,7 +135,7 @@ public class Buffet {
 		for(Review r : this.reviews) {
 			sum+= r.getRate();
 		}
-		return sum/this.reviews.size();
+		return (float) Math.round(sum/this.reviews.size());
 	}
 	
 	public Float avgPerCentRate(){

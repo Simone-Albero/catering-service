@@ -89,7 +89,6 @@ public class ReviewController {
 	public String updateReview(@ModelAttribute("review")Review review, BindingResult bindingResult, Model model) {
 		this.reviewValidator.validate(review, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			
 			this.reviewService.save(review);
 			Buffet buffet = review.getBuffet();
 			model.addAttribute("buffet", buffet);

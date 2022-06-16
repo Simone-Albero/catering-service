@@ -42,6 +42,7 @@ public class DishController {
 			
 			this.dishService.save(dish);
 			model.addAttribute("buffet", dish.getBuffet());
+			model.addAttribute("reviews", dish.getBuffet().getReviews());
 			
 			return "/buffet/info";
 		}
@@ -71,6 +72,7 @@ public class DishController {
 	public String deleteDish(@PathVariable("id") Long id, Model model) {
 		Dish dish = dishService.findById(id);
 		model.addAttribute("buffet", dish.getBuffet());
+		model.addAttribute("reviews", dish.getBuffet().getReviews());
 		FileStorer.dirEmptyEndDelete(dish.getDirectoryName());
 		this.dishService.deleteById(id);
 		
@@ -117,6 +119,7 @@ public class DishController {
 			
 			this.dishService.save(dish);
 			model.addAttribute("buffet", dish.getBuffet());
+			model.addAttribute("reviews", dish.getBuffet().getReviews());
 			return "/buffet/info";
 		}
 		else return "/dish/modify";
