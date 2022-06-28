@@ -52,42 +52,42 @@ public class BuffetController {
 			this.buffetService.save(buffet);
 			return this.getBuffetsHome(model);
 		}
-		else return "/buffet/form";
+		else return "buffet/form";
 	}
 	
 	@GetMapping("/{id}")
 	public String getBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(id));
 		model.addAttribute("reviews", this.buffetService.findById(id).getReviews());
-		return "/buffet/info";
+		return "buffet/info";
 	}
 	
 	
 	@GetMapping("/all")
 	public String getBuffets(Model model) {
 		model.addAttribute("buffets", this.buffetService.findAll());
-		return "/buffet/all";
+		return "buffet/all";
 	}
 
 	@GetMapping("/home")
 	public String getBuffetsHome(Model model) {
 		List<Buffet> buffets = this.buffetService.findAll();
 		model.addAttribute("buffets", buffets);
-		return "/buffet/home";
+		return "buffet/home";
 	}
 	
 	
 	@GetMapping("/{id}/all")
 	public String getBuffetsByChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffets", this.buffetService.findAllByChef(this.chefService.findById(id)));
-		return "/buffet/all";
+		return "buffet/all";
 	}
 	
 	@GetMapping("/{id}/home")
 	public String getBuffetsHomeByChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffets", this.buffetService.findAllByChef(this.chefService.findById(id)));
 		model.addAttribute("chef", this.chefService.findById(id));
-		return "/buffet/home";
+		return "buffet/home";
 	}
 	
 	@GetMapping("/admin/delete/{id}")
@@ -120,7 +120,7 @@ public class BuffetController {
 		Buffet buffet = new Buffet();
 		buffet.setChef(this.chefService.findById(id));		
 		model.addAttribute("buffet", buffet);
-		return "/buffet/form";
+		return "buffet/form";
 	}
 	
 	@GetMapping("/admin/modify/{id}")
@@ -149,7 +149,7 @@ public class BuffetController {
 			this.buffetService.save(buffet);
 			return this.getBuffetsHome(model);
 		}
-		else return "/buffet/modify";
+		else return "buffet/modify";
 	}
 	
 }

@@ -44,27 +44,27 @@ public class DishController {
 			model.addAttribute("buffet", dish.getBuffet());
 			model.addAttribute("reviews", dish.getBuffet().getReviews());
 			
-			return "/buffet/info";
+			return "buffet/info";
 		}
-		else return "/dish/form";
+		else return "dish/form";
 	}
 	
 	@GetMapping("/{id}")
 	public String getDish(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("dish", this.dishService.findById(id));
-		return "/dish/info";
+		return "dish/info";
 	}
 	
 	@GetMapping("/all")
 	public String getDishes(Model model) {
 		model.addAttribute("dishes", this.dishService.findAll());
-		return "/dish/all";
+		return "dish/all";
 	}
 	
 	@GetMapping("/{id}/all")
 	public String getDishesByBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("dishes", this.dishService.findAllByBuffet(this.buffetService.findById(id)));
-		return "/dish/all";
+		return "dish/all";
 	}
 	
 	
@@ -76,7 +76,7 @@ public class DishController {
 		FileStorer.dirEmptyEndDelete(dish.getDirectoryName());
 		this.dishService.deleteById(id);
 		
-		return "/buffet/info";
+		return "buffet/info";
 	}
 	
 	@GetMapping("/admin/delete/image/{id}")
@@ -87,7 +87,7 @@ public class DishController {
 			
 		this.dishService.save(dish);
 		model.addAttribute("dish", this.dishService.findById(id));
-		return "/dish/modify";
+		return "dish/modify";
 	}
 	
 	/**l'id e' del buffet per il quale si sta inserendo il piatto**/
@@ -96,7 +96,7 @@ public class DishController {
 		Dish dish = new Dish();
 		dish.setBuffet(this.buffetService.findById(id));	
 		model.addAttribute("dish", dish);
-		return "/dish/form";
+		return "dish/form";
 	}
 	
 	@GetMapping("/admin/modify/{id}")
@@ -120,9 +120,9 @@ public class DishController {
 			this.dishService.save(dish);
 			model.addAttribute("buffet", dish.getBuffet());
 			model.addAttribute("reviews", dish.getBuffet().getReviews());
-			return "/buffet/info";
+			return "buffet/info";
 		}
-		else return "/dish/modify";
+		else return "dish/modify";
 	}
 	
 }

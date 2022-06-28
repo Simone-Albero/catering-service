@@ -36,25 +36,25 @@ public class ChefController {
 			this.chefService.save(chef);
 			return this.getChefsHome(model);
 		}
-		else return "/chef/form";
+		else return "chef/form";
 	}
 	
 	@GetMapping("/{id}")
 	public String getChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("chef", this.chefService.findById(id));
-		return "/chef/info";
+		return "chef/info";
 	}
 	
 	@GetMapping("/all")
 	public String getChefs(Model model) {
 		model.addAttribute("chefs", this.chefService.findAll());
-		return "/chef/all";
+		return "chef/all";
 	}
 	
 	@GetMapping("/home")
 	public String getChefsHome(Model model) {
 		model.addAttribute("chefs", this.chefService.findAll());
-		return "/chef/home";
+		return "chef/home";
 	}
 	
 	@GetMapping("/admin/delete/{id}")
@@ -73,13 +73,13 @@ public class ChefController {
 			
 		this.chefService.save(chef);
 		model.addAttribute("chef", this.chefService.findById(id));
-		return "/chef/modify";
+		return "chef/modify";
 	}
 	
 	@GetMapping("/admin/form")
 	public String getForm(Model model) {
 		model.addAttribute("chef", new Chef());
-		return "/chef/form";
+		return "chef/form";
 	}
 	
 	@GetMapping("/admin/modify/{id}")
@@ -104,7 +104,7 @@ public class ChefController {
 			
 			return this.getChefsHome(model);
 		}
-		else return "/chef/modify";
+		else return "chef/modify";
 	}
 	
 }

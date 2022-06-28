@@ -12,6 +12,8 @@ public class FileStorer {
 
 	public static String uploadDirectory = System.getProperty("user.dir")+"/src/main/resources/static/images/";
 	
+	//public static final String uploadDirectory = System.getProperty("user.dir")+"/static/images/"; //deploy updir
+	
 	private static String setupDirName(String owner) {
 		return uploadDirectory+owner;
 	}

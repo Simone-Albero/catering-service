@@ -43,27 +43,27 @@ public class IngradientController {
 			this.ingradientService.save(ingradient);
 			model.addAttribute("dish", ingradient.getDish());
 			
-			return "/dish/info";
+			return "dish/info";
 		}
-		else return "/ingradient/form";
+		else return "ingradient/form";
 	}
 	
 	@GetMapping("/{id}")
 	public String getIngradient(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("ingradient", this.ingradientService.findById(id));
-		return "/ingradient/info";
+		return "ingradient/info";
 	}
 	
 	@GetMapping("/all")
 	public String getIngradients(Model model) {
 		model.addAttribute("ingradients", this.ingradientService.findAll());
-		return "/ingradient/all";
+		return "ingradient/all";
 	}
 	
 	@GetMapping("/{id}/all")
 	public String getIngradientsByDish(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("ingradients", this.ingradientService.findAllByDish(this.dishService.findById(id)));
-		return "/ingradient/all";
+		return "ingradient/all";
 	}
 	
 	@GetMapping("/admin/delete/{id}")
@@ -73,7 +73,7 @@ public class IngradientController {
 		this.ingradientService.deleteById(id);
 
 		model.addAttribute("dish", ingradient.getDish());
-		return "/dish/info";
+		return "dish/info";
 	}
 	
 	@GetMapping("/admin/delete/image/{id}")
@@ -84,7 +84,7 @@ public class IngradientController {
 			
 		this.ingradientService.save(ingradient);
 		model.addAttribute("ingradient", this.ingradientService.findById(id));
-		return "/ingradient/modify";
+		return "ingradient/modify";
 	}
 	
 	/**l'id e' del piatto per il quale si sta inserendo l'ingrediente**/
@@ -93,7 +93,7 @@ public class IngradientController {
 		Ingradient ingradient = new Ingradient();
 		ingradient.setDish(this.dishService.findById(id));	
 		model.addAttribute("ingradient", ingradient);
-		return "/ingradient/form";
+		return "ingradient/form";
 	}
 	
 	@GetMapping("/admin/modify/{id}")
@@ -117,9 +117,9 @@ public class IngradientController {
 			this.ingradientService.save(ingradient);
 			model.addAttribute("dish", ingradient.getDish());
 			
-			return "/dish/info";
+			return "dish/info";
 		}
-		else return "/ingradient/modify";
+		else return "ingradient/modify";
 	}
 	
 	

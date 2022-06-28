@@ -22,12 +22,16 @@ import it.uniroma3.catering.model.Credentials;
 import it.uniroma3.catering.model.User;
 import it.uniroma3.catering.presentation.FileStorer;
 import it.uniroma3.catering.service.CredentialsService;
+import it.uniroma3.catering.service.UserService;
 
 @Controller
 public class AuthController {
 	
 	@Autowired
 	private CredentialsService credentialsService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private UserValidator userValidator;
@@ -39,12 +43,12 @@ public class AuthController {
 	public String showRegisterForm(Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
-		return "/user/registerForm";
+		return "user/registerForm";
 	}
 	
 	@GetMapping("/login")
 	public String showLoginForm(Model model) {
-		return "/user/loginForm";
+		return "user/loginForm";
 	}
 	
 	@GetMapping("/logout")
@@ -101,7 +105,7 @@ public class AuthController {
     
     @GetMapping("/admin/promote")
     public String promoteUser() {
-    	return "/admin/promote";
+    	return "admin/promote";
     }
     
     @PostMapping("/admin/promote/finalize")
@@ -118,28 +122,27 @@ public class AuthController {
     	
     	Credentials credentials = this.credentialsService.findByUsername(username);
     	
-		model.addAttribute("credentials", credentials);
-    	return "/profile";
+    	model.addAttribute("credentials", credentials);
+		model.addAttribute("user", credentials.getUser());
+    	return "profile";
     }
     
     @PostMapping("/profile/modify")
-	public String updateChef(@ModelAttribute("credentials")Credentials credentials, @RequestParam("file")MultipartFile file, BindingResult bindingResult, Model model) {
-    	this.userValidator.validate(credentials.getUser(), bindingResult);
-    	this.credentialsValidator.validate(credentials, bindingResult);
+	public String updateChef(@RequestParam("credId")Long credId, @ModelAttribute("user")User user, BindingResult bindingResult, @RequestParam("file")MultipartFile file, Model model) {
+    	this.userValidator.validate(user, bindingResult);
 		
     	if(!bindingResult.hasErrors()) {
-			FileStorer.dirRename(this.credentialsService.findById(credentials.getId()).getDirectoryName() , credentials.getDirectoryName());
 			
 			if(!file.isEmpty()) {
-				FileStorer.removeImgAndDir(credentials.getDirectoryName(), credentials.getUser().getImg());
-				credentials.getUser().setImg(FileStorer.store(file, credentials.getDirectoryName()));
+				FileStorer.removeImgAndDir(this.credentialsService.findById(credId).getDirectoryName(), this.userService.findById(user.getId()).getImg());
+				user.setImg(FileStorer.store(file, this.credentialsService.findById(credId).getDirectoryName()));
 			}
 			
-			credentialsService.update(credentials);
+			this.userService.save(user);
 			
 			return "index";
 		}
-		else return "/profile";
+		else return "profile";
 	}
     
 }

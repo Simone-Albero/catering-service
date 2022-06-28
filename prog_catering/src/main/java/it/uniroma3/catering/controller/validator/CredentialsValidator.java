@@ -38,7 +38,7 @@ public class CredentialsValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return User.class.equals(clazz);
+        return Credentials.class.equals(clazz);
     }
 
 }
